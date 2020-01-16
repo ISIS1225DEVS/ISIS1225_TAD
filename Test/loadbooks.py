@@ -28,20 +28,20 @@ print ('Loading books')
 booksfile = cf.data_dir + 'GoodReads/books.csv'
 loadCSVFile (booksfile, lst_books)
 print (lst_books['size'])
-#printList (lst_books)
+printList (lst_books)
 
 
 print ('Loading tags')
 tagsfile = cf.data_dir + 'GoodReads/tags.csv'
 loadCSVFile (tagsfile, lst_tags)
 print (lst_tags['size'])
-#printList (lst_tags)
+printList (lst_tags)
 
 print ('Loading books-tags')
 booktagsfile = cf.data_dir + 'GoodReads/book_tags.csv'
 loadCSVFile (booktagsfile, lst_book_tags)
 print (lst_book_tags['size'])
-#printList (lst_book_tags)
+printList (lst_book_tags)
 
 
 
