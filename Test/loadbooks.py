@@ -1,4 +1,4 @@
-import config
+import config as cf
 from TAD import list as lt
 from DataStructures import listiterator as it
 import csv
@@ -25,17 +25,23 @@ lst_book_tags= lt.newList()
 
 
 print ('Loading books')
-loadCSVFile ('/Users/dcorreal/Develop/python/ISIS1225/Data/books.csv', lst_books)
-printList (lst_books)
+booksfile = cf.data_dir + 'GoodReads/books.csv'
+loadCSVFile (booksfile, lst_books)
+print (lst_books['size'])
+#printList (lst_books)
 
 
 print ('Loading tags')
-loadCSVFile ('/Users/dcorreal/Develop/python/ISIS1225/Data/tags.csv', lst_tags)
-printList (lst_tags)
+tagsfile = cf.data_dir + 'GoodReads/tags.csv'
+loadCSVFile (tagsfile, lst_tags)
+print (lst_tags['size'])
+#printList (lst_tags)
 
 print ('Loading books-tags')
-loadCSVFile ('/Users/dcorreal/Develop/python/ISIS1225/Data/book_tags.csv', lst_book_tags)
-printList (lst_book_tags)
+booktagsfile = cf.data_dir + 'GoodReads/book_tags.csv'
+loadCSVFile (booktagsfile, lst_book_tags)
+print (lst_book_tags['size'])
+#printList (lst_book_tags)
 
 
 

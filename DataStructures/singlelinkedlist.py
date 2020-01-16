@@ -21,8 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-
-from . import listnode as node 
+import config
+from DataStructures import listnode as node 
 
 """
   Este módulo implementa una estructura de datos lineal, como una lista encadenada sencillamente 
@@ -53,7 +53,10 @@ def addFirst(lst, element):
 
 def addLast(lst, element):
     """
-    Agrega un elemento en la última posición de la lista
+    Agrega un elemento en la última posición de la lista.
+
+    lst: La lista en la que se inserta el elemento
+    element: El elemento a insertar
     """
     new_node = node.newSingleNode (element)
 
@@ -63,7 +66,6 @@ def addLast(lst, element):
         lst['last']['next'] = new_node
     lst['last']= new_node
     lst['size'] += 1
-
 
 
 def isEmpty (lst):
@@ -102,8 +104,6 @@ def getElement (lst, pos):
     pos debe ser mayor que cero y menor o igual al tamaño de la lista
     la lista no esta vacia
     """
-    node = None
-
     searchpos = 1
     node = lst['first']
     while searchpos < pos:
@@ -129,10 +129,18 @@ def removeLast (lst):
     """
     Remueve el último elemento de la lista y lo retorna en caso de existir, de lo contrario retorna None
     """
-    if lst['last'] != None:
-        temp = lst['last']['next']
-        node = lst['last'] 
-        lst['last'] = temp
+    if lst['size'] != 0:
+        if lst['first'] == lst['last']:
+            node = lst['first'] 
+            lst['last'] = None
+            lst['first'] = None
+        else:
+            temp = lst['first']    
+            while temp['next'] != lst['last']:
+                temp = temp['next']
+            node = lst['last']
+            lst['last'] = temp
+            lst['last']['next'] = None
         lst['size'] -= 1
         return node['info']
     else:
@@ -140,26 +148,26 @@ def removeLast (lst):
 
 def insertElement (lst, element, pos):
     """
-    Inserta el elemento element en la posición pos de la lista. pos debe ser menor o igual al tamaño de la lista. 
+    Inserta el elemento element en la posición pos de la lista. 
+
+    lst: La lista en la que se va a insertar el elemento
+    element: El elemento a insertar
+    pos: posición en la que se va a insertar el elemento,  0 < pos <= size(lst) 
     """
     new_node = node.newSingleNode (element)
-    if (pos >0) and (pos <= lst['size']):
-        if (pos == 1):
-            new_node['next'] = lst['first']
-            lst['first'] = new_node
-        else:
-            cont = 1
-            prev = lst['first']
-            current  = lst['first']
-            while cont < pos:
-                prev = current
-                current = current['next']
-                cont += 1
-            new_node['next'] = current
-            prev['next'] = new_node
-        lst['size'] += 1
-    elif (lst['size'] == 0):
+
+    if (pos == 1):
+        new_node['next'] = lst['first']
         lst['first'] = new_node
-        lst['last'] = new_node
-        lst['size'] += 1
+    else:
+        cont = 1
+        prev = lst['first']
+        current  = lst['first']
+        while cont < pos:
+            prev = current
+            current = current['next']
+            cont += 1
+        new_node['next'] = current
+        prev['next'] = new_node
+    lst['size'] += 1
         
