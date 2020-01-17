@@ -22,7 +22,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 import config
-from DataStructures import singlelinkedlist as lt
+from DataStructures import arraylist as lt
 
 """
   Este módulo implementa el tipo abstracto de datos (TAD) lista. 
@@ -109,6 +109,10 @@ def insertElement (lst, element, pos):
     """
     lt.insertElement (lst, element, pos)
 
-
+def exchange (lst, pos1, pos2):
+    """
+    Intercambia la informacion en las posiciones pos1 y pos2 de la lista
+    """
+    lt.exchange (lst, pos1, pos2)
 
 

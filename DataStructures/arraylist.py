@@ -116,4 +116,19 @@ def insertElement (lst, element, pos):
     """
     lst['elements'].insert (pos-1,element) 
     lst['size'] += 1
-        
+
+
+def changeInfo (lst, pos, newinfo):
+    """
+    Cambia la informacion contenida en el nodo de la lista en la posicion pos
+    """
+    lst['elements'][pos-1] = newinfo
+
+def exchange (lst, pos1, pos2):
+    """
+    Intercambia la informacion en las posiciones pos1 y pos2 de la lista
+    """
+    infopos1 = getElement (lst, pos1)
+    infopos2 = getElement (lst, pos2)
+    changeInfo (lst, pos1, infopos2)
+    changeInfo (lst, pos2, infopos1)

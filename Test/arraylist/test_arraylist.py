@@ -1,6 +1,6 @@
 import unittest 
 import config 
-from DataStructures import arraylist as slt
+from DataStructures import singlelinkedlist as slt
 
 class ListTest (unittest.TestCase):
 

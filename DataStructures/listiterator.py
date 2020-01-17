@@ -23,7 +23,7 @@
  """
 
 
-from DataStructures import linkedlistiterator as it
+from DataStructures import arraylistiterator as it
 
 
 """

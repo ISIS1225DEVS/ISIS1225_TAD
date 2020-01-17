@@ -170,4 +170,24 @@ def insertElement (lst, element, pos):
         new_node['next'] = current
         prev['next'] = new_node
     lst['size'] += 1
-        
+
+def changeInfo (lst, pos, newinfo):
+    """
+    Cambia la informacion contenida en el nodo de la lista en la posicion pos
+    """
+    current  = lst['first']
+    cont = 1
+    while cont < pos:
+        current = current['next']
+        cont += 1
+    current['info'] = newinfo
+    
+
+def exchange (lst, pos1, pos2):
+    """
+    Intercambia la informacion en las posiciones pos1 y pos2 de la lista
+    """
+    infopos1 = getElement (lst, pos1)
+    infopos2 = getElement (lst, pos2)
+    changeInfo (lst, pos1, infopos2)
+    changeInfo (lst, pos2, infopos1)
