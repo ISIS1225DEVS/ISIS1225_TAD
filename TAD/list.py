@@ -115,4 +115,10 @@ def exchange (lst, pos1, pos2):
     """
     lt.exchange (lst, pos1, pos2)
 
+def changeInfo (lst, pos, element):
+    """
+    Reemplaza la información de la lista en la posicion pos, con el elemento element
+    """
+    lt.changeInfo (lst, pos, element)
+
 

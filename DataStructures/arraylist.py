@@ -132,3 +132,5 @@ def exchange (lst, pos1, pos2):
     infopos2 = getElement (lst, pos2)
     changeInfo (lst, pos1, infopos2)
     changeInfo (lst, pos2, infopos1)
+
+

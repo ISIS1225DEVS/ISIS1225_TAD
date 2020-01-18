@@ -1,11 +1,11 @@
 import unittest 
 import config 
-from Sorting import selectionsort as sort
+from Sorting import shellsort as sort
 from DataStructures import listiterator as it
 from TAD import list as slt
 
 
-class insertionSortTest (unittest.TestCase):
+class shellSortTest (unittest.TestCase):
 
     def setUp (self):
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
@@ -46,6 +46,7 @@ class insertionSortTest (unittest.TestCase):
         slt.addFirst (self.lst, self.book4)
         slt.addFirst (self.lst, self.book7)
         slt.addFirst (self.lst, self.book9)
+
      
         print ("Random list:----------------------------------------------------")
         iterator = it.newIterator(self.lst)
@@ -54,7 +55,7 @@ class insertionSortTest (unittest.TestCase):
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
-        sort.selectionSort (self.lst, self.less)
+        sort.shellSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
@@ -85,13 +86,12 @@ class insertionSortTest (unittest.TestCase):
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
-        sort.selectionSort (self.lst, self.less)
+        sort.shellSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
-
 
     def test_orderedElements (self):
         """
@@ -116,7 +116,7 @@ class insertionSortTest (unittest.TestCase):
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
-        sort.selectionSort (self.lst, self.less)
+        sort.shellSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
@@ -137,7 +137,7 @@ class insertionSortTest (unittest.TestCase):
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
-        sort.selectionSort (self.lst, self.less)
+        sort.shellSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
@@ -171,12 +171,14 @@ class insertionSortTest (unittest.TestCase):
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
-        sort.selectionSort (self.lst, self.less)
+        sort.shellSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
+
+
 
 
 
