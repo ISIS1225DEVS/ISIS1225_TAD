@@ -22,7 +22,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 import config
-from DataStructures import arraylist as lt
+from DataStructures import singlelinkedlist as lt
 
 """
   Este módulo implementa el tipo abstracto de datos (TAD) lista. 
