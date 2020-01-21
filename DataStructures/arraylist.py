@@ -23,8 +23,8 @@
  """
 
 """
-  Este módulo implementa una estructura de datos lineal, como una lista cuyos elementos 
-  estan en posiciones coniguas en memoria.
+  Este módulo implementa una estructura de datos lineal, como un arreglo de apuntadores a 
+  los nodos de la lista.
 """
 
 
