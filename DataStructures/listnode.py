@@ -1,9 +1,6 @@
 """
  * Copyright 2020, Departamento de sistemas y Computación, Universidad de Los Andes
  * 
- * Contribución de:
- *
- * Dario Correal
  *
  * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
  *
