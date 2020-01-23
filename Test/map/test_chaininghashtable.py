@@ -17,37 +17,52 @@ class EntryMapTest (unittest.TestCase):
     def test_chainingHashTable (self):
         """
         """
-        print ('--------------------------------')
+        print ('TEST--------------------------------')
         capacity = 3
         table = ht.newMap (capacity)
-        print (table)
 
     def printTable (self, table):
-        iterator = it.newIterator(table)
+        iterator = it.newIterator(table['table'])
+        print ('TABLE:')
+        print ('Capacity: ' + str(table['capacity']))
+        print ('Scale: ' + str(table['scale']))
+        print ('Shift: ' + str(table['shift']))
+        print ('Prime: ' + str(table['prime']))
         while  it.hasNext(iterator):
-            element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
+            bucket = it.next(iterator)
+            bucketiterator = it.newIterator(bucket)
+            while  it.hasNext(bucketiterator):
+                entry = it.next(bucketiterator)
+                result = "".join(str(key) + ":" + str(value) + "," for key, value in entry.items())
+                print (result)
 
+
+
+    def comparefunction (self, element1, element2):
+        if (element1['key'] == element2['key']):
+            return True
+        return False
 
 
     def test_hashValue (self):
         """
         """
-        print ('--------------------------------')
+        print ('TEST--------------------------------')
         table = ht.newMap ()
         hv = ht.hashValue (table, 'book1')
-        print (hv)    
+
      
     def test_put (self):
         """
         """
-        print ('--------------------------------')
+        print ('TEST--------------------------------')
         capacity = 7
         table = ht.newMap (capacity)
-        ht.put (table, 'book1', 'title1')
-        ht.put (table, 'book2', 'title2')
-        print (table)
+        ht.put (table, 'book1', 'title1', self.comparefunction)
+        ht.put (table, 'book2', 'title2', self.comparefunction)
+        self.printTable (table)
+        ht.put (table, 'book2', 'new-title 2', self.comparefunction)
+        self.printTable (table)
 
 if __name__ == "__main__":
     unittest.main()

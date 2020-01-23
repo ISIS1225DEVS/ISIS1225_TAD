@@ -169,6 +169,25 @@ def insertElement (lst, element, pos):
         prev['next'] = new_node
     lst['size'] += 1
 
+
+def isPresent (lst, element, comparefunction):
+    """
+    Informa si el elemento element esta presente en la lista. Si esta presente retorna la posición en la que se encuentra o cero (0) si no esta presente
+    """
+    size = lst ['size']
+    if size > 0:
+        node = lst['first']
+        keyexist = False
+        for keypos in range (1,size+1):
+            if (comparefunction (element, node['info'] )):
+                keyexist = True
+                break
+            node = node['next']
+        if keyexist:
+            return keypos
+    return 0        
+
+
 def changeInfo (lst, pos, newinfo):
     """
     Cambia la informacion contenida en el nodo de la lista en la posicion pos

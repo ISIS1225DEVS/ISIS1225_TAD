@@ -80,5 +80,28 @@ class AddFirstListTest (unittest.TestCase):
         book = slt.firstElement(self.lst)
         self.assertDictEqual (book, self.book5)     
 
+    def comparebooks (self, book1, book2):
+        if book1['book_id'] == book2['book_id']:
+            return True    
+        return False
+
+    def test_isPresent (self):
+        """
+           Con muchos elementos en la lista
+        """
+        self.lst = slt.newList()
+        slt.addFirst (self.lst, self.book1)
+        slt.addFirst (self.lst, self.book2)
+        slt.addFirst (self.lst, self.book3)
+        slt.addFirst (self.lst, self.book4)
+        slt.addFirst (self.lst, self.book5)
+        book = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
+        self.assertEqual (slt.size(self.lst), 5)
+        present = slt.isPresent (self.lst, book, self.comparebooks )
+        if  present > 0:
+            print ('el libro esta presente') 
+        else:
+            print ('El libro no esta presente')    
+
 if __name__ == "__main__":
     unittest.main()

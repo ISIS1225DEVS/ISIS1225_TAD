@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
- 
+
 import config
 from DataStructures import singlelinkedlist as lt
 
@@ -98,6 +98,12 @@ def removeLast (lst):
     Remueve el último elemento de la lista
     """
     lt.removeLast (lst)
+
+def isPresent (lst, element, comparefunction):
+     """
+    Informa si el elemento element esta presente en la lista
+    """
+    return lt.isPresent (lst, element, comparefunction)
 
 
 def insertElement (lst, element, pos):

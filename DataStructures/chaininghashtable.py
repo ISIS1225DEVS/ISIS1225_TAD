@@ -26,9 +26,7 @@ from DataStructures import singlelinkedlist as lt
 
 def newMap( capacity=17, prime=109345121 ):
     scale = rd.randint(1, prime-1) + 1
-    print (scale)
     shift = rd.randint(1, prime) 
-    print (shift)
     table = lt.newList()
     for _ in range(capacity):
         bucket = lt.newList()
@@ -40,7 +38,7 @@ def newMap( capacity=17, prime=109345121 ):
 
 def hashValue (table, key):
     h = (hash(key))
-    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'])
+    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
     return value
 
 
@@ -49,12 +47,15 @@ def contains (map, key):
     ht.contains (map, key)
 
 
-def put (map, key , value):
-    entry = me.newMapEntry (key, value)
+def put (map, key , value, comparefunction):
     hash = hashValue (map, key)
-    print ('hash: ' + str(hash))
     bucket = lt.getElement (map['table'], hash)
-    lt.addLast ( bucket, entry)
+    entry = me.newMapEntry (key, value)
+    pos = lt.isPresent (bucket, entry, comparefunction)
+    if pos > 0:
+        lt.changeInfo (bucket, pos, entry)
+    else: 
+        lt.addLast ( bucket, entry)
 
 
 
