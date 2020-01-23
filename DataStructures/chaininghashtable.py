@@ -19,21 +19,54 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+import random as rd
+from DataStructures import mapentry as me
+from DataStructures import singlelinkedlist as lt
 
-def newMap( capacity ) :
-     return ht.newMap ()
+
+def newMap( capacity=17, prime=109345121 ):
+    scale = rd.randint(1, prime-1) + 1
+    print (scale)
+    shift = rd.randint(1, prime) 
+    print (shift)
+    table = lt.newList()
+    for _ in range(capacity):
+        bucket = lt.newList()
+        lt.addLast (table, bucket)
+    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table}
+
+    return hashtable
+
+
+def hashValue (table, key):
+    h = (hash(key))
+    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'])
+    return value
+
+
+
+def contains (map, key):
+    ht.contains (map, key)
+
 
 def put (map, key , value):
-    ht.put (map, key, value)
+    entry = me.newMapEntry (key, value)
+    hash = hashValue (map, key)
+    print ('hash: ' + str(hash))
+    bucket = lt.getElement (map['table'], hash)
+    lt.addLast ( bucket, entry)
+
+
 
 def get (map, key):
     return ht.get (map, key)
 
+
+
 def remove (map , key):
     ht.remove (map, key)
 
-def contains (map, key):
-    ht.contains (map, key)
+
 
 def size(map):
     ht.size (map)

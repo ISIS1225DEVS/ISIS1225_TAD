@@ -18,32 +18,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-import config
-from DataStructures import chaininghashtable as ht 
 
-def newMap( capacity, factor ) :
-     return ht.newMap ()
 
-def put (map, key , value):
-    ht.put (map, key, value)
+def newMapEntry ( key, value):
+    entry = {'key':key, 'value':value}
+    return entry
 
-def get (map, key):
-    return ht.get (map, key)
+def setKey (entry, key):
+    entry['key'] = key
 
-def remove (map , key):
-    ht.remove (map, key)
+def setValue (entry, value):
+    entry['value'] = value
 
-def contains (map, key):
-    ht.contains (map, key)
+def getKey (entry):
+    return entry['key']
 
-def size(map):
-    ht.size (map)
+def getValue (entry):
+    return entry['value']
 
-def isEmpty(map ):
-    return ht.isEmpty (map)
 
-def keySet (map):
-    return ht.keySet
-
-def values(map):
-    return ht.values (map)
