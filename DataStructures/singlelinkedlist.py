@@ -117,11 +117,18 @@ def deleteElement (lst, pos):
     la lista no esta vacia
     """
     node = lst['first']
-    while searchpos < pos:
-        searchpos+=1
-        node = node['next']
-    remove = 
-    return node['info']  
+    prev = lst['first']
+    searchpos = 1
+    if (pos == 1):
+        lst['first'] = lst['first']['next']
+        lst['size'] -= 1
+    elif(pos > 1):
+        while searchpos < pos:
+            searchpos+=1
+            prev = node
+            node = node['next']
+        prev['next'] = node['next']
+        lst['size'] -= 1
 
 
 

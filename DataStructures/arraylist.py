@@ -89,6 +89,16 @@ def getElement (lst, pos):
     return lst['elements'][pos-1]
 
 
+def deleteElement (lst, pos):
+    """
+    Elimina el elemento en la posición pos de la lista.
+    pos debe ser mayor que cero y menor o igual al tamaño de la lista
+    la lista no esta vacia
+    """
+    lst['elements'].pop(pos)
+    lst['size'] -= 1    
+
+
 def removeFirst (lst):
     """
     Remueve el primer elemento de la lista y lo retorna. La lista no puede ser vacía
@@ -112,6 +122,22 @@ def insertElement (lst, element, pos):
     """
     lst['elements'].insert (pos-1,element) 
     lst['size'] += 1
+
+
+def isPresent (lst, element, comparefunction):
+    """
+    Informa si el elemento element esta presente en la lista. Si esta presente retorna 
+    la primera posición en la que se encuentra o cero (0) si no esta presente
+    """
+    if lst['size'] > 0:
+        keyexist = False
+        for keypos in range (1,size+1):
+            if (comparefunction (element, lst['elements'][keypos-1])):
+                keyexist = True
+                break
+        if keyexist:
+            return keypos
+    return 0   
 
 
 def changeInfo (lst, pos, newinfo):

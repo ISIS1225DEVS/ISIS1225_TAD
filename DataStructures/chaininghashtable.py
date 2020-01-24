@@ -19,12 +19,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+"""
+
+Implementación de una tabla de hash, utilizando Separate Chaining como 
+mecanismo de manejo de colisiones.
+
+"""
+
 import random as rd
 from DataStructures import mapentry as me
 from DataStructures import singlelinkedlist as lt
 
 
 def newMap( capacity=17, prime=109345121 ):
+    """
+    Crea una tabla de hash con capacidad igual a capacity.  
+    """
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
     table = lt.newList()
@@ -36,6 +46,10 @@ def newMap( capacity=17, prime=109345121 ):
 
 
 def hashValue (table, key):
+    """
+    Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
+    N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
+    """
     h = (hash(key))
     value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
     return value
@@ -43,6 +57,10 @@ def hashValue (table, key):
 
 
 def contains (map, key, comparefunction):
+    """
+    Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
+    Es necesario proveer la función de comparación entre llaves. 
+    """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
     pos = lt.isPresent (bucket, entry, comparefunction)
@@ -53,6 +71,10 @@ def contains (map, key, comparefunction):
 
 
 def put (map, key , value, comparefunction):
+    """
+    Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
+    Es necesario proveer una función de comparación para las llaves.
+    """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
     entry = me.newMapEntry (key, value)
@@ -64,7 +86,11 @@ def put (map, key , value, comparefunction):
 
 
 
-def get (map, key):
+def get (map, key, comparefunction):
+    """
+    Retorna la pareja llave, valor, cuya llave sea igual a key.
+    Es necesario proveer una función de comparación para las llaves.
+    """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
     pos = lt.isPresent (bucket, entry, comparefunction)
@@ -75,25 +101,58 @@ def get (map, key):
 
 
 
-def remove (map , key):
+def remove (map , key, comparefunction):
+    """
+    Elimina la pareja llave,valor, donde llave == key.
+    Es necesario proveer la función de comparación entre llaves 
+    """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
-    pos = lt.isPresent (bucket, entry, comparefunction)
+    pos = lt.isPresent (bucket, key, comparefunction)
     if pos > 0:
-        lt. (bucket, pos)
+        lt.deleteElement (bucket, pos)
     else: 
         return None
 
 
-
 def size(map):
-    ht.size (map)
+    """
+    Retornar el tamaño de la tabla de hash
+    """
+    return lt.size (map['table'])
+
 
 def isEmpty(map ):
-    return ht.isEmpty (map)
+    """
+    Informa si la tabla de hash se encuentra vacia
+    """
+    return lt.isEmpty (map['table'])
+
+
 
 def keySet (map):
-    return ht.keySet
+    """
+    Retorna una lista con todas las llaves de la tabla de hash
+    """
+    ltset = lt.newList()
+    bucket = lt.newList()
+    for pos in range(lt.size(map['table'])):
+        bucket = lt.getElement (map['table'], pos+1)
+        for element in range (lt.size(bucket)):
+           entry = lt.getElement (bucket, element+1)
+           lt.addLast (ltset, entry['key'])
+    return ltset
 
-def values(map):
-    return ht.values (map)
+
+def valueSet(map):
+    """
+    Retornar una lista con todos los valores de la tabla de hash
+    """
+    ltset = lt.newList()
+    bucket = lt.newList()
+    for pos in range(lt.size(map['table'])):
+        bucket = lt.getElement (map['table'], pos+1)
+        for element in range (lt.size(bucket)):
+           entry = lt.getElement (bucket, element+1)
+           lt.addLast (ltset, entry['value'])
+    return ltset

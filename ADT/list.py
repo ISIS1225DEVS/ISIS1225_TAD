@@ -86,6 +86,15 @@ def getElement (lst, pos):
     return lt.getElement (lst, pos) 
 
 
+def deleteElement (lst, pos):
+    """
+    Elimina el elemento en la posición pos de la lista.
+    pos debe ser mayor que cero y menor o igual al tamaño de la lista
+    la lista no esta vacia
+    """
+    lt.deleteElement(lst, pos) 
+
+
 def removeFirst (lst):
     """
     Remueve el primer elemento de la lista
@@ -99,12 +108,6 @@ def removeLast (lst):
     """
     lt.removeLast (lst)
 
-def isPresent (lst, element, comparefunction):
-    """
-    Informa si el elemento element esta presente en la lista
-    """
-    return lt.isPresent (lst, element, comparefunction)
-
 
 def insertElement (lst, element, pos):
     """
@@ -112,11 +115,20 @@ def insertElement (lst, element, pos):
     """
     lt.insertElement (lst, element, pos)
 
+def isPresent (lst, element, comparefunction):
+    """
+    Informa si el elemento element esta presente en la lista. Si esta presente retorna 
+    la posición en la que se encuentra o cero (0) si no esta presente
+    """
+    return lt.isPresent (lst, element, comparefunction)
+
+
 def exchange (lst, pos1, pos2):
     """
     Intercambia la informacion en las posiciones pos1 y pos2 de la lista
     """
     lt.exchange (lst, pos1, pos2)
+    
 
 def changeInfo (lst, pos, element):
     """

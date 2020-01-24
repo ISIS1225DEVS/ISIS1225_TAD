@@ -22,28 +22,76 @@ import config
 from DataStructures import chaininghashtable as ht 
 
 def newMap( capacity, factor ) :
-     return ht.newMap ()
+    """
+    Crea una tabla de hash con capacidad igual a capacity.  
+    """
+    return ht.newMap ()
 
-def put (map, key , value):
-    ht.put (map, key, value)
+    
 
-def get (map, key):
-    return ht.get (map, key)
+def put (map, key , value, comparefunction):
+    """
+    Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
+    Es necesario proveer una función de comparación para las llaves.
+    """
+    ht.put (map, key, value, comparefunction)
 
-def remove (map , key):
-    ht.remove (map, key)
 
-def contains (map, key):
-    ht.contains (map, key)
+
+def get (map, key, comparefunction):
+    """
+    Retorna la pareja llave, valor, cuya llave sea igual a key.
+    Es necesario proveer una función de comparación para las llaves.
+    """
+    return ht.get (map, key, comparefunction)
+
+
+
+
+def remove (map , key, comparefunction):
+    """
+    Elimina la pareja llave,valor, donde llave == key.
+    Es necesario proveer la función de comparación entre llaves 
+    """
+    ht.remove (map, key, comparefunction)
+
+
+
+def contains (map, key, comparefunction):
+    """
+    Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
+    Es necesario proveer la función de comparación entre llaves. 
+    """
+    return ht.contains (map, key, comparefunction)
+
+
 
 def size(map):
-    ht.size (map)
+    """
+    Retornar el tamaño de la tabla de hash
+    """
+    return ht.size (map)
+
+
 
 def isEmpty(map ):
+    """
+    Informa si la tabla de hash se encuentra vacia
+    """
     return ht.isEmpty (map)
 
-def keySet (map):
-    return ht.keySet
 
-def values(map):
+
+def keySet (map):
+    """
+    Retorna una lista con todas las llaves de la tabla de hash
+    """
+    return ht.keySet (map)
+
+
+
+def valueSet(map):
+    """
+    Retornar una lista con todos los valores de la tabla de hash
+    """
     return ht.values (map)
