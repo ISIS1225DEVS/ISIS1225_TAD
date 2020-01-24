@@ -114,6 +114,7 @@ def insertElement (lst, element, pos):
     Inserta el elemento element en la posición pos de la lista.
     """
     lt.insertElement (lst, element, pos)
+    
 
 def isPresent (lst, element, comparefunction):
     """
@@ -128,7 +129,7 @@ def exchange (lst, pos1, pos2):
     Intercambia la informacion en las posiciones pos1 y pos2 de la lista
     """
     lt.exchange (lst, pos1, pos2)
-    
+
 
 def changeInfo (lst, pos, element):
     """
