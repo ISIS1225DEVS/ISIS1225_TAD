@@ -32,7 +32,6 @@ def newMap( capacity=17, prime=109345121 ):
         bucket = lt.newList()
         lt.addLast (table, bucket)
     hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table}
-
     return hashtable
 
 
@@ -43,8 +42,14 @@ def hashValue (table, key):
 
 
 
-def contains (map, key):
-    ht.contains (map, key)
+def contains (map, key, comparefunction):
+    hash = hashValue (map, key)
+    bucket = lt.getElement (map['table'], hash)
+    pos = lt.isPresent (bucket, entry, comparefunction)
+    if pos > 0:
+        return True
+    else: 
+        return False
 
 
 def put (map, key , value, comparefunction):
@@ -60,7 +65,13 @@ def put (map, key , value, comparefunction):
 
 
 def get (map, key):
-    return ht.get (map, key)
+    hash = hashValue (map, key)
+    bucket = lt.getElement (map['table'], hash)
+    pos = lt.isPresent (bucket, entry, comparefunction)
+    if pos > 0:
+        return lt.getElement (bucket, pos)
+    else: 
+        return None
 
 
 

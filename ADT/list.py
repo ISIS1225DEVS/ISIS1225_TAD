@@ -100,7 +100,7 @@ def removeLast (lst):
     lt.removeLast (lst)
 
 def isPresent (lst, element, comparefunction):
-     """
+    """
     Informa si el elemento element esta presente en la lista
     """
     return lt.isPresent (lst, element, comparefunction)

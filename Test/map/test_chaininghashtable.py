@@ -22,19 +22,23 @@ class EntryMapTest (unittest.TestCase):
         table = ht.newMap (capacity)
 
     def printTable (self, table):
-        iterator = it.newIterator(table['table'])
         print ('TABLE:')
         print ('Capacity: ' + str(table['capacity']))
         print ('Scale: ' + str(table['scale']))
         print ('Shift: ' + str(table['shift']))
         print ('Prime: ' + str(table['prime']))
+        iterator = it.newIterator(table['table'])
+        pos = 1
         while  it.hasNext(iterator):
             bucket = it.next(iterator)
             bucketiterator = it.newIterator(bucket)
+            print ("[ " + str(pos) + " ]-->", end="")
             while  it.hasNext(bucketiterator):
                 entry = it.next(bucketiterator)
-                result = "".join(str(key) + ":" + str(value) + "," for key, value in entry.items())
-                print (result)
+                print (entry, end="")
+                print ("-->",end="")
+            print ("None")
+            pos += 1
 
 
 
@@ -56,10 +60,14 @@ class EntryMapTest (unittest.TestCase):
         """
         """
         print ('TEST--------------------------------')
-        capacity = 7
+        capacity = 5
         table = ht.newMap (capacity)
         ht.put (table, 'book1', 'title1', self.comparefunction)
         ht.put (table, 'book2', 'title2', self.comparefunction)
+        ht.put (table, 'book3', 'title3', self.comparefunction)
+        ht.put (table, 'book4', 'title1', self.comparefunction)
+        ht.put (table, 'book5', 'title2', self.comparefunction)
+        ht.put (table, 'book6', 'title3', self.comparefunction)
         self.printTable (table)
         ht.put (table, 'book2', 'new-title 2', self.comparefunction)
         self.printTable (table)
