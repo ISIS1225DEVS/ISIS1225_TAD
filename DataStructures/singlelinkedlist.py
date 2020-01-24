@@ -110,6 +110,21 @@ def getElement (lst, pos):
     return node['info']  
 
 
+def deleteElement (lst, pos):
+    """
+    Elimina el elemento en la posición pos de la lista.
+    pos debe ser mayor que cero y menor o igual al tamaño de la lista
+    la lista no esta vacia
+    """
+    node = lst['first']
+    while searchpos < pos:
+        searchpos+=1
+        node = node['next']
+    remove = 
+    return node['info']  
+
+
+
 def removeFirst (lst):
     """
     Remueve el primer elemento de la lista y lo retorna en caso de existir, de lo contrario retorna None

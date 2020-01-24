@@ -76,7 +76,13 @@ def get (map, key):
 
 
 def remove (map , key):
-    ht.remove (map, key)
+    hash = hashValue (map, key)
+    bucket = lt.getElement (map['table'], hash)
+    pos = lt.isPresent (bucket, entry, comparefunction)
+    if pos > 0:
+        lt. (bucket, pos)
+    else: 
+        return None
 
 
 
