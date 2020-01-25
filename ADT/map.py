@@ -18,12 +18,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+
+
 import config
 from DataStructures import chaininghashtable as ht 
 
+
+
 def newMap( capacity, factor ) :
     """
-    Crea una tabla de hash con capacidad igual a capacity.  
+    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
     """
     return ht.newMap ()
 
@@ -68,7 +73,7 @@ def contains (map, key, comparefunction):
 
 def size(map):
     """
-    Retornar el tamaño de la tabla de hash
+    Retornar el número de entradas en la tabla de hash.
     """
     return ht.size (map)
 
@@ -92,6 +97,6 @@ def keySet (map):
 
 def valueSet(map):
     """
-    Retornar una lista con todos los valores de la tabla de hash
+    Retorna una lista con todos los valores de la tabla de hash
     """
     return ht.values (map)

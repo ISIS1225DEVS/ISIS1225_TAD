@@ -22,7 +22,9 @@
 """
 
 Implementación de una tabla de hash, utilizando Separate Chaining como 
-mecanismo de manejo de colisiones.
+mecanismo de manejo de colisiones.  Esta implementación crea una lista
+de tamaño capacity.  En cada posición de la lista, se crea una lista
+vacia.
 
 """
 
@@ -33,7 +35,9 @@ from DataStructures import singlelinkedlist as lt
 
 def newMap( capacity=17, prime=109345121 ):
     """
-    Crea una tabla de hash con capacidad igual a capacity.  
+    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    el calculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. Bucket representa 
+    la lista de parejas llave,valor a guardar en cada posición de la tabla de hash.
     """
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
@@ -76,13 +80,13 @@ def put (map, key , value, comparefunction):
     Es necesario proveer una función de comparación para las llaves.
     """
     hash = hashValue (map, key)
-    bucket = lt.getElement (map['table'], hash)
+    bucket = lt.getElement (map['table'], hash)          #Se obtiene la lista de elementos en la posicion  hash de la tabla
     entry = me.newMapEntry (key, value)
-    pos = lt.isPresent (bucket, entry, comparefunction)
-    if pos > 0:
+    pos = lt.isPresent (bucket, entry, comparefunction)  
+    if pos > 0:                                          #La pareja ya exista, se reemplaza el valor con la nueva información
         lt.changeInfo (bucket, pos, entry)
     else: 
-        lt.addLast ( bucket, entry)
+        lt.addLast ( bucket, entry)                      #La llave no existia, se crea una nueva entrada
 
 
 
@@ -90,6 +94,7 @@ def get (map, key, comparefunction):
     """
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
+    Si la llave no esta presente se retorna None
     """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
@@ -117,16 +122,28 @@ def remove (map , key, comparefunction):
 
 def size(map):
     """
-    Retornar el tamaño de la tabla de hash
+    Retornar el número de elementos presentes en la tabla de hash
     """
-    return lt.size (map['table'])
+    bucket = lt.newList()
+    size = 0
+    for pos in range(lt.size(map['table'])):
+        bucket = lt.getElement (map['table'], pos+1)
+        size += lt.size (bucket)
+    return size
 
 
 def isEmpty(map ):
     """
     Informa si la tabla de hash se encuentra vacia
     """
-    return lt.isEmpty (map['table'])
+    bucket = lt.newList()
+    empty = True
+    for pos in range(lt.size(map['table'])):
+        bucket = lt.getElement (map['table'], pos+1)
+        if lt.isEmpty(bucket)== False:
+            empty = False
+            break
+    return empty
 
 
 

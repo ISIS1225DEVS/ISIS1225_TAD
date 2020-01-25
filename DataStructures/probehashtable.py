@@ -20,10 +20,9 @@
  """
 
 """
-
 Implementación de una tabla de hash, utilizando linear probing como 
-mecanismo de manejo de colisiones.
-
+mecanismo de manejo de colisiones.  No se considera el caso de crecer
+el tamaño de la tabla (resizing / rehashing)
 """
 
 import random as rd
@@ -33,7 +32,8 @@ from DataStructures import singlelinkedlist as lt
 
 def newMap( capacity=17, prime=109345121 ):
     """
-    Crea una tabla de hash con capacidad igual a capacity.  
+    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    el cálculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. 
     """
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
@@ -56,8 +56,12 @@ def hashValue (table, key):
     return (int (key) % table['capacity']+1)
     
 
-def isAvailable (lst, pos):
-    entry = lt.getElement (lst, pos)
+def isAvailable (table, pos):
+    """
+    Informa si la posición pos esta disponible en la tabla de hash.  Se entiende que una posición está disponible
+    si su contenido es igual a None (no se ha usado esa posicion) o a __EMPTY__ (la posición fue liberada)
+    """
+    entry = lt.getElement (table, pos)
     if (entry['key'] == None or  entry['key']== '__EMPTY__'):
         return True
     return False
@@ -65,24 +69,29 @@ def isAvailable (lst, pos):
 
 
 def findSlot (map, key, hashvalue, comparefunction):
-    avail = -1
-    searchpos = 0
-    lst = map['table']
-    while (searchpos!=hashvalue):
-        if (searchpos == 0):
-            searchpos = hashvalue
-        if isAvailable (lst, searchpos):
-            element = lt.getElement(lst, searchpos)
+    """
+    Encuentra una posición libre en la tabla de hash. 
+    Basado en el algoritmo propuesto por Michael T. Goodrich 
+    """
+    avail = -1                                             # no se ha encontrado una posición aun
+    searchpos = 0                                          #  
+    table = map['table']
+    while (searchpos!=hashvalue):                          # Se busca una posición hasta llegar al punto de partida
+        if (searchpos == 0):   
+            searchpos = hashvalue                          # searchpos comienza la búsqueda en la posición hashvalue
+        if isAvailable (table, searchpos):                 # La posición esta disponible
+            element = lt.getElement(table, searchpos)      
             if (avail == -1 ):
-                avail = searchpos
-            if  element['key']==None:
+                avail = searchpos                          # avail tiene la primera posición disponible encontrada
+            if  element['key']==None:                      # La posición nunca ha sido utilizada, luego el elemento no existe
                 break
-        else:
-            element = lt.getElement(lst, searchpos)
-            if comparefunction (key, element['key']):
-                return searchpos
-        searchpos = (((searchpos) % map['capacity'])+1);  
-    return -(avail)
+        else:                                              # la posicion no estaba disponible
+            element = lt.getElement(table, searchpos)      
+            if comparefunction (key, element['key']):      # La llave es exactamente la que se busca
+                return searchpos                           # Se termina la busqueda y se retorna la posicion
+        searchpos = (((searchpos) % map['capacity'])+1);   # Se pasa a la siguiente posición de la tabla
+    return -(avail)                                        # Se retorna la primera posicion disponible, se indica 
+                                                           # con un numero negativo que el elemento no estaba presente 
 
 
 def put (map, key , value, comparefunction):
@@ -90,10 +99,10 @@ def put (map, key , value, comparefunction):
     Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
     """
-    hash = hashValue (map, key)
-    entry = me.newMapEntry (key,value)
-    pos = findSlot (map, key, hash, comparefunction)
-    lt.changeInfo (map['table'], abs(pos), entry) 
+    hash = hashValue (map, key)                            # Se obtiene el hascode de la llave 
+    entry = me.newMapEntry (key,value)                  
+    pos = findSlot (map, key, hash, comparefunction)       # Se encuentra la posición correspondiente a hash
+    lt.changeInfo (map['table'], abs(pos), entry)          # Se reemplaza el valor anterior (puede ser None) con el nuevo valor
 
 
 
@@ -108,6 +117,7 @@ def contains (map, key, comparefunction):
         return True
     else: 
         return False
+
 
 
 def get (map, key, comparefunction):
@@ -137,18 +147,31 @@ def remove (map , key, comparefunction):
         lt.changeInfo (map['table'], pos, entry) 
 
 
+
 def size(map):
     """
-    Retornar el tamaño de la tabla de hash
+    Retornar el numero de entradas presentes en la tabla de hash
     """
-    return lt.size (map['table'])
+    size = 0
+    for pos in range(lt.size(map['table'])):
+        entry = lt.getElement (map['table'], pos+1)
+        if (entry['key']!=None and entry['key']!='__EMPTY__'):
+            size += 1
+    return size
+
 
 
 def isEmpty(map ):
     """
     Informa si la tabla de hash se encuentra vacia
     """
-    return lt.isEmpty (map['table'])
+    empty = True
+    for pos in range(lt.size(map['table'])):
+        entry = lt.getElement (map['table'], pos+1)
+        if (entry['key']!=None and entry['key']!='__EMPTY__'):
+            empty = False
+            break
+    return empty
 
 
 
@@ -162,6 +185,7 @@ def keySet (map):
         if (entry['key']!=None and entry['key']!='__EMPTY__'):
             lt.addLast (ltset, entry['key'])
     return ltset
+
 
 
 def valueSet(map):

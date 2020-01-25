@@ -3,23 +3,33 @@ import config
 from DataStructures import mapentry as me
 from DataStructures import chaininghashtable as ht
 from DataStructures import listiterator as it
+from ADT import list as lt
 
 
 class EntryMapTest (unittest.TestCase):
+    
+    capacity = 5
+    table = ht.newMap (capacity)
+
+
+    def compareentryfunction (self, element1, element2):
+        if (element1['key'] == element2['key']):
+            return True
+        return False
+
+
 
     def setUp (self):
-        pass
-
+        ht.put (self.table, 'book1', 'title1', self.compareentryfunction)
+        ht.put (self.table, 'book2', 'title2', self.compareentryfunction)
+        ht.put (self.table, 'book3', 'title3', self.compareentryfunction)
+        ht.put (self.table, 'book4', 'title4', self.compareentryfunction)
+        ht.put (self.table, 'book5', 'title5', self.compareentryfunction)
+        ht.put (self.table, 'book6', 'title6', self.compareentryfunction)
 
     def tearDown (self):
         pass
 
-    def test_chainingHashTable (self):
-        """
-        """
-        print ('TEST--------------------------------')
-        capacity = 3
-        table = ht.newMap (capacity)
 
     def printTable (self, table):
         print ('TABLE:')
@@ -42,35 +52,53 @@ class EntryMapTest (unittest.TestCase):
 
 
 
-    def comparefunction (self, element1, element2):
-        if (element1['key'] == element2['key']):
+    def test_put (self):
+        """
+        """
+        ht.put (self.table, 'book2', 'new-title 2', self.compareentryfunction)
+        self.printTable (self.table)
+        self.assertEqual (ht.size(self.table), 6)
+
+
+
+    def comparekeyfunction (self, key, element):
+        if ( key  == element['key']):
             return True
         return False
 
 
-    def test_hashValue (self):
-        """
-        """
-        print ('TEST--------------------------------')
-        table = ht.newMap ()
-        hv = ht.hashValue (table, 'book1')
 
-     
-    def test_put (self):
+    def test_delete (self):
         """
         """
-        print ('TEST--------------------------------')
-        capacity = 5
-        table = ht.newMap (capacity)
-        ht.put (table, 'book1', 'title1', self.comparefunction)
-        ht.put (table, 'book2', 'title2', self.comparefunction)
-        ht.put (table, 'book3', 'title3', self.comparefunction)
-        ht.put (table, 'book4', 'title1', self.comparefunction)
-        ht.put (table, 'book5', 'title2', self.comparefunction)
-        ht.put (table, 'book6', 'title3', self.comparefunction)
-        self.printTable (table)
-        ht.put (table, 'book2', 'new-title 2', self.comparefunction)
-        self.printTable (table)
+        self.printTable (self.table)
+        ht.remove (self.table, 'book1', self.comparekeyfunction)
+        self.printTable (self.table)
+
+
+
+    def test_getkeys (self):
+        """
+        """
+        ltset = ht.keySet(self.table)
+        iterator = it.newIterator (ltset)
+        while it.hasNext (iterator):
+            info = it.next (iterator)
+            print (info)
+
+
+
+    def test_getvalues (self):
+        """
+        """
+        ltset = lt.newList ()
+        ltset = ht.valueSet (self.table)
+        iterator = it.newIterator (ltset)
+        while it.hasNext (iterator):
+            info = it.next (iterator)
+            print (info)
+
+
 
 if __name__ == "__main__":
     unittest.main()
