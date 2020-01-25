@@ -50,10 +50,10 @@ def hashValue (table, key):
     Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
     N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
     """
-    #h = (hash(key))
-    #value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
-    #return value
-    return (int (key) % table['capacity']+1)
+    h = (hash(key))
+    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
+    return value
+    #return (int (key) % table['capacity']+1)
     
 
 def isAvailable (table, pos):
