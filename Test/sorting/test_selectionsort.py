@@ -27,7 +27,7 @@ from DataStructures import listiterator as it
 from ADT import list as slt
 
 
-class insertionSortTest (unittest.TestCase):
+class selectionSortTest (unittest.TestCase):
 
     def setUp (self):
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
@@ -69,7 +69,8 @@ class insertionSortTest (unittest.TestCase):
         slt.addFirst (self.lst, self.book7)
         slt.addFirst (self.lst, self.book9)
      
-        print ("Random list:----------------------------------------------------")
+        print ("Testing Random list:----------------------------------------------------")
+
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
@@ -168,7 +169,7 @@ class insertionSortTest (unittest.TestCase):
 
     def test_repeatedElements (self):
         """
-           Con muchos elementos en la lista
+           Con  elementos repetidos en la lista
         """
         self.lst = slt.newList()
         slt.addFirst (self.lst, self.book5)

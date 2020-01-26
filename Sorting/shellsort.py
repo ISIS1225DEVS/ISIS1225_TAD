@@ -29,12 +29,12 @@ from DataStructures import listnode as node
 def shellSort(lst, lessfunction):
     n = lt.size(lst)
     h = 1
-    while h < n/3:
-        h = 3*h + 1
+    while h < n/3:          # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño
+        h = 3*h + 1         # por ejemplo para n = 100, h toma un valor inical de 13 , 4, 1
     while (h >= 1):
         for i in range (h,n):
             j = i
             while (j>=h) and lessfunction (lt.getElement(lst,j+1),lt.getElement(lst,j-h+1)):
                 lt.exchange (lst, j+1, j-h+1)
                 j -=h
-        h //=3
+        h //=3              # h se decrementa en un tercio. cuando h es igual a 1, se comporta como insertionsort

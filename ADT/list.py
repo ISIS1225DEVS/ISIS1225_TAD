@@ -19,7 +19,7 @@
  """
 
 import config
-from DataStructures import singlelinkedlist as lt
+from DataStructures import arraylist as lt
 
 """
   Este módulo implementa el tipo abstracto de datos (TAD) lista. 
