@@ -31,7 +31,7 @@ def newIterator(lst):
     """
     Inicializa un iterador para la lista lst
     """
-    iterator = {'iterable_lst':lst,'current_node':None}
+    iterator = {'iterable_lst':lst,'current_node':None, 'type':'LINKED_ITERATOR'}
     return iterator
 
 

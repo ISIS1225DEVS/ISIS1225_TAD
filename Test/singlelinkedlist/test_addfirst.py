@@ -23,7 +23,7 @@
 
 import unittest 
 import config 
-from DataStructures import singlelinkedlist as slt
+from DataStructures import liststructure as slt
 
 class AddFirstListTest (unittest.TestCase):
 
@@ -42,7 +42,7 @@ class AddFirstListTest (unittest.TestCase):
         """
            Con la lista vacia
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList('SINGLE_LINKED_LIST')
         self.assertEqual (slt.isEmpty(self.lst), True)
         self.assertEqual (slt.size(self.lst), 0)
         slt.addFirst (self.lst, self.book1)
@@ -54,7 +54,7 @@ class AddFirstListTest (unittest.TestCase):
         """
            Con un elemento en la lista
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList('SINGLE_LINKED_LIST')
         self.assertEqual (slt.isEmpty(self.lst), True)
         self.assertEqual (slt.size(self.lst), 0)
         slt.addFirst (self.lst, self.book1)
@@ -70,7 +70,7 @@ class AddFirstListTest (unittest.TestCase):
         """
            Con muchos elementos en la lista
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList('SINGLE_LINKED_LIST')
         slt.addFirst (self.lst, self.book1)
         slt.addFirst (self.lst, self.book2)
         slt.addFirst (self.lst, self.book3)
@@ -89,7 +89,7 @@ class AddFirstListTest (unittest.TestCase):
         """
            Con muchos elementos en la lista
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList('SINGLE_LINKED_LIST')
         slt.addFirst (self.lst, self.book1)
         slt.addFirst (self.lst, self.book2)
         slt.addFirst (self.lst, self.book3)

@@ -30,7 +30,7 @@ def newIterator(lst):
     """
     Inicializa un iterador para la lista lst
     """
-    iterator = {'iterable_lst':lst,'current_node':-1}
+    iterator = {'iterable_lst':lst,'current_node':-1, 'type':'ARRAY_ITERATOR'}
     return iterator
 
 

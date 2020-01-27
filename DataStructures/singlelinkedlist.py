@@ -32,7 +32,7 @@ def newList ():
     """
     Crea una lista vacia
     """
-    new_list = {'first':None, 'last':None, 'size':0 }
+    new_list = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
     return (new_list)
 
 

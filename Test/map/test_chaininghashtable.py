@@ -12,6 +12,7 @@ class EntryMapTest (unittest.TestCase):
     table = ht.newMap (capacity)
 
 
+
     def compareentryfunction (self, element1, element2):
         if (element1['key'] == element2['key']):
             return True
@@ -91,7 +92,7 @@ class EntryMapTest (unittest.TestCase):
     def test_getvalues (self):
         """
         """
-        ltset = lt.newList ()
+        ltset = lt.newList ('SINGLE_LINKED_LIST')
         ltset = ht.valueSet (self.table)
         iterator = it.newIterator (ltset)
         while it.hasNext (iterator):

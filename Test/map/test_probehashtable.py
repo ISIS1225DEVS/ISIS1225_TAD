@@ -71,7 +71,7 @@ class EntryMapTest (unittest.TestCase):
     def test_getkeys (self):
         """
         """
-        ltset = lt.newList ()
+        ltset = lt.newList ('SINGLE_LINKED_LIST')
         ltset = ht.keySet(self.table)
         iterator = it.newIterator (ltset)
         while it.hasNext (iterator):
@@ -82,7 +82,7 @@ class EntryMapTest (unittest.TestCase):
     def test_getvalues (self):
         """
         """
-        ltset = lt.newList ()
+        ltset = lt.newList ('SINGLE_LINKED_LIST')
         ltset = ht.valueSet (self.table)
         iterator = it.newIterator (ltset)
         while it.hasNext (iterator):

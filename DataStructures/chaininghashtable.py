@@ -30,7 +30,7 @@ vacia.
 
 import random as rd
 from DataStructures import mapentry as me
-from DataStructures import singlelinkedlist as lt
+from DataStructures import liststructure as lt
 
 
 def newMap( capacity=17, prime=109345121 ):
@@ -41,9 +41,9 @@ def newMap( capacity=17, prime=109345121 ):
     """
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
-    table = lt.newList()
+    table = lt.newList('ARRAY_LIST')
     for _ in range(capacity):
-        bucket = lt.newList()
+        bucket = lt.newList('SINGLE_LINKED_LIST')
         lt.addLast (table, bucket)
     hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table}
     return hashtable
@@ -124,7 +124,6 @@ def size(map):
     """
     Retornar el número de elementos presentes en la tabla de hash
     """
-    bucket = lt.newList()
     size = 0
     for pos in range(lt.size(map['table'])):
         bucket = lt.getElement (map['table'], pos+1)
@@ -151,8 +150,7 @@ def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    ltset = lt.newList()
-    bucket = lt.newList()
+    ltset = lt.newList('SINGLE_LINKED_LIST')
     for pos in range(lt.size(map['table'])):
         bucket = lt.getElement (map['table'], pos+1)
         for element in range (lt.size(bucket)):
@@ -165,8 +163,7 @@ def valueSet(map):
     """
     Retornar una lista con todos los valores de la tabla de hash
     """
-    ltset = lt.newList()
-    bucket = lt.newList()
+    ltset = lt.newList('SINGLE_LINKED_LIST')
     for pos in range(lt.size(map['table'])):
         bucket = lt.getElement (map['table'], pos+1)
         for element in range (lt.size(bucket)):

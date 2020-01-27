@@ -27,7 +27,7 @@ el tamaño de la tabla (resizing / rehashing)
 
 import random as rd
 from DataStructures import mapentry as me
-from DataStructures import singlelinkedlist as lt
+from DataStructures import liststructure as lt
 
 
 def newMap( capacity=17, prime=109345121 ):
@@ -37,7 +37,7 @@ def newMap( capacity=17, prime=109345121 ):
     """
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
-    table = lt.newList()
+    table = lt.newList('ARRAY_LIST')
     for _ in range(capacity):
         entry = me.newMapEntry(None, None)
         lt.addLast (table, entry)
@@ -179,7 +179,7 @@ def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    ltset = lt.newList()
+    ltset = lt.newList('SINGLE_LINKED_LIST')
     for pos in range(lt.size(map['table'])):
         entry = lt.getElement (map['table'], pos+1)
         if (entry['key']!=None and entry['key']!='__EMPTY__'):
@@ -192,7 +192,7 @@ def valueSet(map):
     """
     Retornar una lista con todos los valores de la tabla de hash
     """
-    ltset = lt.newList()
+    ltset = lt.newList('SINGLE_LINKED_LIST')
     for pos in range(lt.size(map['table'])):
         entry = lt.getElement (map['table'], pos+1)
         if (entry['value']!=None and  entry['value']!='__EMPTY__'):

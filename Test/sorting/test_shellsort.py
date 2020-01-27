@@ -29,6 +29,9 @@ from ADT import list as slt
 
 class shellSortTest (unittest.TestCase):
 
+    list_type = 'ARRAY_LIST'
+    #list_type = 'SINGLE_LINKED_LIST'
+
     def setUp (self):
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
         self.book2 = {'book_id':'2', 'book_title':'Title 2', 'author':'author 2'}
@@ -57,7 +60,7 @@ class shellSortTest (unittest.TestCase):
         """
          Lista con elementos en orden aleatorio
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList(self.list_type)
         slt.addFirst (self.lst, self.book5)
         slt.addFirst (self.lst, self.book6)
         slt.addFirst (self.lst, self.book3)
@@ -89,7 +92,7 @@ class shellSortTest (unittest.TestCase):
         """
         Lista ordenada inversamente
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList(self.list_type)
         slt.addFirst (self.lst, self.book1)
         slt.addFirst (self.lst, self.book2)
         slt.addFirst (self.lst, self.book3)
@@ -119,7 +122,7 @@ class shellSortTest (unittest.TestCase):
         """
         Lista ordenada
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList(self.list_type)
         slt.addFirst (self.lst, self.book10)
         slt.addFirst (self.lst, self.book9)
         slt.addFirst (self.lst, self.book8)
@@ -149,7 +152,7 @@ class shellSortTest (unittest.TestCase):
         """
         Un elemento
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList(self.list_type)
         slt.addFirst (self.lst, self.book1)
 
         print ("one element:----------------------------------------------------")
@@ -170,7 +173,7 @@ class shellSortTest (unittest.TestCase):
         """
            Con muchos elementos en la lista
         """
-        self.lst = slt.newList()
+        self.lst = slt.newList(self.list_type)
         slt.addFirst (self.lst, self.book5)
         slt.addFirst (self.lst, self.book6)
         slt.addFirst (self.lst, self.book14)

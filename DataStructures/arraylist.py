@@ -28,7 +28,7 @@ def newList ():
     """
     Crea una lista vacia
     """
-    new_list = {'elements':[], 'size':0 }
+    new_list = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
     return (new_list)
 
 

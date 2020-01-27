@@ -20,7 +20,8 @@
  """
 
 
-from DataStructures import arraylistiterator as it
+from DataStructures import arraylistiterator as ait
+from DataStructures import linkedlistiterator as lit
 
 
 """
@@ -32,7 +33,10 @@ def newIterator(lst):
     """
     Inicializa un iterador para la lista lst
     """
-    return it.newIterator(lst)
+    if (lst['type'] == 'ARRAY_LIST'):
+        return ait.newIterator(lst)
+    else:
+        return lit.newIterator (lst)
 
 
 
@@ -40,11 +44,18 @@ def hasNext(iterator):
     """
     Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador
     """
-    return it.hasNext(iterator)
+    if (iterator['type']=='ARRAY_ITERATOR'):
+        return ait.hasNext(iterator)
+    else: 
+        return lit.hasNext(iterator)
+
 
 
 def next(iterator):
     """
     Retorna el elemento en la posición siguiente a la indicada por el iterador
     """
-    return it.next(iterator)
+    if (iterator['type']=='ARRAY_ITERATOR'):
+        return ait.next(iterator)
+    else:
+        return lit.next(iterator)

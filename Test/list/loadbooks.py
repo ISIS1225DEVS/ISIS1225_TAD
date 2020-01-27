@@ -23,6 +23,7 @@
 import config as cf
 from ADT import list as lt
 from DataStructures import listiterator as it
+from DataStructures import liststructure as lt
 import csv
 
 def loadCSVFile (file, lst):
@@ -39,28 +40,28 @@ def printList (lst):
 
 
 print ('Creating books list')
-lst_books= lt.newList()
+lst_books= lt.newList('SINGLE_LINKED_LIST')
 print ('Creating tag list')
-lst_tags=  lt.newList()
+lst_tags=  lt.newList('ARRAY_LIST')
 print ('Creating books-tag list')
-lst_book_tags= lt.newList()
+lst_book_tags= lt.newList('SINGLE_LINKED_LIST')
 print ('Creating ratings list')
-lst_ratings= lt.newList()
+lst_ratings= lt.newList('SINGLE_LINKED_LIST')
 print ('Creating to-read list')
-lst_to_read= lt.newList()
+lst_to_read= lt.newList('SINGLE_LINKED_LIST')
 
 print ('Loading books')
 booksfile = cf.data_dir + 'GoodReads/books.csv'
 loadCSVFile (booksfile, lst_books)
 print (lst_books['size'])
-#printList (lst_books)
+printList (lst_books)
 
 
 print ('Loading tags')
 tagsfile = cf.data_dir + 'GoodReads/tags.csv'
 loadCSVFile (tagsfile, lst_tags)
 print (lst_tags['size'])
-#printList (lst_tags)
+printList (lst_tags)
 
 print ('Loading books-tags')
 booktagsfile = cf.data_dir + 'GoodReads/book_tags.csv'
