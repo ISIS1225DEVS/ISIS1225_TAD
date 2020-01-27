@@ -56,7 +56,7 @@ class insertionSortTest (unittest.TestCase):
         lt.addFirst (self.alst, self.book4)
         print (self.alst)
         print('-----')
-        self.slst = lt.newList('SINGLE_LINKED_LIST')
+        self.slst = lt.newList()
         lt.addFirst (self.slst, self.book6)
         lt.addFirst (self.slst, self.book7)
         lt.addFirst (self.slst, self.book8)

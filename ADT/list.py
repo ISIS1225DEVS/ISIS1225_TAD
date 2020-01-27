@@ -30,7 +30,7 @@ from DataStructures import liststructure as lt
 
 def newList (datastructure):
     """
-    Crea una lista vacia. datastructure puede ser igual a: 'ARRAY_LIST' o 'SINGLE_LINKED_LIST'
+    Crea una lista vacia. datastructure puede ser igual a: 'ARRAY_LIST' o 'SINGLE_LINKED'
     """
     lst = lt.newList(datastructure)
     return lst

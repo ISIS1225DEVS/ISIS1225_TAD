@@ -40,15 +40,19 @@ def printList (lst):
 
 
 print ('Creating books list')
-lst_books= lt.newList('SINGLE_LINKED_LIST')
+lst_books= lt.newList()
+
 print ('Creating tag list')
 lst_tags=  lt.newList('ARRAY_LIST')
+
 print ('Creating books-tag list')
-lst_book_tags= lt.newList('SINGLE_LINKED_LIST')
+lst_book_tags= lt.newList()
+
 print ('Creating ratings list')
-lst_ratings= lt.newList('SINGLE_LINKED_LIST')
+lst_ratings= lt.newList()
+
 print ('Creating to-read list')
-lst_to_read= lt.newList('SINGLE_LINKED_LIST')
+lst_to_read= lt.newList()
 
 print ('Loading books')
 booksfile = cf.data_dir + 'GoodReads/books.csv'

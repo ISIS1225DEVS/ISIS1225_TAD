@@ -27,7 +27,7 @@ from DataStructures import singlelinkedlist as slt
   Se puede implementar sobre una estructura de datos encadenada de forma sencilla o doble
 """
 
-def newList (datastructure):
+def newList (datastructure='SINGLE_LINKED'):
     """
     Crea una lista vacia
     """
