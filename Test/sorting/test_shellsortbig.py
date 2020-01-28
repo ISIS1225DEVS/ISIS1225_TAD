@@ -58,7 +58,7 @@ class shellSortTest (unittest.TestCase):
 
 
     def less( self, element1, element2):
-        if int(element1['goodreads_book_id']) <  int(element2['goodreads_book_id']):
+        if int(element1['goodreads_book_id']) >  int(element2['goodreads_book_id']):
             return True
         return False
 

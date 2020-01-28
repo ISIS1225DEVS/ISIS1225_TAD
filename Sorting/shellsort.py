@@ -25,6 +25,14 @@ import config as cf
 from ADT import list as lt
 from DataStructures import listnode as node
 
+"""
+Implementación del algoritmo shellsort, basado en la propuesta de Robert Sedgewick
+
+Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne
+
+Se utiliza la secuencia de incrementos 3x+1: 1, 4, 13, 40, 121, 364, 1093, ..... (D. Knuth)
+Sedgewick: 1,5,19,41,109,209,929,2161,...
+"""
 
 def shellSort(lst, lessfunction):
     n = lt.size(lst)
