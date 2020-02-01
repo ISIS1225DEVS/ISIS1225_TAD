@@ -132,9 +132,9 @@ def removeFirst (lst):
     Remueve el primer elemento de la lista
     """
     if (lst['type']=='ARRAY_LIST'):
-        alt.removeFirst (lst)
+        return alt.removeFirst (lst)
     else:
-        slt.removeFirst (lst)
+        return slt.removeFirst (lst)
 
 
 
@@ -144,9 +144,9 @@ def removeLast (lst):
     Remueve el último elemento de la lista
     """
     if (lst['type']=='ARRAY_LIST'):
-        alt.removeLast (lst)
+        return alt.removeLast (lst)
     else:
-        slt.removeLast (lst)
+        return slt.removeLast (lst)
 
 
 

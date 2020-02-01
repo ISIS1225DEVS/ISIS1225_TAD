@@ -19,17 +19,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-from DataStructures import singlelinkedlist as lt
+from DataStructures import liststructure as lt
 
 """
   Este módulo implementa el tipo abstracto de datos cola (Queue) sobre una lista.
 """
 
-def newQueue():
+def newQueue(datastructure='SINGLE_LINKED'):
     """
     Crea una cola vacia
     """
-    return lt.newList()
+    return lt.newList(datastructure)
 
 def enqueue (queue, element):
     """
@@ -41,13 +41,13 @@ def dequeue (queue):
     """
     Retorna el elemento en la primer posición de la cola, y lo elimina
     """
-    lt.removeFirst(queue, element)
+    return lt.removeFirst(queue)
 
 def peek (queue):
     """
     Retorna el elemento en la primer posición de la cola sin eliminarlo
     """
-    lt.firstElement (queue)
+    return lt.firstElement (queue)
 
 def isEmpty (queue):
     """
@@ -60,23 +60,3 @@ def size (queue):
     Informa el número de elementos en la cola
     """
     return lt.size(queue)
-
-def newIterator(queue):
-    """
-    Inicializa un iterador para la lista
-    """
-    lt.newIterator(queue)
-
-
-def hasNext(queue):
-    """
-    Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador
-    """
-    return lt.hasNext (queue)
-
-
-def next(queue):
-    """
-    Retorna el elemento en la posición siguiente a la indicada por el iterador
-    """
-    return lt.next (queue)

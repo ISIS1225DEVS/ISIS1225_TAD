@@ -43,7 +43,7 @@ def partition (lst, lo, hi, lessequalfunction):
 
 def sort (lst, lo, hi, lessequalfunction):
     """
-    Se localiza el pivot, utilizando la funcion de paticion. 
+    Se localiza el pivot, utilizando la funcion de particion. 
     Luego se hace la recursión con los elementos a la izquierda del pivot 
     y los elementos a la derecha del pivot 
     """

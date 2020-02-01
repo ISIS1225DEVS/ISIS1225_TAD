@@ -19,17 +19,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-from DataStructures import singlelinkedlist as lt
+from DataStructures import liststructure as lt
 
 """
   Este módulo implementa el tipo abstracto de datos pial (Stack) sobre una lista.
 """
 
-def newStack():
+def newStack(datastructure = 'SINGLE_LINKED'):
     """
     Crea una pila vacia
     """
-    return lt.newList()
+    return lt.newList(datastructure)
+
 
 def push (stack, element):
     """
@@ -37,11 +38,13 @@ def push (stack, element):
     """
     lt.addFirst (stack, element)
 
-def pop (stack, element):
+
+def pop (stack):
     """
-    Retorn el elemento  presente en el tope de la pila
+    Retorna el elemento  presente en el tope de la pila
     """
     return lt.removeFirst (stack)
+
 
 def isEmpty (stack):
     """
@@ -49,11 +52,13 @@ def isEmpty (stack):
     """
     return lt.isEmpty(stack)
 
+
 def top (stack):
     """
-    Retorna el elemento en tope de la pila, sin removerlo 
+    Retorna el elemento en tope de la pila, sin eliminarlo de la pila 
     """
     return lt.firstElement(stack)
+
 
 def size (stack):
     """
