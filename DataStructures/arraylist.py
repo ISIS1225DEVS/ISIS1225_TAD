@@ -155,4 +155,18 @@ def exchange (lst, pos1, pos2):
     changeInfo (lst, pos1, infopos2)
     changeInfo (lst, pos2, infopos1)
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
+    elem = pos-1
+    cont = 1
+    while  cont <= numelem:
+        sublst['elements'].append (lst['elements'][elem])
+        sublst['size'] += 1
+        elem += 1
+        cont += 1
+    return sublst
+
 

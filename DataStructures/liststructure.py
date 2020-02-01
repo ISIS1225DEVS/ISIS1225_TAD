@@ -197,4 +197,14 @@ def changeInfo (lst, pos, element):
     else:
         slt.changeInfo (lst, pos, element)
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    if (lst['type']=='ARRAY_LIST'):
+        return alt.subList (lst, pos, numelem)
+    else:
+        return slt.subList (lst, pos, numelem)
+
+
 

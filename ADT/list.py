@@ -141,3 +141,10 @@ def changeInfo (lst, pos, element):
     lt.changeInfo (lst, pos, element)
 
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    return lt.subList (lst, pos, numelem)
+
+

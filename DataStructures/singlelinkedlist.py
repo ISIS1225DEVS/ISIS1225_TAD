@@ -231,3 +231,19 @@ def exchange (lst, pos1, pos2):
     infopos2 = getElement (lst, pos2)
     changeInfo (lst, pos1, infopos2)
     changeInfo (lst, pos2, infopos1)
+
+
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
+    cont = 1
+    loc = pos
+    while  cont <= numelem:
+        elem = getElement (lst, loc)
+        addLast (sublst, elem)
+        loc += 1
+        cont += 1
+    return sublst
+
