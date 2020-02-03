@@ -28,7 +28,7 @@ from DataStructures import liststructure as lt
   como un arreglo
 """
 
-def newList (datastructure):
+def newList (datastructure='SINGLE_LINKED'):
     """
     Crea una lista vacia. datastructure puede ser igual a: 'ARRAY_LIST' o 'SINGLE_LINKED'
     """

@@ -129,7 +129,8 @@ def isPresent (lst, element, comparefunction):
     Informa si el elemento element esta presente en la lista. Si esta presente retorna 
     la primera posición en la que se encuentra o cero (0) si no esta presente
     """
-    if lst['size'] > 0:
+    size = lst['size']
+    if size > 0:
         keyexist = False
         for keypos in range (1,size+1):
             if (comparefunction (element, lst['elements'][keypos-1])):
