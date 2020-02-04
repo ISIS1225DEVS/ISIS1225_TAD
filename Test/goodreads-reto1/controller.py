@@ -49,34 +49,26 @@ def printList (lst):
 
 
 def compareauthors (authorname1, author):
-    if authorname1 == author['name'] :
-        return True
-    return False
-
+    return  (authorname1 == author['name'] )
 
 
 def compareratings (book1, book2):
-    if float(book1['average_rating']) > float(book2['average_rating']):
-        return True
-    return False
+    return ( float(book1['average_rating']) > float(book2['average_rating']))
 
 
 def compareids (id, tag):
-    if id  == tag['tag_id']:
-        return True
-    return False
+    return (id  == tag['tag_id'])
+
 
 
 def comparegoodreadsid (id, book):
-    if id  == book['goodreads_book_id']:
-        return True
-    return False
+    return (id  == book['goodreads_book_id'])
+
 
 
 def comparetagnames (name, tag):
-    if name  == tag['name']:
-        return True
-    return False
+    return (name  == tag['name'])
+
 
 
 # Funciones para la carga de datos 
