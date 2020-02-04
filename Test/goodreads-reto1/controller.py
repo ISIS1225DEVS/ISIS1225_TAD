@@ -89,7 +89,7 @@ def loadBooks (catalog):
     cada uno de ellos, se crea en la lista de autores, a dicho autor y una
     referencia al libro que se esta procesando.
     """
-    booksfile = cf.data_dir + 'GoodReads/books.csv'
+    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
     input_file = csv.DictReader(open(booksfile))
     for book in input_file:  
         # Se adiciona el libro a la lista de libros
@@ -121,7 +121,7 @@ def loadBooksTags (catalog):
     Primero se localiza el tag y se le agrega la información leida. 
     Adicionalmente se le agrega una referencia al libro procesado.
     """
-    booktagsfile = cf.data_dir + 'GoodReads/book_tags-medium.csv'
+    booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file: 
         model.addBookTag (catalog, tag, compareids, comparegoodreadsid)

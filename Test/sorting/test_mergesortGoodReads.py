@@ -33,7 +33,7 @@ class mergesortTest (unittest.TestCase):
     #list_type = 'SINGLE_LINKED_LIST'
     
     lst_books = lt.newList(list_type)
-    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
+    booksfile = cf.data_dir + 'GoodReads/books.csv'
 
     def setUp (self):
         print ('Loading books')
@@ -58,7 +58,7 @@ class mergesortTest (unittest.TestCase):
 
 
     def less( self, element1, element2):
-        if float (element1['average_rating'] ) <  float (element2['average_rating']):
+        if float (element1['average_rating'] ) >  float (element2['average_rating']):
             return True
         return False
 
