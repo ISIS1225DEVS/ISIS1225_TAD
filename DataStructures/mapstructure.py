@@ -21,17 +21,20 @@
 
 
 import config
-from DataStructures import mapstructure as ht 
+from DataStructures import chaininghashtable as cht
+from DataStructures import probehashtable as pht 
 
 
 
-def newMap( capacity, prime, maptype ) :
+def newMap( capacity, factor, maptype='CHAINING' ) :
     """
-    Crea una tabla de hash con capacidad igual a capacity (idealmente un numero primo).  prime es un número primo utilizado para 
-    el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.  maptype indica si se utiliza separate chaining
-    o linear probing como mecanismo de solución de colisiones.
+    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
     """
-    return ht.newMap (capacity, prime, maptype)
+    if (maptype == 'CHAINING'):
+        return cht.newMap (capacity, factor)
+    else:
+        return pht.newMap (capacity, factor)
 
     
 
@@ -40,7 +43,10 @@ def put (map, key , value, comparefunction):
     Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
     """
-    ht.put (map, key, value, comparefunction)
+    if (map['type']=='CHAINING'):
+        cht.put (map, key, value, comparefunction)
+    else:
+        pht.put (map, key, value, comparefunction)
 
 
 
@@ -49,7 +55,10 @@ def get (map, key, comparefunction):
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
     """
-    return ht.get (map, key, comparefunction)
+    if (map['type']=='CHAINING'):
+        return cht.get (map, key, comparefunction)
+    else:
+        return pht.get (map, key, comparefunction)
 
 
 
@@ -59,7 +68,10 @@ def remove (map , key, comparefunction):
     Elimina la pareja llave,valor, donde llave == key.
     Es necesario proveer la función de comparación entre llaves 
     """
-    ht.remove (map, key, comparefunction)
+    if (map['type']=='CHAINING'):
+        cht.remove (map, key, comparefunction)
+    else:
+        pht.remove (map, key, comparefunction)
 
 
 
@@ -68,7 +80,10 @@ def contains (map, key, comparefunction):
     Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
     Es necesario proveer la función de comparación entre llaves. 
     """
-    return ht.contains (map, key, comparefunction)
+    if (map['type']=='CHAINING'):
+        return cht.contains (map, key, comparefunction)
+    else:
+        return pht.contains (map, key, comparefunction)
 
 
 
@@ -76,15 +91,20 @@ def size(map):
     """
     Retornar el número de entradas en la tabla de hash.
     """
-    return ht.size (map)
-
+    if (map['type']=='CHAINING'):
+        return cht.size (map)
+    else:
+        return pht.size (map)
 
 
 def isEmpty(map ):
     """
     Informa si la tabla de hash se encuentra vacia
     """
-    return ht.isEmpty (map)
+    if (map['type']=='CHAINING'):
+        return cht.isEmpty (map)
+    else:
+        return pht.isEmpty (map)
 
 
 
@@ -92,7 +112,10 @@ def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    return ht.keySet (map)
+    if (map['type']=='CHAINING'):
+        return cht.keySet (map)
+    else:
+        return pht.keySet (map)
 
 
 
@@ -100,4 +123,7 @@ def valueSet(map):
     """
     Retorna una lista con todos los valores de la tabla de hash
     """
-    return ht.values (map)
+    if (map['type']=='CHAINING'):
+        return cht.values (map)
+    else:
+        return pht.values (map)

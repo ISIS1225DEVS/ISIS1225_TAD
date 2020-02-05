@@ -41,7 +41,7 @@ def newMap( capacity=17, prime=109345121 ):
     for _ in range(capacity):
         entry = me.newMapEntry(None, None)
         lt.addLast (table, entry)
-    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table}
+    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'type':'PROBING'}
     return hashtable
 
 
@@ -53,7 +53,6 @@ def hashValue (table, key):
     h = (hash(key))
     value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
     return value
-    #return (int (key) % table['capacity']+1)
     
 
 def isAvailable (table, pos):
