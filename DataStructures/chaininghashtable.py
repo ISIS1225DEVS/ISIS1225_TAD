@@ -33,6 +33,7 @@ from DataStructures import mapentry as me
 from DataStructures import liststructure as lt
 
 
+
 def newMap( capacity=17, prime=109345121 ):
     """
     Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
@@ -49,6 +50,8 @@ def newMap( capacity=17, prime=109345121 ):
     return hashtable
 
 
+
+
 def hashValue (table, key):
     """
     Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
@@ -57,6 +60,7 @@ def hashValue (table, key):
     h = (hash(key))
     value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
     return value
+
 
 
 
@@ -72,6 +76,8 @@ def contains (map, key, comparefunction):
         return True
     else: 
         return False
+
+
 
 
 def put (map, key , value, comparefunction):
@@ -131,6 +137,8 @@ def size(map):
     return size
 
 
+
+
 def isEmpty(map ):
     """
     Informa si la tabla de hash se encuentra vacia
@@ -146,11 +154,13 @@ def isEmpty(map ):
 
 
 
+
+
 def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    ltset = lt.newList('SINGLE_LINKED_LIST')
+    ltset = lt.newList()
     for pos in range(lt.size(map['table'])):
         bucket = lt.getElement (map['table'], pos+1)
         for element in range (lt.size(bucket)):
@@ -159,11 +169,14 @@ def keySet (map):
     return ltset
 
 
+
+
+
 def valueSet(map):
     """
     Retornar una lista con todos los valores de la tabla de hash
     """
-    ltset = lt.newList('SINGLE_LINKED_LIST')
+    ltset = lt.newList()
     for pos in range(lt.size(map['table'])):
         bucket = lt.getElement (map['table'], pos+1)
         for element in range (lt.size(bucket)):

@@ -23,6 +23,8 @@
 Implementación de una tabla de hash, utilizando linear probing como 
 mecanismo de manejo de colisiones.  No se considera el caso de crecer
 el tamaño de la tabla (resizing / rehashing)
+
+Basado en el algoritmo propuesto por Michael T. Goodrich 
 """
 
 import random as rd
@@ -45,6 +47,7 @@ def newMap( capacity=17, prime=109345121 ):
     return hashtable
 
 
+
 def hashValue (table, key):
     """
     Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
@@ -54,6 +57,8 @@ def hashValue (table, key):
     value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
     return value
     
+
+
 
 def isAvailable (table, pos):
     """
@@ -67,10 +72,14 @@ def isAvailable (table, pos):
 
 
 
+
 def findSlot (map, key, hashvalue, comparefunction):
     """
     Encuentra una posición libre en la tabla de hash. 
-    Basado en el algoritmo propuesto por Michael T. Goodrich 
+    map: la trabla de hash
+    key: la llave
+    hashvalue: La posición inicial de la llave
+    comparefunction: funcion de comparación para la búsqueda de la llave
     """
     avail = -1                                             # no se ha encontrado una posición aun
     searchpos = 0                                          #  
@@ -93,6 +102,8 @@ def findSlot (map, key, hashvalue, comparefunction):
                                                            # con un numero negativo que el elemento no estaba presente 
 
 
+
+
 def put (map, key , value, comparefunction):
     """
     Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
@@ -105,6 +116,7 @@ def put (map, key , value, comparefunction):
 
 
 
+
 def contains (map, key, comparefunction):
     """
     Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
@@ -112,10 +124,11 @@ def contains (map, key, comparefunction):
     """
     hash = hashValue (map, key)
     pos = findSlot (map, key, hash, comparefunction)
-    if pos > 0:
+    if  (pos > 0):
         return True
     else: 
         return False
+
 
 
 
@@ -178,7 +191,7 @@ def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    ltset = lt.newList('SINGLE_LINKED_LIST')
+    ltset = lt.newList()
     for pos in range(lt.size(map['table'])):
         entry = lt.getElement (map['table'], pos+1)
         if (entry['key']!=None and entry['key']!='__EMPTY__'):
@@ -191,7 +204,7 @@ def valueSet(map):
     """
     Retornar una lista con todos los valores de la tabla de hash
     """
-    ltset = lt.newList('SINGLE_LINKED_LIST')
+    ltset = lt.newList()
     for pos in range(lt.size(map['table'])):
         entry = lt.getElement (map['table'], pos+1)
         if (entry['value']!=None and  entry['value']!='__EMPTY__'):
