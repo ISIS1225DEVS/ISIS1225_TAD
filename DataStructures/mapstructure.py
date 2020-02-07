@@ -26,7 +26,7 @@ from DataStructures import probehashtable as pht
 
 
 
-def newMap( capacity, factor, maptype='CHAINING' ) :
+def newMap( capacity, factor=109345121, maptype='CHAINING' ) :
     """
     Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
     el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
@@ -124,6 +124,6 @@ def valueSet(map):
     Retorna una lista con todos los valores de la tabla de hash
     """
     if (map['type']=='CHAINING'):
-        return cht.values (map)
+        return cht.valueSet (map)
     else:
-        return pht.values (map)
+        return pht.valueSet (map)

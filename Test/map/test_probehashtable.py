@@ -1,14 +1,14 @@
 import unittest 
 import config 
 from DataStructures import mapentry as me
-from DataStructures import probehashtable as ht
+from DataStructures import mapstructure as ht
 from DataStructures import listiterator as it
 from ADT import list as lt
 
 class EntryMapTest (unittest.TestCase):
 
     capacity = 10
-    table = ht.newMap (capacity)
+    table = ht.newMap (capacity, maptype='PROBING')
 
 
     def setUp (self):

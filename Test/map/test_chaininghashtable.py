@@ -1,14 +1,14 @@
 import unittest 
 import config 
 from DataStructures import mapentry as me
-from DataStructures import chaininghashtable as ht
+from DataStructures import mapstructure as ht
 from DataStructures import listiterator as it
 from ADT import list as lt
 
 
 class EntryMapTest (unittest.TestCase):
     
-    capacity = 5
+    capacity = 17
     table = ht.newMap (capacity)
 
 
