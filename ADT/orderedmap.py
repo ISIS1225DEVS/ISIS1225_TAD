@@ -21,26 +21,24 @@
 
 
 import config
-from DataStructures import mapstructure as ht 
+from DataStructures import orderedmapstructure as map 
 
 
 
-def newMap( capacity=17, prime=109345121, maptype='CHAINING') :
+def newMap ( ) :
     """
-    Crea una tabla de simbolos (map) con capacidad 'capacity'
-    Prime es utilizado para la función de hash 
-    maptype indica si se utiliza separate chaining o linear probing como mecanismo de solución de colisiones.
+    Crea una tabla de simbolos ordenada.
     """
-    return ht.newMap (capacity, prime, maptype)
+    return map.newMap ( )
 
     
 
 def put (map, key , value, comparefunction):
     """
-    Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
+    Ingresa una pareja llave,valor a la tabla.  Si la llave ya existe, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
     """
-    ht.put (map, key, value, comparefunction)
+    map.put (map, key, value, comparefunction)
 
 
 
@@ -65,7 +63,7 @@ def remove (map , key, comparefunction):
 
 def contains (map, key, comparefunction):
     """
-    Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
+    Retorna True si la llave key se encuentra en la tabla o False en caso contrario.  
     Es necesario proveer la función de comparación entre llaves. 
     """
     return ht.contains (map, key, comparefunction)
@@ -74,7 +72,7 @@ def contains (map, key, comparefunction):
 
 def size(map):
     """
-    Retornar el número de entradas en la tabla de hash.
+    Retornar el número de entradas en la tabla
     """
     return ht.size (map)
 
@@ -82,7 +80,7 @@ def size(map):
 
 def isEmpty(map ):
     """
-    Informa si la tabla de hash se encuentra vacia
+    Informa si la tabla  se encuentra vacia
     """
     return ht.isEmpty (map)
 
@@ -90,7 +88,7 @@ def isEmpty(map ):
 
 def keySet (map):
     """
-    Retorna una lista con todas las llaves de la tabla de hash
+    Retorna una lista con todas las llaves de la tabla 
     """
     return ht.keySet (map)
 
@@ -98,6 +96,78 @@ def keySet (map):
 
 def valueSet(map):
     """
-    Retorna una lista con todos los valores de la tabla de hash
+    Retorna una lista con todos los valores de la tabla 
     """
     return ht.valueSet (map)
+
+
+def min (map):
+    """
+    Retorna la menor llave de la tabla de simbolos 
+    """
+    pass
+
+
+
+def max (map):
+    """
+    Retorna la mayor llave de la tabla de simbolos 
+    """
+    pass
+
+
+
+def deleteMin (map):
+    """
+    Encuentra y remueve la menor  llave de la tabla de simbolos y su valor asociado
+    """
+    pass
+
+
+
+def deleteMax (map):
+    """
+    Encuentra y remueve la mayor llave de la tabla de simbolos y su valor asociado
+    """
+    pass
+
+
+
+
+def floor (map, key):
+    """
+    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
+    """ 
+    pass
+
+
+
+
+def ceiling (map, key):
+    """
+    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
+    """ 
+    pass
+
+
+
+
+def select (map, k)
+    """
+    Retorna la k-esima llave mas pequeña de la tabla
+    """ 
+    pass
+
+
+
+def rank (map, key):
+    """
+    Retorna el número de llaves en la tabla estrictamente menores que key
+    """
+    pass
+
+
+
+
+
+

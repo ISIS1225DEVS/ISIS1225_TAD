@@ -32,7 +32,7 @@ from DataStructures import mapentry as me
 from DataStructures import liststructure as lt
 
 
-def newMap( capacity=17, prime=109345121 ):
+def newMap( capacity, prime):
     """
     Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
     el cálculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. 
@@ -43,7 +43,7 @@ def newMap( capacity=17, prime=109345121 ):
     for _ in range(capacity):
         entry = me.newMapEntry(None, None)
         lt.addLast (table, entry)
-    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'type':'PROBING'}
+    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'size':0,'type':'PROBING'}
     return hashtable
 
 
@@ -95,7 +95,7 @@ def findSlot (map, key, hashvalue, comparefunction):
                 break
         else:                                              # la posicion no estaba disponible
             element = lt.getElement(table, searchpos)      
-            if comparefunction (key, element['key']):      # La llave es exactamente la que se busca
+            if comparefunction (key, element):             # La llave es exactamente la que se busca
                 return searchpos                           # Se termina la busqueda y se retorna la posicion
         searchpos = (((searchpos) % map['capacity'])+1);   # Se pasa a la siguiente posición de la tabla
     return -(avail)                                        # Se retorna la primera posicion disponible, se indica 
@@ -113,6 +113,7 @@ def put (map, key , value, comparefunction):
     entry = me.newMapEntry (key,value)                  
     pos = findSlot (map, key, hash, comparefunction)       # Se encuentra la posición correspondiente a hash
     lt.changeInfo (map['table'], abs(pos), entry)          # Se reemplaza el valor anterior (puede ser None) con el nuevo valor
+    map['size'] += 1
 
 
 
@@ -157,6 +158,7 @@ def remove (map , key, comparefunction):
     if pos > 0:
         entry = me.newMapEntry ('__EMPTY__','__EMPTY__')
         lt.changeInfo (map['table'], pos, entry) 
+        map['size'] -= 1
 
 
 
@@ -164,12 +166,7 @@ def size(map):
     """
     Retornar el numero de entradas presentes en la tabla de hash
     """
-    size = 0
-    for pos in range(lt.size(map['table'])):
-        entry = lt.getElement (map['table'], pos+1)
-        if (entry['key']!=None and entry['key']!='__EMPTY__'):
-            size += 1
-    return size
+    return map['size']
 
 
 
