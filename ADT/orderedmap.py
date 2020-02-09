@@ -134,7 +134,7 @@ def deleteMax (map):
 
 
 
-def floor (map, key):
+def floor (map, key, comparefunction):
     """
     Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
     """ 
@@ -143,7 +143,7 @@ def floor (map, key):
 
 
 
-def ceiling (map, key):
+def ceiling (map, key, comparefunction):
     """
     Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
     """ 

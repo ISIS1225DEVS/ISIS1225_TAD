@@ -89,7 +89,27 @@ def remove (bst , key, comparefunction):
     Elimina la pareja llave,valor, donde llave == key.
     Es necesario proveer la función de comparación entre llaves 
     """
-    pass
+    if (bst == None): 
+        return None
+
+    cmp = comparefunction (key, bst['key'])
+
+    if (cmp < 0):
+        bst['left'] = remove (bst['left'], key, comparefunction)
+    elif (cmp > 0):
+        bst['right'] = remove (bst['right'], key, comparefunction)
+    else:
+        if (bst['right']== None):
+            return bst['left'] 
+        if (bst['left']  == None):
+            bst['right']
+        elem = bst
+        bst = min(bst['right'])
+        bst['right'] = deleteMin(elem['right']);
+        bst['left']  = elem['left']
+
+    bst['size'] = 1 + size(bst['left']) + size (bst['right'])
+    return bst
 
 
 
@@ -137,6 +157,7 @@ def valueSet(bst):
     Retorna una lista con todos los valores de la tabla de hash
     """
     pass
+
 
 
 def min (bst):
@@ -193,20 +214,46 @@ def deleteMax (bst):
 
 
 
-def floor (bst, key):
+def floor (bst, key, comparefunction):
     """
     Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
     """ 
-    pass
+    if (bst == None):
+        return None
+
+    cmp = comparefunction (key, bst['key'])
+
+    if (cmp == 0): 
+        return bst
+    if (cmp <  0):
+        return floor (bst['left'], key, comparefunction)
+    t = floor(bst['right'], key, comparefunction); 
+    if (t != None):
+        return t
+    else:
+        return bst
 
 
 
 
-def ceiling (bst, key):
+def ceiling (bst, key, comparefunction):
     """
     Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
     """ 
-    pass
+    if (bst == None):
+        return None
+
+    cmp = comparefunction (key, bst['key'])
+
+    if (cmp == 0): 
+        return bst
+    if (cmp <  0):
+        t = ceiling (bst['left'], key, comparefunction); 
+        if (t != None):
+            return t
+        else:
+            return bst
+    return ceiling (bst['right'], key, comparefunction)
 
 
 
