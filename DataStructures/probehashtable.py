@@ -24,7 +24,12 @@ Implementación de una tabla de hash, utilizando linear probing como
 mecanismo de manejo de colisiones.  No se considera el caso de crecer
 el tamaño de la tabla (resizing / rehashing)
 
-Basado en el algoritmo propuesto por Michael T. Goodrich 
+
+Este código está basado en las implementaciones propuestas en:
+
+- Algorithms, 4th Edition.  R. Sedgewick
+
+- Data Structures and Algorithms in Java, 6th Edition.  Michael Goodrich
 """
 
 import random as rd
@@ -45,62 +50,6 @@ def newMap( capacity, prime):
         lt.addLast (table, entry)
     hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'size':0,'type':'PROBING'}
     return hashtable
-
-
-
-def hashValue (table, key):
-    """
-    Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
-    N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
-    """
-    h = (hash(key))
-    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
-    return value
-    
-
-
-
-def isAvailable (table, pos):
-    """
-    Informa si la posición pos esta disponible en la tabla de hash.  Se entiende que una posición está disponible
-    si su contenido es igual a None (no se ha usado esa posicion) o a __EMPTY__ (la posición fue liberada)
-    """
-    entry = lt.getElement (table, pos)
-    if (entry['key'] == None or  entry['key']== '__EMPTY__'):
-        return True
-    return False
-
-
-
-
-def findSlot (map, key, hashvalue, comparefunction):
-    """
-    Encuentra una posición libre en la tabla de hash. 
-    map: la trabla de hash
-    key: la llave
-    hashvalue: La posición inicial de la llave
-    comparefunction: funcion de comparación para la búsqueda de la llave
-    """
-    avail = -1                                             # no se ha encontrado una posición aun
-    searchpos = 0                                          #  
-    table = map['table']
-    while (searchpos!=hashvalue):                          # Se busca una posición hasta llegar al punto de partida
-        if (searchpos == 0):   
-            searchpos = hashvalue                          # searchpos comienza la búsqueda en la posición hashvalue
-        if isAvailable (table, searchpos):                 # La posición esta disponible
-            element = lt.getElement(table, searchpos)      
-            if (avail == -1 ):
-                avail = searchpos                          # avail tiene la primera posición disponible encontrada
-            if  element['key']==None:                      # La posición nunca ha sido utilizada, luego el elemento no existe
-                break
-        else:                                              # la posicion no estaba disponible
-            element = lt.getElement(table, searchpos)      
-            if comparefunction (key, element):             # La llave es exactamente la que se busca
-                return searchpos                           # Se termina la busqueda y se retorna la posicion
-        searchpos = (((searchpos) % map['capacity'])+1);   # Se pasa a la siguiente posición de la tabla
-    return -(avail)                                        # Se retorna la primera posicion disponible, se indica 
-                                                           # con un numero negativo que el elemento no estaba presente 
-
 
 
 
@@ -207,3 +156,61 @@ def valueSet(map):
         if (entry['value']!=None and  entry['value']!='__EMPTY__'):
             lt.addLast (ltset, entry['value'])
     return ltset
+
+
+#__________________________________________________________________
+#       Helper Functions
+#__________________________________________________________________
+
+
+def hashValue (table, key):
+    """
+    Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
+    N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
+    """
+    h = (hash(key))
+    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
+    return value
+    
+
+
+def findSlot (map, key, hashvalue, comparefunction):
+    """
+    Encuentra una posición libre en la tabla de hash. 
+    map: la trabla de hash
+    key: la llave
+    hashvalue: La posición inicial de la llave
+    comparefunction: funcion de comparación para la búsqueda de la llave
+    """
+    avail = -1                                             # no se ha encontrado una posición aun
+    searchpos = 0                                          #  
+    table = map['table']
+    while (searchpos!=hashvalue):                          # Se busca una posición hasta llegar al punto de partida
+        if (searchpos == 0):   
+            searchpos = hashvalue                          # searchpos comienza la búsqueda en la posición hashvalue
+        if isAvailable (table, searchpos):                 # La posición esta disponible
+            element = lt.getElement(table, searchpos)      
+            if (avail == -1 ):
+                avail = searchpos                          # avail tiene la primera posición disponible encontrada
+            if  element['key']==None:                      # La posición nunca ha sido utilizada, luego el elemento no existe
+                break
+        else:                                              # la posicion no estaba disponible
+            element = lt.getElement(table, searchpos)      
+            if comparefunction (key, element['key']):             # La llave es exactamente la que se busca
+                return searchpos                           # Se termina la busqueda y se retorna la posicion
+        searchpos = (((searchpos) % map['capacity'])+1);   # Se pasa a la siguiente posición de la tabla
+    return -(avail)                                        # Se retorna la primera posicion disponible, se indica 
+                                                           # con un numero negativo que el elemento no estaba presente 
+
+
+
+
+def isAvailable (table, pos):
+    """
+    Informa si la posición pos esta disponible en la tabla de hash.  Se entiende que una posición está disponible
+    si su contenido es igual a None (no se ha usado esa posicion) o a __EMPTY__ (la posición fue liberada)
+    """
+    entry = lt.getElement (table, pos)
+    if (entry['key'] == None or  entry['key']== '__EMPTY__'):
+        return True
+    return False

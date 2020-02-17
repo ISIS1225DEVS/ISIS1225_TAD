@@ -19,11 +19,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-def newNode (key, value, size):
+RED=0
+BLACK=1
+
+
+
+def newNode (key, value, size, color):
     """
-    Crea un nuevo nodo para un árbol binario y lo retorna
+    Crea un nuevo nodo para un árbol rojo-negro  y lo retorna.
+    color:0 - rojo  color:1 - negro
+
     """
-    node = {'key':key, 'value': value, 'size':size, 'left':None, 'right': None, 'type':'BST'}
+
+    node = {'key':key, 'value': value, 'size':size, 'parent':None, 'left':None, 'right': None, 'color':color, 'type':'RBT'}
+
     return node 
 
+
+def isRed (node):
+    return (node['color'] == RED)
 

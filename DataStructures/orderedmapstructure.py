@@ -21,15 +21,19 @@
 
 
 import config
-from DataStructures import orderedmapstructure as om 
+from DataStructures import bst as bst
+from DataStructures import rbt as rbt
 
 
 
-def newMap ( omaptype='RBT' ):
+def newMap( omaptype ) :
     """
-    Crea una tabla de simbolos ordenada.
+    Crea un map (tabla de símbolos) ordenado.
     """
-    return om.newMap (omaptype)
+    if (omaptype == 'BST'):
+        return bst.newMap ( )
+    else:
+        return rbt.newMap ( )
 
     
 
@@ -38,7 +42,10 @@ def put (map, key , value, comparefunction):
     Ingresa una pareja llave,valor a la tabla.  Si la llave ya existe, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
     """
-    return om.put (map, key, value, comparefunction)
+    if (map['type'] == 'BST'):
+        return bst.put (map, key, value, comparefunction)
+    else:
+        return rbt.put (map, key, value, comparefunction)
 
 
 
@@ -47,7 +54,10 @@ def get (map, key, comparefunction):
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
     """
-    return om.get (map, key, comparefunction)
+    if (map['type']=='BST'):
+        return bst.get (map, key, comparefunction)
+    else:
+        return rbt.get (map, key, comparefunction)
 
 
 
@@ -57,32 +67,43 @@ def remove (map , key, comparefunction):
     Elimina la pareja llave,valor, donde llave == key.
     Es necesario proveer la función de comparación entre llaves 
     """
-    om.remove (map, key, comparefunction)
+    if (map['type']=='BST'):
+        bst.remove (map, key, comparefunction)
+    else:
+        rbt.remove (map, key, comparefunction)
 
 
 
 def contains (map, key, comparefunction):
     """
-    Retorna True si la llave key se encuentra en la tabla o False en caso contrario.  
+    Retorna True si la llave key se encuentra en la tabla  o False en caso contrario.  
     Es necesario proveer la función de comparación entre llaves. 
     """
-    return om.contains (map, key, comparefunction)
+    if (map['type']=='BST'):
+        return bst.contains (map, key, comparefunction)
+    else:
+        return rbt.contains (map, key, comparefunction)
 
 
 
 def size(map):
     """
-    Retornar el número de entradas en la tabla
+    Retornar el número de entradas en la tabla 
     """
-    return om.size (map)
-
+    if (map['type']=='BST'):
+        return bst.size (map)
+    else:
+        return rbt.size (map)
 
 
 def isEmpty(map ):
     """
     Informa si la tabla  se encuentra vacia
     """
-    return om.isEmpty (map)
+    if (map['type']=='BST'):
+        return bst.isEmpty (map)
+    else:
+        return rbt.isEmpty (map)
 
 
 
@@ -90,7 +111,10 @@ def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla 
     """
-    return om.keySet (map)
+    if (map['type']=='BST'):
+        return bst.keySet (map)
+    else:
+        return rbt.keySet (map)
 
 
 
@@ -98,14 +122,21 @@ def valueSet(map):
     """
     Retorna una lista con todos los valores de la tabla 
     """
-    return om.valueSet (map)
+    if (map['type']=='BST'):
+        return bst.valueSet (map)
+    else:
+        return rbt.valueSet (map)
+
 
 
 def min (map):
     """
     Retorna la menor llave de la tabla de simbolos 
     """
-    return om.min (map)
+    if (map['type']=='BST'):
+        return bst.min (map)
+    else:
+        return rbt.min (map)
 
 
 
@@ -113,15 +144,22 @@ def max (map):
     """
     Retorna la mayor llave de la tabla de simbolos 
     """
-    return om.max (map)
+    if (map['type']=='BST'):
+        return bst.max (map)
+    else:
+        return rbt.max (map)
 
 
 
 def deleteMin (map):
     """
-    Encuentra y remueve la menor  llave de la tabla de simbolos y su valor asociado
+    Encuentra y remueve la menor llave de la tabla de simbolos y su valor asociado
     """
-    return om.deleteMin (map)
+    if (map['type']=='BST'):
+        return bst.deleteMin (map)
+    else:
+        return rbt.deleteMin (map)
+
 
 
 
@@ -129,7 +167,11 @@ def deleteMax (map):
     """
     Encuentra y remueve la mayor llave de la tabla de simbolos y su valor asociado
     """
-    return om.deleteMax (map)
+    if (map['type']=='BST'):
+        return bst.deleteMax (map)
+    else:
+        return rbt.deleteMax (map)
+
 
 
 
@@ -137,7 +179,10 @@ def floor (map, key, comparefunction):
     """
     Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
     """ 
-    return om.floor (map, key, comparefunction)
+    if (map['type']=='BST'):
+        return bst.floor (map, key, comparefunction)
+    else:
+        return rbt.floor (map, key, comparefunction)
 
 
 
@@ -146,7 +191,10 @@ def ceiling (map, key, comparefunction):
     """
     Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
     """ 
-    return om.ceiling (map, key, comparefunction)
+    if (map['type']=='BST'):
+        return bst.ceiling (map, key, comparefunction)
+    else:
+        return rbt.ceiling (map, key, comparefunction)
 
 
 
@@ -155,7 +203,11 @@ def select (map, k):
     """
     Retorna la k-esima llave mas pequeña de la tabla
     """ 
-    return om.select (map, k)
+    if (map['type']=='BST'):
+        return bst.select (map, k)
+    else:
+        return rbt.select (map, k)
+
 
 
 
@@ -163,10 +215,9 @@ def rank (map, key, comparefunction):
     """
     Retorna el número de llaves en la tabla estrictamente menores que key
     """
-    return om.rank (map, key, comparefunction)
-
-
-
-
+    if (map['type']=='BST'):
+        return bst.rank (map, key, comparefunction)
+    else:
+        return rbt.rank (map, key, comparefunction)
 
 

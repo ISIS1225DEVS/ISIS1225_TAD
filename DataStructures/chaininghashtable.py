@@ -26,6 +26,12 @@ mecanismo de manejo de colisiones.  Esta implementación crea una lista
 de tamaño capacity.  En cada posición de la lista, se crea una lista
 vacia.
 
+Este código está basado en las implementaciones propuestas en:
+
+- Algorithms, 4th Edition.  R. Sedgewick
+
+- Data Structures and Algorithms in Java, 6th Edition.  Michael Goodrich
+
 """
 
 import random as rd
@@ -36,7 +42,7 @@ from DataStructures import liststructure as lt
 
 def newMap( capacity, prime ):
     """
-    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    Crea una tabla de hash con capacidad igual a capacity (idealmente un numero primo).  prime es un número primo utilizado para 
     el calculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. Bucket representa 
     la lista de parejas llave,valor a guardar en cada posición de la tabla de hash.
     """
@@ -48,18 +54,6 @@ def newMap( capacity, prime ):
         lt.addLast (table, bucket)
     hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'size':0,'type':'CHAINING'}
     return hashtable
-
-
-
-
-def hashValue (table, key):
-    """
-    Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
-    N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
-    """
-    h = hash(key)
-    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
-    return value
 
 
 
@@ -93,7 +87,7 @@ def put (map, key , value, comparefunction):
         lt.changeInfo (bucket, pos, entry)
     else: 
         lt.addLast ( bucket, entry)                      #La llave no existia, se crea una nueva entrada
-    map['size'] += 1                     
+        map['size'] += 1                     
 
 
 
@@ -151,8 +145,6 @@ def isEmpty(map ):
 
 
 
-
-
 def keySet (map):
     """
     Retorna una lista con todas las llaves de la tabla de hash
@@ -167,8 +159,6 @@ def keySet (map):
 
 
 
-
-
 def valueSet(map):
     """
     Retornar una lista con todos los valores de la tabla de hash
@@ -180,3 +170,22 @@ def valueSet(map):
            entry = lt.getElement (bucket, element+1)
            lt.addLast (ltset, entry['value'])
     return ltset
+
+
+
+#__________________________________________________________________
+#       Helper Functions
+#__________________________________________________________________
+
+
+
+def hashValue (table, key):
+    """
+    Calcula un hash para una llave, utilizando el método MAD : hashValue(y) = ((ay + b) % p) % N.  Donde:
+    N es el tamaño de la tabla, p es un primo mayor a N, a y b enteros aleatoreos dentro del intervalo [0,p-1], con a>0  
+    """
+    h = hash(key)
+    value = int ((abs( h*table['scale'] + table['shift']) % table['prime']) % table['capacity'] + 1)
+    return value
+
+

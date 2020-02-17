@@ -21,6 +21,13 @@
 
 import config as cf 
 from DataStructures import bstnode as node
+from ADT import list as lt
+
+
+#_____________________________________________________________________
+#            API
+#_____________________________________________________________________
+
 
 
 def newMap ( ) :
@@ -43,7 +50,7 @@ def put (bst, key , value, comparefunction):
         bst['key'] = key
         bst['value'] = value
         bst['size'] = 1
-        return
+        return bst
 
     #La funcion de comparación indica la relación de orden entre las llaves    
     cmp = comparefunction (key, bst['key'])
@@ -51,15 +58,17 @@ def put (bst, key , value, comparefunction):
         if (bst['left'] == None):  
             bst['left'] = node.newNode (key, value, 1)
         else:
-            put (bst['left'], key, value, comparefunction)
+            bst['left'] = put (bst['left'], key, value, comparefunction)
     elif (cmp > 0):                                           #La llave a insertar es mayo que la raiz
         if (bst['right'] == None):
             bst['right'] = node.newNode (key, value, 1)
         else:
-            put (bst['right'], key, value, comparefunction)
+            bst['right']  = put (bst['right'], key, value, comparefunction)
     else:                                                      #La llave a insertar es igual que la raiz
         bst['value'] = value
     bst['size'] = 1 + size(bst['left']) + size (bst['right'])
+    return bst
+
 
 
 
@@ -113,6 +122,8 @@ def remove (bst , key, comparefunction):
 
 
 
+
+
 def contains (bst, key, comparefunction):
     """
     Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
@@ -122,6 +133,8 @@ def contains (bst, key, comparefunction):
         return False
     else:
         return (get(bst,key,comparefunction)!= None)
+
+
 
 
 
@@ -136,6 +149,8 @@ def size(bst):
 
 
 
+
+
 def isEmpty (bst):
     """
     Informa si la tabla de hash se encuentra vacia
@@ -144,11 +159,14 @@ def isEmpty (bst):
 
 
 
+
 def keySet (bst):
     """
     Retorna una lista con todas las llaves de la tabla de hash
     """
-    pass
+    klist = lt.newList ()
+    klist = keySetHelper (bst, klist)
+    return klist
 
 
 
@@ -156,7 +174,10 @@ def valueSet(bst):
     """
     Retorna una lista con todos los valores de la tabla de hash
     """
-    pass
+    vlist = lt.newList ()
+    vlist = valueSetHelper (bst, vlist)
+    return vlist
+
 
 
 
@@ -262,21 +283,67 @@ def select (bst, k):
     """
     Retorna la k-esima llave mas pequeña de la tabla
     """ 
-    pass
+    
+    if (bst == None):
+        return None; 
+
+    t = 0
+    if bst['left'] != None: 
+        t = bst['left']['size']
+        
+    if  (t > k):
+        return select(bst['left'], k)
+    elif (t < k):
+        return select(bst['right'], k-t-1)
+    else:
+        return bst; 
 
 
 
 
-def rank (bst, key):
+def rank (bst, key, comparefunction):
     """
     Retorna el número de llaves en la tabla estrictamente menores que key
     """
-    pass
+    if (bst == None):
+        return 0
+
+    cmp = comparefunction (key, bst['key'])
+
+    if  (cmp < 0):
+        return rank (bst['left'], key, comparefunction)
+    elif (cmp > 0): 
+        return 1 + size(bst['left']) + rank(bst['right'], key, comparefunction)
+    else:
+        return size(bst['left'])
+
+
+
+
+#_____________________________________________________________________
+#            Funciones Helper
+#_____________________________________________________________________
+
+
+
+
+def valueSetHelper (bst, klist):
+    if (bst == None):
+        return klist
+    valueSetHelper (bst['left'], klist)
+    lt.addLast (klist, bst['value'])
+    valueSetHelper (bst['right'], klist)
+    return klist
 
 
 
 
 
-
-
+def keySetHelper (bst, klist):
+    if (bst == None):
+        return klist
+    keySetHelper (bst['left'], klist)
+    lt.addLast (klist, bst['key'])
+    keySetHelper (bst['right'], klist)
+    return klist
 

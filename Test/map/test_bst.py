@@ -1,13 +1,11 @@
 import unittest 
 import config 
 from DataStructures import bstnode as node
-from DataStructures import bst as bst
 from DataStructures import listiterator as it
 from ADT import list as lt
+from ADT import orderedmap as bst
 
 class EntryMapTest (unittest.TestCase):
-
-    
 
 
     def setUp (self):
@@ -31,7 +29,7 @@ class EntryMapTest (unittest.TestCase):
     def test_BST (self):
         """
         """
-        tree = bst.newMap ( )
+        tree = bst.newMap ('BST')
         self.assertTrue (bst.isEmpty(tree))
         bst.put (tree, '50', 'Title 50', self.comparekeys)
         bst.put (tree, '70', 'Title 70', self.comparekeys)
@@ -65,7 +63,7 @@ class EntryMapTest (unittest.TestCase):
     def test_BSTRemove (self):
         """
         """
-        tree = bst.newMap ( )
+        tree = bst.newMap ('BST')
         self.assertTrue (bst.isEmpty(tree))
         bst.put (tree, '50', 'Title 50', self.comparekeys)
         bst.put (tree, '70', 'Title 70', self.comparekeys)
@@ -88,7 +86,7 @@ class EntryMapTest (unittest.TestCase):
     def test_BSTFloor (self):
         """
         """
-        tree = bst.newMap ( )
+        tree = bst.newMap ('BST')
         self.assertTrue (bst.isEmpty(tree))
         bst.put (tree, '50', 'Title 50', self.comparekeys)
         bst.put (tree, '70', 'Title 70', self.comparekeys)
@@ -113,7 +111,7 @@ class EntryMapTest (unittest.TestCase):
     def test_BSTCeiling (self):
         """
         """
-        tree = bst.newMap ( )
+        tree = bst.newMap ('BST')
         self.assertTrue (bst.isEmpty(tree))
         bst.put (tree, '50', 'Title 50', self.comparekeys)
         bst.put (tree, '70', 'Title 70', self.comparekeys)
@@ -140,6 +138,109 @@ class EntryMapTest (unittest.TestCase):
 
         node = bst.ceiling (tree, '72', self.comparekeys)
         self.assertEqual ( node['key'], '80' )
+
+
+
+
+    def test_BSTSelect (self):
+        """
+        """
+        print ('Test select')
+        tree = bst.newMap ('BST')
+        self.assertTrue (bst.isEmpty(tree))
+        bst.put (tree, '50', 'Title 50', self.comparekeys)
+        bst.put (tree, '70', 'Title 70', self.comparekeys)
+        bst.put (tree, '30', 'Title 30', self.comparekeys)
+        bst.put (tree, '80', 'Title 80', self.comparekeys)
+        bst.put (tree, '60', 'Title 60', self.comparekeys)
+        bst.put (tree, '40', 'Title 40', self.comparekeys)
+        bst.put (tree, '20', 'Title 20', self.comparekeys)
+        bst.put (tree, '10', 'Title 10', self.comparekeys)
+        bst.put (tree, '25', 'Title 25', self.comparekeys)
+        bst.put (tree, '6', 'Title 6', self.comparekeys)
+        bst.put (tree, '12', 'Title 12', self.comparekeys)
+        bst.put (tree, '7', 'Title 7', self.comparekeys)
+        bst.put (tree, '28', 'Title 28', self.comparekeys)
+
+        node = bst.select (tree, 2)
+        print (node['key'])
+
+
+    def test_BSTRank (self):
+        """
+        """
+        print ('Test rank')
+        tree = bst.newMap ('BST')
+        self.assertTrue (bst.isEmpty(tree))
+        bst.put (tree, '50', 'Title 50', self.comparekeys)
+        bst.put (tree, '70', 'Title 70', self.comparekeys)
+        bst.put (tree, '30', 'Title 30', self.comparekeys)
+        bst.put (tree, '80', 'Title 80', self.comparekeys)
+        bst.put (tree, '60', 'Title 60', self.comparekeys)
+        bst.put (tree, '40', 'Title 40', self.comparekeys)
+        bst.put (tree, '20', 'Title 20', self.comparekeys)
+        bst.put (tree, '10', 'Title 10', self.comparekeys)
+        bst.put (tree, '25', 'Title 25', self.comparekeys)
+        bst.put (tree, '6', 'Title 6', self.comparekeys)
+        bst.put (tree, '12', 'Title 12', self.comparekeys)
+        bst.put (tree, '7', 'Title 7', self.comparekeys)
+        bst.put (tree, '28', 'Title 28', self.comparekeys)
+
+        total = bst.rank (tree, '30', self.comparekeys)
+        print (total)
+
+
+
+    def test_BSTKeySet (self):
+        """
+        """
+        print ('Test key')
+        tree = bst.newMap ('BST')
+        self.assertTrue (bst.isEmpty(tree))
+        bst.put (tree, '50', 'Title 50', self.comparekeys)
+        bst.put (tree, '70', 'Title 70', self.comparekeys)
+        bst.put (tree, '30', 'Title 30', self.comparekeys)
+        bst.put (tree, '80', 'Title 80', self.comparekeys)
+        bst.put (tree, '60', 'Title 60', self.comparekeys)
+        bst.put (tree, '40', 'Title 40', self.comparekeys)
+        bst.put (tree, '20', 'Title 20', self.comparekeys)
+        bst.put (tree, '10', 'Title 10', self.comparekeys)
+        bst.put (tree, '25', 'Title 25', self.comparekeys)
+        bst.put (tree, '6', 'Title 6', self.comparekeys)
+        bst.put (tree, '12', 'Title 12', self.comparekeys)
+        bst.put (tree, '7', 'Title 7', self.comparekeys)
+        bst.put (tree, '28', 'Title 28', self.comparekeys)
+
+        lt = bst.keySet (tree)
+
+        print (lt)
+
+
+
+    def test_BSTValueSet (self):
+        """
+        """
+        print ('Test value')
+        tree = bst.newMap ('BST')
+        self.assertTrue (bst.isEmpty(tree))
+        bst.put (tree, '50', 'Title 50', self.comparekeys)
+        bst.put (tree, '70', 'Title 70', self.comparekeys)
+        bst.put (tree, '30', 'Title 30', self.comparekeys)
+        bst.put (tree, '80', 'Title 80', self.comparekeys)
+        bst.put (tree, '60', 'Title 60', self.comparekeys)
+        bst.put (tree, '40', 'Title 40', self.comparekeys)
+        bst.put (tree, '20', 'Title 20', self.comparekeys)
+        bst.put (tree, '10', 'Title 10', self.comparekeys)
+        bst.put (tree, '25', 'Title 25', self.comparekeys)
+        bst.put (tree, '6', 'Title 6', self.comparekeys)
+        bst.put (tree, '12', 'Title 12', self.comparekeys)
+        bst.put (tree, '7', 'Title 7', self.comparekeys)
+        bst.put (tree, '28', 'Title 28', self.comparekeys)
+
+        lt = bst.valueSet (tree)
+
+        print (lt)
+
 
 if __name__ == "__main__":
     unittest.main()

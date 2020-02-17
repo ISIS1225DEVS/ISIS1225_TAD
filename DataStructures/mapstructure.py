@@ -26,7 +26,7 @@ from DataStructures import probehashtable as pht
 
 
 
-def newMap( capacity, prime, maptype ) :
+def newMap( capacity=17, prime=109345121, maptype='CHAINING') :
     """
     Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
     el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
