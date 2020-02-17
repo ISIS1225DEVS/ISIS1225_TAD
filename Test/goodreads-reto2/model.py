@@ -41,7 +41,7 @@ def newCatalog():
     Adicionalmente, crea una lista vacia para los autores y una lista vacia para los 
     generos.   Retorna el catalogo inicializado.
     """
-    catalog = {'books':None, 'authors':None, 'tags': None}
+    catalog = {'books':None, 'authors':None, 'tags': None, 'tagIds': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
     catalog['authors'] = map.newMap (641, maptype='PROBING')
     catalog['tags'] = map.newMap (17021, maptype='CHAINING')
