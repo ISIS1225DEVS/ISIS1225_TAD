@@ -60,7 +60,7 @@ def loadBooks (catalog):
     cada uno de ellos, se crea en una tabla de simbolos de autores. A cada autor
     se le adiciona una referencia al libro que se esta procesando.
     """
-    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
+    booksfile = cf.data_dir + 'GoodReads/books.csv'
     input_file = csv.DictReader(open(booksfile))
     for book in input_file:  
         # Se adiciona el libro a la lista de libros
