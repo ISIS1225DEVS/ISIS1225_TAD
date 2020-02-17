@@ -28,8 +28,9 @@ from DataStructures import listiterator as it
 
 """
 Se define la estructura de un catálogo de libros.
-El catálogo tendrá tres listas, una para libros, otra para autores 
-y otra para géneros
+El catálogo tendrá  una lista para los libros, 
+Los autores y los generos se guardaran en 
+tablas de simbolos
 """
 
 # Construccion de modelos
@@ -42,7 +43,7 @@ def newCatalog():
     """
     catalog = {'books':None, 'authors':None, 'tags': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
-    catalog['authors'] = map.newMap (751, maptype='PROBING')
+    catalog['authors'] = map.newMap (317, maptype='PROBING')
     catalog['tags'] = lt.newList('ARRAY_LIST')
     return catalog
 
@@ -80,7 +81,8 @@ def addBookAuthor (catalog, authorname, book, compareauthors):
     existauthor = map.contains (authors, authorname, compareauthors)
 
     if existauthor:
-        author = map.get (authors,authorname,compareauthors)    
+        entry = map.get (authors,authorname,compareauthors)  
+        author =  entry['value'] 
     else:
         author = newAuthor(authorname)
         map.put (authors, authorname, author, compareauthors)
@@ -125,6 +127,6 @@ def getBooksByAuthor (catalog, authorname, compareauthors):
     Retorna un autor con sus libros a partir del nombre del autor
     """
     author = map.get (catalog['authors'], authorname, compareauthors)
-    return author
+    return author['value']
 
 

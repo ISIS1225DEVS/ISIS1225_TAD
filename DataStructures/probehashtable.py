@@ -196,7 +196,7 @@ def findSlot (map, key, hashvalue, comparefunction):
                 break
         else:                                              # la posicion no estaba disponible
             element = lt.getElement(table, searchpos)      
-            if comparefunction (key, element['key']):             # La llave es exactamente la que se busca
+            if comparefunction (key, element['key']):      # La llave es exactamente la que se busca
                 return searchpos                           # Se termina la busqueda y se retorna la posicion
         searchpos = (((searchpos) % map['capacity'])+1);   # Se pasa a la siguiente posición de la tabla
     return -(avail)                                        # Se retorna la primera posicion disponible, se indica 

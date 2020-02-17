@@ -31,55 +31,34 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-# Funcionaes utilitarias
-
-def loadCSVFile (file, lst):
-    input_file = csv.DictReader(open(file))
-    for row in input_file:  
-        lt.addLast(lst,row)
-
-
-def printList (lst):
-    iterator = it.newIterator(lst)
-    while  it.hasNext(iterator):
-        element = it.next(iterator)
-        result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-        print (result)
+def initCatalog ():
+    """
+    Llama la funcion de inicializacion del catalogo del modelo.
+    """
+    catalog = model.newCatalog()
+    return catalog
 
 
+def loadData (catalog):
+    """
+    Carga los datos de los archivos y cargar los datos en la
+    estructura de datos
+    """
+    loadBooks(catalog)
+    loadTags (catalog)
+    loadBooksTags(catalog)
 
-def compareauthors (authorname1, author):
-    return  (authorname1 == author['name'] )
-
-
-def compareratings (book1, book2):
-    return ( float(book1['average_rating']) > float(book2['average_rating']))
-
-
-def compareids (id, tag):
-    return (id  == tag['tag_id'])
-
-
-
-def comparegoodreadsid (id, book):
-    return (id  == book['goodreads_book_id'])
-
-
-
-def comparetagnames (name, tag):
-    return (name  == tag['name'])
-
-
-
-# Funciones para la carga de datos 
-
+#___________________________________________________
+#  Funciones para la carga de datos y almacenamiento
+#  de datos en los modelos
+#___________________________________________________
 
 
 def loadBooks (catalog):
     """
     Carga los libros del archivo.  Por cada libro se toman sus autores y por 
-    cada uno de ellos, se crea en la lista de autores, a dicho autor y una
-    referencia al libro que se esta procesando.
+    cada uno de ellos, se crea en una tabla de simbolos de autores. A cada autor
+    se le adiciona una referencia al libro que se esta procesando.
     """
     booksfile = cf.data_dir + 'GoodReads/books-small.csv'
     input_file = csv.DictReader(open(booksfile))
@@ -88,11 +67,11 @@ def loadBooks (catalog):
         lt.addLast(catalog['books'],book)
         # Se obtienen los autores del libro
         authors = book['authors'].split(",")
-        # Cada autor, se crea en la lista de libros del catalogo, y se 
+        # Cada auto se crea en la tabla de simbolos del catalogo, y se 
         # crea un libro en la lista de dicho autor (apuntador al libro)
         for author in authors:
-            model.addBookAuthor (catalog, author.strip(), book, compareauthors)
-    sort.mergesort (catalog['books'],compareratings)
+            model.addBookAuthor (catalog, author.strip(), book, compareAuthorsByName)
+    sort.mergesort (catalog['books'],compareRatings)
     
 
 
@@ -116,32 +95,16 @@ def loadBooksTags (catalog):
     booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file: 
-        model.addBookTag (catalog, tag, compareids, comparegoodreadsid)
+        model.addBookTag (catalog, tag, compareIds, compareGoodreadsId)
 
 
-def initCatalog ():
-    """
-    Llama la funcion de inicializacion del catalogo del modelo.
-    """
-    catalog = model.newCatalog()
-    return catalog
+#___________________________________________________
+#  Funciones para consultas
+#___________________________________________________
 
-
-
-def loadData (catalog):
-    """
-    Carga los datos de los archivos y cargar los datos en la
-    estructura de datos
-    """
-    loadBooks(catalog)
-    loadTags (catalog)
-    loadBooksTags(catalog)
-
-
-# Funciones llamadas desde la vista y enviadas al modelo
 
 def getBooksByAuthor (catalog, authorname):
-    author = model.getBooksByAuthor (catalog, authorname, compareauthors)
+    author = model.getBooksByAuthor (catalog, authorname, compareAuthorsByName)
     return author
 
 
@@ -156,7 +119,32 @@ def getBestBooks (catalog, number):
 
 def getBooksByTag (catalog, tag):
     tags = catalog['tags']
-    pos = lt.isPresent (tags, tag, comparetagnames)
+    pos = lt.isPresent (tags, tag, compareTagNames)
     if pos:
         elem = lt.getElement (tags, pos)
         return elem 
+
+
+#___________________________________________________
+#  Funciones Helper para comparación de Elementos
+#___________________________________________________
+
+def compareAuthorsByName (keyname, authorname):
+    return  (keyname == authorname )    
+
+
+def compareRatings (book1, book2):
+    return ( float(book1['average_rating']) > float(book2['average_rating']))
+
+
+def compareIds (id, tag):
+    return (id  == tag['tag_id'])
+
+
+def compareGoodreadsId (id, book):
+    return (id  == book['goodreads_book_id'])
+
+
+def compareTagNames (name, tag):
+    return (name  == tag['name'])
+
