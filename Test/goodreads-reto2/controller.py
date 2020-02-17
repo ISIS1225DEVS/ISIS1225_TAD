@@ -45,7 +45,7 @@ def loadData (catalog):
     estructura de datos
     """
     loadBooks(catalog)
-    loadTags (catalog)
+    loadTags (catalog, compareTagNames)
     loadBooksTags(catalog)
 
 #___________________________________________________
@@ -75,14 +75,14 @@ def loadBooks (catalog):
     
 
 
-def loadTags(catalog):
+def loadTags(catalog,compareTagNames):
     """
     Carga todos los tags del archivo y los agrega a la lista de tags
     """
     tagsfile = cf.data_dir + 'GoodReads/tags.csv'
     input_file = csv.DictReader(open(tagsfile))
     for tag in input_file:  
-        model.addTag (catalog, tag)
+        model.addTag (catalog, tag, compareTagNames, compareIds)
     
 
 
@@ -95,7 +95,7 @@ def loadBooksTags (catalog):
     booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file: 
-        model.addBookTag (catalog, tag, compareIds, compareGoodreadsId)
+        model.addBookTag (catalog, tag, compareIds, compareTagNames, compareGoodreadsId)
 
 
 #___________________________________________________
@@ -117,12 +117,9 @@ def getBestBooks (catalog, number):
     return bestbooks
     
 
-def getBooksByTag (catalog, tag):
-    tags = catalog['tags']
-    pos = lt.isPresent (tags, tag, compareTagNames)
-    if pos:
-        elem = lt.getElement (tags, pos)
-        return elem 
+def getBooksByTag (catalog, tagname):
+    books = model.getBooksByTag (catalog, tagname, compareTagNames)
+    return books
 
 
 #___________________________________________________
@@ -138,7 +135,7 @@ def compareRatings (book1, book2):
 
 
 def compareIds (id, tag):
-    return (id  == tag['tag_id'])
+    return (id  == tag['key'])
 
 
 def compareGoodreadsId (id, book):
@@ -146,5 +143,5 @@ def compareGoodreadsId (id, book):
 
 
 def compareTagNames (name, tag):
-    return (name  == tag['name'])
+    return (name  == tag['key'])
 

@@ -116,8 +116,8 @@ while True:
     elif int(inputs[0])==5:
         label = input ("Etiqueta a buscar: ")
         resp = controller.getBooksByTag (catalog, label)
-        print ('Se encontraron: ' + str(resp['total_books']) + ' Libros')
-        iterator = it.newIterator (resp['books'])
+        print ('Se encontraron: ' + str(lt.size (resp)) + ' Libros')
+        iterator = it.newIterator (resp)
         while it.hasNext (iterator):
             book = it.next (iterator)
             print (book['title'])

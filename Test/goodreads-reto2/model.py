@@ -44,7 +44,8 @@ def newCatalog():
     catalog = {'books':None, 'authors':None, 'tags': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
     catalog['authors'] = map.newMap (317, maptype='PROBING')
-    catalog['tags'] = lt.newList('ARRAY_LIST')
+    catalog['tags'] = map.newMap (15013, maptype='CHAINING')
+    catalog['tagIds'] = map.newMap (171, maptype='CHAINING')
     return catalog
 
 
@@ -94,30 +95,31 @@ def addBookAuthor (catalog, authorname, book, compareauthors):
 
 
 
-def addTag (catalog, tag):
+def addTag (catalog, tag, compareTagNames, compareTagIds):
     """
     Adiciona un tag a la lista de tags
     """
     t = newTagBook (tag['tag_name'], tag['tag_id'])
-    lt.addLast (catalog['tags'], t)
+    map.put (catalog['tags'], tag['tag_name'], t, compareTagNames)
+    map.put (catalog['tagIds'], tag['tag_id'], t, compareTagIds)
 
 
 
-def addBookTag (catalog, tag, comparefunction, comparegoodreadsid):
+def addBookTag (catalog, tag, comparefunction, compareTagNames, comparegoodreadsid):
     """
     Agrega una relación entre un libro y un tag asociado a dicho libro
     """
     bookid = tag['goodreads_book_id']
     tagid = tag['tag_id']
-    pos = lt.isPresent(catalog['tags'], tagid, comparefunction)
-    if pos:
-        tagbook = lt.getElement (catalog['tags'], pos)
-        tagbook ['total_books'] += 1
-        tagbook ['count'] += int (tag['count'])
+    entry = map.get(catalog['tagIds'], tagid, comparefunction)
+    if entry:
+        tagbook = map.get (catalog['tags'], entry['value']['name'], compareTagNames)
+        tagbook ['value']['total_books'] += 1
+        tagbook ['value']['count'] += int (tag['count'])
         posbook = lt.isPresent(catalog['books'], bookid, comparegoodreadsid)
         if posbook:
             book =  lt.getElement (catalog['books'], posbook) 
-            lt.addLast (tagbook['books'], book)
+            lt.addLast (tagbook['value']['books'], book)
 
 
 # Funciones de consulta
@@ -128,5 +130,16 @@ def getBooksByAuthor (catalog, authorname, compareauthors):
     """
     author = map.get (catalog['authors'], authorname, compareauthors)
     return author['value']
+
+
+def getBooksByTag (catalog, tagname, compareTagNames):
+    """
+    Retornar la lista de libros asociados a un tag 
+    """    
+    tag = map.get (catalog['tags'], tagname, compareTagNames)
+    books = None
+    if tag:
+        books = tag['value']['books']
+    return books
 
 
