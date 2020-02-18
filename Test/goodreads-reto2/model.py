@@ -41,7 +41,7 @@ def newCatalog():
     Adicionalmente, crea una lista vacia para los autores y una lista vacia para los 
     generos.   Retorna el catalogo inicializado.
     """
-    catalog = {'books':None, 'authors':None, 'tags': None, 'tagIds': None}
+    catalog = {'books':None, 'bookIds':None, 'authors':None, 'tags': None, 'tagIds': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
     catalog['bookIds'] = map.newMap (20011, maptype='PROBING')
     catalog['authors'] = map.newMap (12007, maptype='PROBING')
@@ -83,7 +83,7 @@ def newTagBook (name, id):
 
 # Funciones para agregar informacion al catalogo
 
-def addBookAuthor (catalog, authorname, book, compareauthors):
+def addBookAuthor (catalog, authorname, book, compareauthors, comparebookid):
     """
     Adiciona un autor a lista de autores, la cual guarda referencias a los libros de dicho autor
     """
@@ -97,6 +97,8 @@ def addBookAuthor (catalog, authorname, book, compareauthors):
         author = newAuthor(authorname)
         map.put (authors, authorname, author, compareauthors)
     lt.addLast (author['books'], book)
+    # Se crea un indice para buscar libros x id
+    map.put(catalog['bookIds'], book['goodreads_book_id'], book, comparebookid )
     if (author['average_rating']==0.0):
         author['average_rating']= float (book['average_rating'])
     else:
@@ -128,13 +130,10 @@ def addBookTag (catalog, tag, comparefunction, compareTagNames, comparegoodreads
         tagbook ['value']['total_books'] += 1
         tagbook ['value']['count'] += int (tag['count'])
         #posbook = lt.isPresent(catalog['books'], bookid, comparegoodreadsid)
-        bookElement = map.get(catalog['bookIds'],bookid,compareBookIds)
-        #if posbook:
-        #    book =  lt.getElement (catalog['books'], posbook) 
-        #    lt.addLast (tagbook['value']['books'], book)
-        if bookElement:
-            lt.addLast (tagbook['value']['books'], bookElement['value'])
-
+        book = map.get (catalog['bookIds'],bookid ,comparegoodreadsid)
+        if book:
+            #book =  lt.getElement (catalog['books'], posbook) 
+            lt.addLast (tagbook['value']['books'], book['value'])
 
 # Funciones de consulta
 

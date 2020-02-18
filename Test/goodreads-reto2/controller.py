@@ -65,16 +65,16 @@ def loadBooks (catalog):
 
     booksfile = cf.data_dir + 'GoodReads/books.csv'
     input_file = csv.DictReader(open(booksfile))
-    for row in input_file:  
+    for book in input_file:  
         # Se adiciona el libro a la lista de libros
-        lt.addLast(catalog['books'],row)
-        model.putMapBook (catalog, row, compareBookIds)
+        lt.addLast(catalog['books'],book)
+        model.putMapBook (catalog, book, compareBookIds)
         # Se obtienen los autores del libro
-        authors = row['authors'].split(",")
+        authors = book['authors'].split(",")
         # Cada auto se crea en la tabla de simbolos del catalogo, y se 
         # crea un libro en la lista de dicho autor (apuntador al libro)
         for author in authors:
-            model.addBookAuthor (catalog, author.strip(), row, compareAuthorsByName)
+            model.addBookAuthor (catalog, author.strip(), book, compareAuthorsByName, compareBookIds)
     sort.mergesort (catalog['books'],compareRatings)
     
 
@@ -99,7 +99,7 @@ def loadBooksTags (catalog):
     booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file: 
-        model.addBookTag (catalog, tag, compareIds, compareTagNames, compareGoodreadsId)
+        model.addBookTag (catalog, tag, compareIds, compareTagNames, compareBookIds)
 
 
 #___________________________________________________
@@ -148,6 +148,8 @@ def compareBookIds (id1, id2):
 def compareGoodreadsId (id, book):
     return (id  == book['goodreads_book_id'])
 
+def compareBookIds (id, bookid):
+    return (id  == bookid)
 
 def compareTagNames (name, tag):
     return (name  == tag['key'])
