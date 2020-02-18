@@ -43,7 +43,8 @@ def newCatalog():
     """
     catalog = {'books':None, 'authors':None, 'tags': None, 'tagIds': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
-    catalog['authors'] = map.newMap (641, maptype='PROBING')
+    catalog['bookIds'] = map.newMap (20011, maptype='PROBING')
+    catalog['authors'] = map.newMap (12007, maptype='PROBING')
     catalog['tags'] = map.newMap (17021, maptype='CHAINING')
     catalog['tagIds'] = map.newMap (17021, maptype='CHAINING')
     return catalog
@@ -57,6 +58,14 @@ def newAuthor (name):
     author ['name'] = name
     author ['books'] = lt.newList('SINGLE_LINKED')
     return author
+
+def newBook (bookRow):
+    """
+    Crea una nueva estructura para modelar los libros y su promedio de ratings
+    """
+    book = {"book_id": bookRow['book_id'], "title":bookRow['title'], "average_rating":bookRow['average_rating'], "ratings_count":bookRow['ratings_count']}
+    return book
+
 
 
 def newTagBook (name, id):
@@ -103,7 +112,9 @@ def addTag (catalog, tag, compareTagNames, compareTagIds):
     map.put (catalog['tags'], tag['tag_name'], t, compareTagNames)
     map.put (catalog['tagIds'], tag['tag_id'], t, compareTagIds)
 
-
+def putMapBook (catalog, bookRow, compareFunction):
+    book= newBook(bookRow)
+    map.put (catalog['bookIds'], book['book_id'],book , compareFunction)
 
 def addBookTag (catalog, tag, comparefunction, compareTagNames, comparegoodreadsid):
     """
@@ -116,10 +127,13 @@ def addBookTag (catalog, tag, comparefunction, compareTagNames, comparegoodreads
         tagbook = map.get (catalog['tags'], entry['value']['name'], compareTagNames)
         tagbook ['value']['total_books'] += 1
         tagbook ['value']['count'] += int (tag['count'])
-        posbook = lt.isPresent(catalog['books'], bookid, comparegoodreadsid)
-        if posbook:
-            book =  lt.getElement (catalog['books'], posbook) 
-            lt.addLast (tagbook['value']['books'], book)
+        #posbook = lt.isPresent(catalog['books'], bookid, comparegoodreadsid)
+        bookElement = map.get(catalog['bookIds'],bookid,compareBookIds)
+        #if posbook:
+        #    book =  lt.getElement (catalog['books'], posbook) 
+        #    lt.addLast (tagbook['value']['books'], book)
+        if bookElement:
+            lt.addLast (tagbook['value']['books'], bookElement['value'])
 
 
 # Funciones de consulta
@@ -129,7 +143,9 @@ def getBooksByAuthor (catalog, authorname, compareauthors):
     Retorna un autor con sus libros a partir del nombre del autor
     """
     author = map.get (catalog['authors'], authorname, compareauthors)
-    return author['value']
+    if author:
+        return author['value']
+    return None
 
 
 def getBooksByTag (catalog, tagname, compareTagNames):
@@ -143,3 +159,5 @@ def getBooksByTag (catalog, tagname, compareTagNames):
     return books
 
 
+def compareBookIds (id1, id2):
+    return (id1  == id2)

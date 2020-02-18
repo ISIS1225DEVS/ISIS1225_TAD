@@ -177,7 +177,7 @@ def hashValue (table, key):
 def findSlot (map, key, hashvalue, comparefunction):
     """
     Encuentra una posición libre en la tabla de hash. 
-    map: la trabla de hash
+    map: la tabla de hash
     key: la llave
     hashvalue: La posición inicial de la llave
     comparefunction: funcion de comparación para la búsqueda de la llave

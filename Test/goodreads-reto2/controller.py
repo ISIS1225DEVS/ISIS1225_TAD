@@ -23,6 +23,8 @@ import config as cf
 import model 
 import csv
 from ADT import list as lt
+from ADT import map as map
+
 from DataStructures import listiterator as it
 from Sorting import mergesort as sort
 
@@ -60,17 +62,19 @@ def loadBooks (catalog):
     cada uno de ellos, se crea en una tabla de simbolos de autores. A cada autor
     se le adiciona una referencia al libro que se esta procesando.
     """
+
     booksfile = cf.data_dir + 'GoodReads/books.csv'
     input_file = csv.DictReader(open(booksfile))
-    for book in input_file:  
+    for row in input_file:  
         # Se adiciona el libro a la lista de libros
-        lt.addLast(catalog['books'],book)
+        lt.addLast(catalog['books'],row)
+        model.putMapBook (catalog, row, compareBookIds)
         # Se obtienen los autores del libro
-        authors = book['authors'].split(",")
+        authors = row['authors'].split(",")
         # Cada auto se crea en la tabla de simbolos del catalogo, y se 
         # crea un libro en la lista de dicho autor (apuntador al libro)
         for author in authors:
-            model.addBookAuthor (catalog, author.strip(), book, compareAuthorsByName)
+            model.addBookAuthor (catalog, author.strip(), row, compareAuthorsByName)
     sort.mergesort (catalog['books'],compareRatings)
     
 
@@ -136,6 +140,9 @@ def compareRatings (book1, book2):
 
 def compareIds (id, tag):
     return (id  == tag['key'])
+
+def compareBookIds (id1, id2):
+    return (id1  == id2)
 
 
 def compareGoodreadsId (id, book):

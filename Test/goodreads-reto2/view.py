@@ -25,6 +25,7 @@ import controller
 import csv
 from ADT import list as lt
 from DataStructures import listiterator as it
+from time import process_time 
 
 """
 La vista se encarga de la interacción con el usuario
@@ -96,11 +97,16 @@ while True:
         catalog = initCatalog ()
 
     elif int(inputs[0])==2:
+        t1_start = process_time() #tiempo inicial
         print("Cargando información de los archivos ....")
         loadData (catalog)
         print ('Libros cargados: ' + str(lt.size(catalog['books'])))
         print ('Autores cargados: ' + str(lt.size(catalog['authors'])))
         print ('Géneros cargados: ' + str(lt.size(catalog['tags'])))
+        t1_stop = process_time() #tiempo final
+        print("Tiempo de ejecución carga libros",t1_stop-t1_start," segundos")
+
+
 
     elif int(inputs[0])==3:
         number = input ("Buscando los TOP ?: ")
@@ -111,7 +117,6 @@ while True:
         authorname = input("Nombre del autor a buscar: ")
         author = controller.getBooksByAuthor (catalog, authorname)
         printAuthorData (author)
-
 
     elif int(inputs[0])==5:
         label = input ("Etiqueta a buscar: ")
