@@ -19,8 +19,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-
-import config as cf
 from ADT import list as lt
 from ADT import map as map
 from DataStructures import listiterator as it
