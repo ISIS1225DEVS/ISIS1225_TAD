@@ -172,7 +172,7 @@ def valueSet(rbt):
 
 
 
-def min (rbt):
+def minKey (rbt):
     """
     Retorna la menor llave de la tabla de simbolos 
     """
@@ -184,7 +184,7 @@ def min (rbt):
 
 
 
-def max (rbt):
+def maxKey (rbt):
     """
     Retorna la mayor llave de la tabla de simbolos 
     """
@@ -261,8 +261,11 @@ def rank (rbt, key, comparefunction):
     pass
 
 
-
-
+def height (rbt):
+    if (rbt == None):
+        return -1
+    else:
+        return 1  +  max (height (rbt['left']),  height (rbt['right']))
 
 
 #_____________________________________________________________________________

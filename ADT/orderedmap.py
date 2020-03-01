@@ -166,7 +166,8 @@ def rank (map, key, comparefunction):
     return om.rank (map, key, comparefunction)
 
 
-
+def height (map):
+    return om.height (map)
 
 
 

@@ -136,7 +136,7 @@ def min (map):
     if (map['type']=='BST'):
         return bst.min (map)
     else:
-        return rbt.min (map)
+        return rbt.minKey (map)
 
 
 
@@ -147,7 +147,7 @@ def max (map):
     if (map['type']=='BST'):
         return bst.max (map)
     else:
-        return rbt.max (map)
+        return rbt.maxKey (map)
 
 
 
@@ -221,3 +221,8 @@ def rank (map, key, comparefunction):
         return rbt.rank (map, key, comparefunction)
 
 
+def height (map):
+    if (map['type']=='BST'):
+        return bst.height (map)
+    else:
+        return rbt.height (map)
