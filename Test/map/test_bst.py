@@ -1,5 +1,5 @@
-import unittest 
-import config 
+import unittest
+import config
 from DataStructures import bstnode as node
 from DataStructures import listiterator as it
 from ADT import list as lt
@@ -26,7 +26,7 @@ class EntryMapTest (unittest.TestCase):
             return 1
 
 
-    def test_BST (self):
+    def test_DisorderedBST (self):
         """
         """
         tree = bst.newMap ('BST')
@@ -80,7 +80,7 @@ class EntryMapTest (unittest.TestCase):
         bst.put (tree, '28', 'Title 28', self.comparekeys)
 
         bst.remove (tree, '20', self.comparekeys)
-        self.assertEqual ( bst.max (tree)['key'], '80' )
+        self.assertIsNone( bst.get (tree, '20', self.comparekeys) )
 
 
     def test_BSTFloor (self):
@@ -162,8 +162,9 @@ class EntryMapTest (unittest.TestCase):
         bst.put (tree, '7', 'Title 7', self.comparekeys)
         bst.put (tree, '28', 'Title 28', self.comparekeys)
 
-        node = bst.select (tree, 2)
-        print (node['key'])
+        node = bst.select (tree, 1)
+        #assert ??
+        print ("select 1:",node['key'])
 
 
     def test_BSTRank (self):
@@ -186,9 +187,10 @@ class EntryMapTest (unittest.TestCase):
         bst.put (tree, '7', 'Title 7', self.comparekeys)
         bst.put (tree, '28', 'Title 28', self.comparekeys)
 
-        total = bst.rank (tree, '30', self.comparekeys)
-        print (total)
+        rank = bst.rank (tree, '30', self.comparekeys)
+        print ("rank 30: ",rank)
 
+        #assert ??
 
 
     def test_BSTKeySet (self):
