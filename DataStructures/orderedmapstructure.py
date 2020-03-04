@@ -134,7 +134,7 @@ def min (map):
     Retorna la menor llave de la tabla de simbolos 
     """
     if (map['type']=='BST'):
-        return bst.min (map)
+        return bst.minKey (map)
     else:
         return rbt.minKey (map)
 

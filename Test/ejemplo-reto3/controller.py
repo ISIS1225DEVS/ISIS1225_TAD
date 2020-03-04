@@ -64,10 +64,8 @@ def loadData (catalog):
 def loadAccidents (catalog, sep=','):
     """
     """
-    #booksfile = cf.data_dir + 'USAccidents/us_accidents_small.csv'
-    booksfile = cf.data_dir + 'USAccidents/us_accidents_dis_small.csv'
-    #booksfile = cf.data_dir + '/Users/kmilo/Documents/PhD/Sem8/Docencia/Retos/Reto3/data/us_accidents_2017.csv'
-    #booksfile = '/Users/kmilo/Documents/PhD/Sem8/Docencia/Retos/Reto3/data/us_accidents_2017.csv'
+    booksfile = cf.data_dir + 'USAccidents/us_accidents_small.csv'
+    #booksfile = cf.data_dir + 'USAccidents/us_accidents_dis_small.csv'
     #booksfile = cf.data_dir + 'USAccidents/US_Accidents_Dec19.csv'
     dialect = csv.excel()
     dialect.delimiter=sep
@@ -77,7 +75,6 @@ def loadAccidents (catalog, sep=','):
             accident = model.newAccident (row)
             model.addAccident (catalog, accident) 
             model.indexAccidentById (catalog, accident, idFunction)
-    #for info in input_file:  
             
     
 
