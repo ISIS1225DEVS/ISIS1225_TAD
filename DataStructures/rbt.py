@@ -155,7 +155,7 @@ def keySet (rbt):
     Retorna una lista con todas las llaves de la tabla
     """
     klist = lt.newList ()
-    klist = KeySetHelper (bst, klist)
+    klist = KeySetHelper (rbt, klist)
 
     return klist
 
@@ -266,7 +266,7 @@ def select (rbt, k):
     if (rbt == None):
         return None
     t = 0
-    if bst['left'] != None:
+    if rbt['left'] != None:
         t = rbt['left']['size']
 
     if  (t > k):
