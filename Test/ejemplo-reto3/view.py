@@ -82,21 +82,21 @@ while True:
 
     elif int(inputs[0])==3:
         number = input ("Infracciones por fecha: ")
-        books = controller.getBestBooks (catalog, int(number))
+    #   books = controller.getBestBooks (catalog, int(number))
 
     elif int(inputs[0])==4:
         authorname = input("Infracciones por rango de fechas: ")
-        author = controller.getBooksByAuthor (catalog, authorname)
+    #    author = controller.getBooksByAuthor (catalog, authorname)
 
 
     elif int(inputs[0])==5:
         label = input ("Infracción mas frecuente: ")
-        resp = controller.getBooksByTag (catalog, label)
+    #    resp = controller.getBooksByTag (catalog, label)
 
 
     elif int(inputs[0])==6:
         label = input ("Zona geográfica mas accidentada: ")
-        resp = controller.getBooksByTag (catalog, label)
+    #    resp = controller.getBooksByTag (catalog, label)
 
 
     else:

@@ -192,7 +192,7 @@ def min (bst):
 
 
 
-def max (bst):
+def maxKey (bst):
     """
     Retorna la mayor llave de la tabla de simbolos 
     """
@@ -318,6 +318,11 @@ def rank (bst, key, comparefunction):
         return size(bst['left'])
 
 
+def height (bst):
+    if (bst == None):
+        return -1
+    else:
+        return 1  +  max (height (bst['left']),  height (bst['right']))
 
 
 #_____________________________________________________________________

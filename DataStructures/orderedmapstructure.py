@@ -145,7 +145,7 @@ def max (map):
     Retorna la mayor llave de la tabla de simbolos 
     """
     if (map['type']=='BST'):
-        return bst.max (map)
+        return bst.maxKey (map)
     else:
         return rbt.maxKey (map)
 

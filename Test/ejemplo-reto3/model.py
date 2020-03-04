@@ -43,7 +43,7 @@ def newCatalog():
     """
     catalog = {'accidents':None, 'idIndex':None}
     catalog['accidents'] = lt.newList()
-    catalog['idIndex'] = map.newMap ()
+    catalog['idIndex'] = map.newMap ("BST")
     return catalog
 
 
