@@ -1,6 +1,6 @@
 """
  * Copyright 2020, Departamento de sistemas y Computación, Universidad de Los Andes
- * 
+ *
  *
  * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
  *
@@ -35,7 +35,7 @@ def newMap( omaptype ) :
     else:
         return rbt.newMap ( )
 
-    
+
 
 def put (map, key , value, comparefunction):
     """
@@ -54,10 +54,14 @@ def get (map, key, comparefunction):
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
     """
+    elem = None
     if (map['type']=='BST'):
-        return bst.get (map, key, comparefunction)
+        elem = bst.get (map, key, comparefunction)
     else:
-        return rbt.get (map, key, comparefunction)
+        elem = rbt.get (map, key, comparefunction)
+    if elem:
+        return elem['value']
+    return None
 
 
 
@@ -65,7 +69,7 @@ def get (map, key, comparefunction):
 def remove (map , key, comparefunction):
     """
     Elimina la pareja llave,valor, donde llave == key.
-    Es necesario proveer la función de comparación entre llaves 
+    Es necesario proveer la función de comparación entre llaves
     """
     if (map['type']=='BST'):
         bst.remove (map, key, comparefunction)
@@ -76,8 +80,8 @@ def remove (map , key, comparefunction):
 
 def contains (map, key, comparefunction):
     """
-    Retorna True si la llave key se encuentra en la tabla  o False en caso contrario.  
-    Es necesario proveer la función de comparación entre llaves. 
+    Retorna True si la llave key se encuentra en la tabla  o False en caso contrario.
+    Es necesario proveer la función de comparación entre llaves.
     """
     if (map['type']=='BST'):
         return bst.contains (map, key, comparefunction)
@@ -88,7 +92,7 @@ def contains (map, key, comparefunction):
 
 def size(map):
     """
-    Retornar el número de entradas en la tabla 
+    Retornar el número de entradas en la tabla
     """
     if (map['type']=='BST'):
         return bst.size (map)
@@ -109,7 +113,7 @@ def isEmpty(map ):
 
 def keySet (map):
     """
-    Retorna una lista con todas las llaves de la tabla 
+    Retorna una lista con todas las llaves de la tabla
     """
     if (map['type']=='BST'):
         return bst.keySet (map)
@@ -120,7 +124,7 @@ def keySet (map):
 
 def valueSet(map):
     """
-    Retorna una lista con todos los valores de la tabla 
+    Retorna una lista con todos los valores de la tabla
     """
     if (map['type']=='BST'):
         return bst.valueSet (map)
@@ -131,7 +135,7 @@ def valueSet(map):
 
 def min (map):
     """
-    Retorna la menor llave de la tabla de simbolos 
+    Retorna la menor llave de la tabla de simbolos
     """
     if (map['type']=='BST'):
         return bst.minKey (map)
@@ -142,7 +146,7 @@ def min (map):
 
 def max (map):
     """
-    Retorna la mayor llave de la tabla de simbolos 
+    Retorna la mayor llave de la tabla de simbolos
     """
     if (map['type']=='BST'):
         return bst.maxKey (map)
@@ -177,8 +181,8 @@ def deleteMax (map):
 
 def floor (map, key, comparefunction):
     """
-    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
-    """ 
+    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key
+    """
     if (map['type']=='BST'):
         return bst.floor (map, key, comparefunction)
     else:
@@ -189,8 +193,8 @@ def floor (map, key, comparefunction):
 
 def ceiling (map, key, comparefunction):
     """
-    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
-    """ 
+    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key
+    """
     if (map['type']=='BST'):
         return bst.ceiling (map, key, comparefunction)
     else:
@@ -202,7 +206,7 @@ def ceiling (map, key, comparefunction):
 def select (map, k):
     """
     Retorna la k-esima llave mas pequeña de la tabla
-    """ 
+    """
     if (map['type']=='BST'):
         return bst.select (map, k)
     else:

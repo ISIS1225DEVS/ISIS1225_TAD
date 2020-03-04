@@ -1,6 +1,6 @@
 """
  * Copyright 2020, Departamento de sistemas y Computación, Universidad de Los Andes
- * 
+ *
  *
  * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
  *
@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-import config as cf 
+import config as cf
 from DataStructures import bstnode as node
 from ADT import list as lt
 
@@ -35,9 +35,9 @@ def newMap ( ) :
     Crea una tabla de simbolos ordenada.
     """
     tree = node.newNode (None,None,0)
-    return tree 
+    return tree
 
-    
+
 
 def put (bst, key , value, comparefunction):
     """
@@ -52,10 +52,10 @@ def put (bst, key , value, comparefunction):
         bst['size'] = 1
         return bst
 
-    #La funcion de comparación indica la relación de orden entre las llaves    
+    #La funcion de comparación indica la relación de orden entre las llaves
     cmp = comparefunction (key, bst['key'])
     if (cmp < 0):                                            #La llave a insertar es menor que la raiz
-        if (bst['left'] == None):  
+        if (bst['left'] == None):
             bst['left'] = node.newNode (key, value, 1)
         else:
             bst['left'] = put (bst['left'], key, value, comparefunction)
@@ -96,9 +96,9 @@ def get (bst, key, comparefunction):
 def remove (bst , key, comparefunction):
     """
     Elimina la pareja llave,valor, donde llave == key.
-    Es necesario proveer la función de comparación entre llaves 
+    Es necesario proveer la función de comparación entre llaves
     """
-    if (bst == None): 
+    if (bst == None):
         return None
 
     cmp = comparefunction (key, bst['key'])
@@ -109,7 +109,7 @@ def remove (bst , key, comparefunction):
         bst['right'] = remove (bst['right'], key, comparefunction)
     else:
         if (bst['right']== None):
-            return bst['left'] 
+            return bst['left']
         if (bst['left']  == None):
             bst['right']
         elem = bst
@@ -126,8 +126,8 @@ def remove (bst , key, comparefunction):
 
 def contains (bst, key, comparefunction):
     """
-    Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
-    Es necesario proveer la función de comparación entre llaves. 
+    Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.
+    Es necesario proveer la función de comparación entre llaves.
     """
     if ( bst['key'] == None):
         return False
@@ -181,25 +181,25 @@ def valueSet(bst):
 
 
 
-def min (bst):
+def minKey (bst):
     """
-    Retorna la menor llave de la tabla de simbolos 
+    Retorna la menor llave de la tabla de simbolos
     """
-    if (bst['left'] == None): 
-        return bst; 
-    else:                
-        return min(bst['left'])
+    if (bst['left'] == None):
+        return bst;
+    else:
+        return minKey(bst['left'])
 
 
 
 def maxKey (bst):
     """
-    Retorna la mayor llave de la tabla de simbolos 
+    Retorna la mayor llave de la tabla de simbolos
     """
-    if (bst['right'] == None): 
-        return bst; 
-    else:                
-        return max(bst['right'])
+    if (bst['right'] == None):
+        return bst;
+    else:
+        return maxKey(bst['right'])
 
 
 
@@ -207,7 +207,7 @@ def deleteMin (bst):
     """
     Encuentra y remueve la menor llave de la tabla de simbolos y su valor asociado
     """
-    if (bst['left'] == None): 
+    if (bst['left'] == None):
         bst = bst['right']
         return bst
     else:
@@ -223,7 +223,7 @@ def deleteMax (bst):
     """
     Encuentra y remueve la mayor llave de la tabla de simbolos y su valor asociado
     """
-    if (bst['right'] == None): 
+    if (bst['right'] == None):
         bst = bst['left']
         return bst
     else:
@@ -237,18 +237,18 @@ def deleteMax (bst):
 
 def floor (bst, key, comparefunction):
     """
-    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
-    """ 
+    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key
+    """
     if (bst == None):
         return None
 
     cmp = comparefunction (key, bst['key'])
 
-    if (cmp == 0): 
+    if (cmp == 0):
         return bst
     if (cmp <  0):
         return floor (bst['left'], key, comparefunction)
-    t = floor(bst['right'], key, comparefunction); 
+    t = floor(bst['right'], key, comparefunction);
     if (t != None):
         return t
     else:
@@ -259,17 +259,17 @@ def floor (bst, key, comparefunction):
 
 def ceiling (bst, key, comparefunction):
     """
-    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
-    """ 
+    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key
+    """
     if (bst == None):
         return None
 
     cmp = comparefunction (key, bst['key'])
 
-    if (cmp == 0): 
+    if (cmp == 0):
         return bst
     if (cmp <  0):
-        t = ceiling (bst['left'], key, comparefunction); 
+        t = ceiling (bst['left'], key, comparefunction);
         if (t != None):
             return t
         else:
@@ -282,21 +282,21 @@ def ceiling (bst, key, comparefunction):
 def select (bst, k):
     """
     Retorna la k-esima llave mas pequeña de la tabla
-    """ 
-    
+    """
+
     if (bst == None):
-        return None; 
+        return None;
 
     t = 0
-    if bst['left'] != None: 
+    if bst['left'] != None:
         t = bst['left']['size']
-        
+
     if  (t > k):
         return select(bst['left'], k)
     elif (t < k):
         return select(bst['right'], k-t-1)
     else:
-        return bst; 
+        return bst;
 
 
 
@@ -312,7 +312,7 @@ def rank (bst, key, comparefunction):
 
     if  (cmp < 0):
         return rank (bst['left'], key, comparefunction)
-    elif (cmp > 0): 
+    elif (cmp > 0):
         return 1 + size(bst['left']) + rank(bst['right'], key, comparefunction)
     else:
         return size(bst['left'])
@@ -351,4 +351,3 @@ def keySetHelper (bst, klist):
     lt.addLast (klist, bst['key'])
     keySetHelper (bst['right'], klist)
     return klist
-

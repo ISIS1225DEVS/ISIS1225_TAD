@@ -1,6 +1,6 @@
 """
  * Copyright 2020, Departamento de sistemas y Computación, Universidad de Los Andes
- * 
+ *
  *
  * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
  *
@@ -21,12 +21,12 @@
 
 """
 Implementación de una tabla de simbolos ordenada, mediante un arbol binario
-balanceado Red-Black. 
+balanceado Red-Black.
 """
 
 
 
-import config as cf 
+import config as cf
 from DataStructures import rbtnode as node
 from ADT import list as lt
 
@@ -42,7 +42,7 @@ def newMap ( omaptype='RBT' ):
     """
     return node.newNode (None, None, 0, node.BLACK)
 
-    
+
 
 def put (rbt, key , value, comparefunction):
     """
@@ -63,17 +63,17 @@ def put (rbt, key , value, comparefunction):
         if (rbt['left']==None):
             rbt['left'] = node.newNode (key, value, 1, node.RED)
         else:
-            rbt['left'] = put(rbt['left'],  key, value, comparefunction)      
+            rbt['left'] = put(rbt['left'],  key, value, comparefunction)
     elif (cmp > 0):                                                          # La llave a insertar es mayor que la raíz
         if (rbt['right']==None):
             rbt['right'] = node.newNode (key, value, 1, node.RED)
         else:
-            rbt['right'] = put( rbt['right'], key, value, comparefunction)      
+            rbt['right'] = put( rbt['right'], key, value, comparefunction)
     else:                                                                    # La llave ya se encuentra en la tabla
         rbt['value'] = value
 
     #Se ajusta el balanceo del arbol
-    
+
     if ( isRed(rbt['right']) and not (isRed(rbt['left']) ) ):                # El hijo derecho es rojo
         rbt = rotateLeft(rbt)
     if (isRed(rbt['left'])  and  isRed( rbt['left']['left'] )):              # Dos enlaces consecutivos izquierdos rojos
@@ -83,7 +83,7 @@ def put (rbt, key , value, comparefunction):
     rbt['size'] = size(rbt['left']) + size(rbt['right']) + 1
 
     return rbt
-    
+
 
 
 
@@ -111,7 +111,7 @@ def get (rbt, key, comparefunction):
 def remove (map , key, comparefunction):
     """
     Elimina la pareja llave,valor, donde llave == key.
-    Es necesario proveer la función de comparación entre llaves 
+    Es necesario proveer la función de comparación entre llaves
 
     No implementada en esta versión
     """
@@ -121,8 +121,8 @@ def remove (map , key, comparefunction):
 
 def contains (rbt, key, comparefunction):
     """
-    Retorna True si la llave key se encuentra en la tabla o False en caso contrario.  
-    Es necesario proveer la función de comparación entre llaves. 
+    Retorna True si la llave key se encuentra en la tabla o False en caso contrario.
+    Es necesario proveer la función de comparación entre llaves.
     """
     if ( rbt['key'] == None):
         return False
@@ -152,10 +152,10 @@ def isEmpty( rbt ):
 
 def keySet (rbt):
     """
-    Retorna una lista con todas las llaves de la tabla 
+    Retorna una lista con todas las llaves de la tabla
     """
     klist = lt.newList ()
-    klist = keySetHelper (bst, klist)
+    klist = KeySetHelper (bst, klist)
 
     return klist
 
@@ -164,7 +164,7 @@ def keySet (rbt):
 
 def valueSet(rbt):
     """
-    Retorna una lista con todos los valores de la tabla 
+    Retorna una lista con todos los valores de la tabla
     """
     vlist = lt.newList ()
     vlist = valueSetHelper (rbt, vlist)
@@ -174,24 +174,24 @@ def valueSet(rbt):
 
 def minKey (rbt):
     """
-    Retorna la menor llave de la tabla de simbolos 
+    Retorna la menor llave de la tabla de simbolos
     """
-    if (rbt['left'] == None): 
-        return rbt; 
-    else:                
-        return min(rbt['left'])
+    if (rbt['left'] == None):
+        return rbt;
+    else:
+        return minKey(rbt['left'])
 
 
 
 
 def maxKey (rbt):
     """
-    Retorna la mayor llave de la tabla de simbolos 
+    Retorna la mayor llave de la tabla de simbolos
     """
-    if (rbt['right'] == None): 
-        return rbt; 
-    else:                
-        return max(rbt['right'])
+    if (rbt['right'] == None):
+        return rbt;
+    else:
+        return maxKey(rbt['right'])
 
 
 
@@ -212,24 +212,24 @@ def deleteMax (rbt):
     No implementada en esta versión
     """
     pass
-    
+
 
 
 
 def floor (rbt, key, comparefunction):
     """
-    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key 
-    """ 
+    Retorna la llave mas grande en la tabla de simbolos, menor o igual a la llave key
+    """
     if (rbt == None):
         return None
 
     cmp = comparefunction (key, rbt['key'])
 
-    if (cmp == 0): 
+    if (cmp == 0):
         return rbt
     if (cmp <  0):
         return floor (rbt['left'], key, comparefunction)
-    t = floor(rbt['right'], key, comparefunction); 
+    t = floor(rbt['right'], key, comparefunction);
     if (t != None):
         return t
     else:
@@ -240,8 +240,8 @@ def floor (rbt, key, comparefunction):
 
 def ceiling (rbt, key, comparefunction):
     """
-    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key 
-    """ 
+    Retorna la llave mas pequeña en la tabla de simbolos, mayor o igual a la llave key
+    """
     pass
 
 
@@ -249,7 +249,7 @@ def ceiling (rbt, key, comparefunction):
 def select (rbt, k):
     """
     Retorna la k-esima llave mas pequeña de la tabla
-    """ 
+    """
     pass
 
 
@@ -291,9 +291,9 @@ def KeySetHelper (rbt, klist):
     """
     if (rbt == None):
         return klist
-    keySetHelper (rbt['left'], klist)
+    KeySetHelper (rbt['left'], klist)
     lt.addLast (klist, rbt['key'])
-    keySetHelper (rbt['right'], klist)
+    KeySetHelper (rbt['right'], klist)
     return klist
 
 
@@ -301,9 +301,9 @@ def KeySetHelper (rbt, klist):
 def rotateLeft(rbt):
     """
     rotación izquierda para compensar dos enlaces rojos consecutivos
-    """        
+    """
     x = rbt['right']
-    rbt['right'] = x['left'] 
+    rbt['right'] = x['left']
     x['left'] = rbt
     x['color'] = x['left']['color']
     x['left']['color'] = node.RED
@@ -317,15 +317,15 @@ def rotateRight(rbt):
     Rotación a la derecha para compensar un hijo rojo a la derecha
     """
     x = rbt['left']
-    rbt['left'] = x['right'] 
+    rbt['left'] = x['right']
     x['right'] = rbt
     x['color'] = x['right']['color']
     x['right']['color'] = node.RED
     x['size'] = rbt['size']
     rbt['size'] = size(rbt['left']) + size(rbt['right']) + 1
     return x
-  
-        
+
+
 
 def flipNodeColor (rbnode):
     """
@@ -346,7 +346,7 @@ def flipColors (rbnode):
     flipNodeColor ( rbnode )
     flipNodeColor ( rbnode['left'] )
     flipNodeColor ( rbnode['right'] )
-   
+
 
 
 
@@ -359,7 +359,3 @@ def isRed (rbnode):
         return False
     else:
         return (rbnode['color'] == node.RED)
-
-
-
-
