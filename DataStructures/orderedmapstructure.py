@@ -225,6 +225,16 @@ def rank (map, key, comparefunction):
         return rbt.rank (map, key, comparefunction)
 
 
+def keys (map, keylo, keyhi, comparefunction):
+    """
+    Retorna todas las llaves encontradas en el rango dado por keylo y keyhi
+    """        
+    if (map['type']=='BST'):
+        return bst.keys (map, keylo, keyhi, comparefunction)
+    else:
+        return rbt.keys (map, keylo, keyhi, comparefunction)
+
+
 def height (map):
     if (map['type']=='BST'):
         return bst.height (map)

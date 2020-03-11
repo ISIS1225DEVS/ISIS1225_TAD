@@ -166,6 +166,15 @@ def rank (map, key, comparefunction):
     return om.rank (map, key, comparefunction)
 
 
+
+
+def keys (map, keylo, keyhi, comparefunction):
+    """
+    Retorna todas las llaves encontradas en el rango dado por keylo y keyhi
+    """
+    return om.keys(map, keylo, keyhi, comparefunction) 
+
+
 def height (map):
     return om.height (map)
 
