@@ -285,7 +285,7 @@ def select (bst, k):
     """
 
     if (bst == None):
-        return None;
+        return None
 
     t = 0
     if bst['left'] != None:
@@ -296,7 +296,7 @@ def select (bst, k):
     elif (t < k):
         return select(bst['right'], k-t-1)
     else:
-        return bst;
+        return bst
 
 
 

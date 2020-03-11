@@ -292,8 +292,29 @@ def rank (rbt, key, comparefunction):
         return 1 + size(rbt['left']) + rank(rbt['right'], key, comparefunction)
     else:
         return size(rbt['left'])
+        
 
 
+def keys (rbt, keylo, keyhi, comparefunction):
+    """
+    Retorna todas las llaves encontradas en el rango dado por keylo y keyhi
+    """
+    if (rbt == None):      
+        lst = None
+        return lst
+
+    cmplo = comparefunction (keylo, rbt['key'])
+    cmphi = comparefunction (keyhi, rbt['key'])
+
+    if (cmplo < 0):
+        lst = keys(rbt['left'],keylo, keyhi, comparefunction)
+    if (cmplo <= 0 and cmphi >= 0): 
+        lt.addLast (lst, rbt['value'])
+    if (cmphi > 0):
+        lst = keys(rbt['right'], keylo, keyhi)
+
+
+        
 def height (rbt):
     if (rbt == None):
         return -1
