@@ -294,7 +294,6 @@ def rank (rbt, key, comparefunction):
         return size(rbt['left'])
         
 
-
 def keys(root, keylo, keyhi, comparefunction):
     if root==None:
         return None # rbt is empty
@@ -315,7 +314,7 @@ def keysRec(rbt, keylo, keyhi, comparefunction, klist):
     if (cmplo < 0):
         keysRec(rbt['left'],keylo, keyhi, comparefunction, klist)
     if (cmplo <= 0 and cmphi >= 0): 
-        lt.addLast (klist, rbt['value'])
+        lt.addLast (klist, rbt['key'])
     if (cmphi > 0):
         keysRec(rbt['right'], keylo, keyhi, comparefunction, klist)
 
@@ -327,6 +326,31 @@ def height (rbt):
     else:
         return 1  +  max (height (rbt['left']),  height (rbt['right']))
 
+
+
+def valueRange(root, keylo, keyhi, comparefunction):
+    if root==None:
+        return None # rbt is empty
+    klist = lt.newList()
+    valueRangeRec(root, keylo, keyhi, comparefunction, klist)
+    return klist
+
+def valueRangeRec(rbt, keylo, keyhi, comparefunction, klist):
+    """
+    Retorna todas las llaves encontradas en el rango dado por keylo y keyhi
+    """
+    if (rbt == None):
+        return
+
+    cmplo = comparefunction (keylo, rbt['key'])
+    cmphi = comparefunction (keyhi, rbt['key'])
+
+    if (cmplo < 0):
+        keysRec(rbt['left'],keylo, keyhi, comparefunction, klist)
+    if (cmplo <= 0 and cmphi >= 0): 
+        lt.addLast (klist, rbt['value'])
+    if (cmphi > 0):
+        keysRec(rbt['right'], keylo, keyhi, comparefunction, klist)
 
 #_____________________________________________________________________________
 #       Funciones Helper
