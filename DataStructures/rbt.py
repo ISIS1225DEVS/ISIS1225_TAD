@@ -155,7 +155,7 @@ def keySet (rbt):
     Retorna una lista con todas las llaves de la tabla
     """
     klist = lt.newList ()
-    klist = KeySetHelper (rbt, klist)
+    klist = keySetHelper (rbt, klist)
 
     return klist
 
@@ -177,7 +177,7 @@ def minKey (rbt):
     Retorna la menor llave de la tabla de simbolos
     """
     if (rbt['left'] == None):
-        return rbt;
+        return rbt
     else:
         return minKey(rbt['left'])
 
@@ -189,7 +189,7 @@ def maxKey (rbt):
     Retorna la mayor llave de la tabla de simbolos
     """
     if (rbt['right'] == None):
-        return rbt;
+        return rbt
     else:
         return maxKey(rbt['right'])
 
@@ -229,7 +229,7 @@ def floor (rbt, key, comparefunction):
         return rbt
     if (cmp <  0):
         return floor (rbt['left'], key, comparefunction)
-    t = floor(rbt['right'], key, comparefunction);
+    t = floor(rbt['right'], key, comparefunction)
     if (t != None):
         return t
     else:
@@ -295,23 +295,29 @@ def rank (rbt, key, comparefunction):
         
 
 
-def keys (rbt, keylo, keyhi, comparefunction):
+def keys(root, keylo, keyhi, comparefunction):
+    if root==None:
+        return None # rbt is empty
+    klist = lt.newList()
+    keysRec(root, keylo, keyhi, comparefunction, klist)
+    return klist
+
+def keysRec(rbt, keylo, keyhi, comparefunction, klist):
     """
     Retorna todas las llaves encontradas en el rango dado por keylo y keyhi
     """
-    if (rbt == None):      
-        lst = None
-        return lst
+    if (rbt == None):
+        return
 
     cmplo = comparefunction (keylo, rbt['key'])
     cmphi = comparefunction (keyhi, rbt['key'])
 
     if (cmplo < 0):
-        lst = keys(rbt['left'],keylo, keyhi, comparefunction)
+        keysRec(rbt['left'],keylo, keyhi, comparefunction, klist)
     if (cmplo <= 0 and cmphi >= 0): 
-        lt.addLast (lst, rbt['value'])
+        lt.addLast (klist, rbt['value'])
     if (cmphi > 0):
-        lst = keys(rbt['right'], keylo, keyhi)
+        keysRec(rbt['right'], keylo, keyhi, comparefunction, klist)
 
 
         
@@ -339,15 +345,15 @@ def valueSetHelper (rbt, vlist):
 
 
 
-def KeySetHelper (rbt, klist):
+def keySetHelper (rbt, klist):
     """
     Retorna una lista con las llaves del arbol. La lista se crea siguiendo un recorrido en inorden.
     """
     if (rbt == None):
         return klist
-    KeySetHelper (rbt['left'], klist)
+    keySetHelper (rbt['left'], klist)
     lt.addLast (klist, rbt['key'])
-    KeySetHelper (rbt['right'], klist)
+    keySetHelper (rbt['right'], klist)
     return klist
 
 

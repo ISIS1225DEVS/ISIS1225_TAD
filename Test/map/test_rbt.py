@@ -50,6 +50,8 @@ class RBTreeTest (unittest.TestCase):
         tree = omap.put (tree, 'M', 'Title 80', self.comparestrkeys)
         tree = omap.put (tree, 'P', 'Title 30', self.comparestrkeys)
         tree = omap.put (tree, 'L', 'Title 30', self.comparestrkeys)
+        print("RBT Aleatorio")
+        print (tree)
 
     
     def test_RBT2 (self):
@@ -67,8 +69,29 @@ class RBTreeTest (unittest.TestCase):
         tree = omap.put (tree, 'R', 'Title 80', self.comparestrkeys)
         tree = omap.put (tree, 'S', 'Title 30', self.comparestrkeys)
         tree = omap.put (tree, 'X', 'Title 30', self.comparestrkeys)
-
+        print("\nRBT Ordenado")
         print (tree)
+
+
+
+    def test_keys (self):
+        """
+        """
+        tree = omap.newMap ()
+      
+        tree = omap.put (tree, 'A', 'Title 50', self.comparestrkeys)
+        tree = omap.put (tree, 'C', 'Title 70', self.comparestrkeys)
+        tree = omap.put (tree, 'E', 'Title 30', self.comparestrkeys)
+        tree = omap.put (tree, 'H', 'Title 80', self.comparestrkeys)        
+        tree = omap.put (tree, 'L', 'Title 90', self.comparestrkeys)
+        tree = omap.put (tree, 'M', 'Title 20', self.comparestrkeys)
+        tree = omap.put (tree, 'P', 'Title 50', self.comparestrkeys)
+        tree = omap.put (tree, 'R', 'Title 60', self.comparestrkeys)
+        tree = omap.put (tree, 'S', 'Title 10', self.comparestrkeys)
+        tree = omap.put (tree, 'X', 'Title 40', self.comparestrkeys)
+        kList = omap.keys (tree, 'R', 'X', self.comparestrkeys) 
+        print("\nRBT keys between R and X")
+        print (kList)
 
     
 
