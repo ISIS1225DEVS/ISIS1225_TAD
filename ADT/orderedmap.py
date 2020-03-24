@@ -179,4 +179,5 @@ def height (map):
     return om.height (map)
 
 
-
+def valueRange(map, keylo, keyhi, comparefunction):
+    return om.valueRange (map, keylo, keyhi, comparefunction)

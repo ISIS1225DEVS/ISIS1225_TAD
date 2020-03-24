@@ -114,7 +114,7 @@ def remove (bst , key, comparefunction):
             bst['right']
         elem = bst
         bst = min(bst['right'])
-        bst['right'] = deleteMin(elem['right']);
+        bst['right'] = deleteMin(elem['right'])
         bst['left']  = elem['left']
 
     bst['size'] = 1 + size(bst['left']) + size (bst['right'])
@@ -186,7 +186,7 @@ def minKey (bst):
     Retorna la menor llave de la tabla de simbolos
     """
     if (bst['left'] == None):
-        return bst;
+        return bst
     else:
         return minKey(bst['left'])
 
@@ -197,7 +197,7 @@ def maxKey (bst):
     Retorna la mayor llave de la tabla de simbolos
     """
     if (bst['right'] == None):
-        return bst;
+        return bst
     else:
         return maxKey(bst['right'])
 
@@ -248,7 +248,7 @@ def floor (bst, key, comparefunction):
         return bst
     if (cmp <  0):
         return floor (bst['left'], key, comparefunction)
-    t = floor(bst['right'], key, comparefunction);
+    t = floor(bst['right'], key, comparefunction)
     if (t != None):
         return t
     else:
@@ -269,7 +269,7 @@ def ceiling (bst, key, comparefunction):
     if (cmp == 0):
         return bst
     if (cmp <  0):
-        t = ceiling (bst['left'], key, comparefunction);
+        t = ceiling (bst['left'], key, comparefunction)
         if (t != None):
             return t
         else:
@@ -324,6 +324,13 @@ def height (bst):
     else:
         return 1  +  max (height (bst['left']),  height (bst['right']))
 
+
+def keys(root, keylo, keyhi, comparefunction):
+    pass
+
+
+def valueRange(root, keylo, keyhi, comparefunction):
+    pass
 
 #_____________________________________________________________________
 #            Funciones Helper

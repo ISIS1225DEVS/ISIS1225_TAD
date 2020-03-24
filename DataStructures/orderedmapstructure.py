@@ -240,3 +240,10 @@ def height (map):
         return bst.height (map)
     else:
         return rbt.height (map)
+
+        
+def valueRange(map, keylo, keyhi, comparefunction):
+    if (map['type']=='BST'):
+        return bst.valueRange(map, keylo, keyhi, comparefunction)
+    else:
+        return rbt.valueRange(map, keylo, keyhi, comparefunction)

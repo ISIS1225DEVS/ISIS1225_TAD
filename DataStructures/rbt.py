@@ -346,11 +346,11 @@ def valueRangeRec(rbt, keylo, keyhi, comparefunction, klist):
     cmphi = comparefunction (keyhi, rbt['key'])
 
     if (cmplo < 0):
-        keysRec(rbt['left'],keylo, keyhi, comparefunction, klist)
+        valueRangeRec(rbt['left'],keylo, keyhi, comparefunction, klist)
     if (cmplo <= 0 and cmphi >= 0): 
         lt.addLast (klist, rbt['value'])
     if (cmphi > 0):
-        keysRec(rbt['right'], keylo, keyhi, comparefunction, klist)
+        valueRangeRec(rbt['right'], keylo, keyhi, comparefunction, klist)
 
 #_____________________________________________________________________________
 #       Funciones Helper
