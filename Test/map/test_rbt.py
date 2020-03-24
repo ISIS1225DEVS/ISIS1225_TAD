@@ -109,7 +109,7 @@ def test_valueRange (self):
         tree = omap.put (tree, 'R', 'Title 60', self.comparestrkeys)
         tree = omap.put (tree, 'S', 'Title 10', self.comparestrkeys)
         tree = omap.put (tree, 'X', 'Title 40', self.comparestrkeys)
-        kList = omap.valueRange (tree, 'R', 'X', self.comparestrkeys) 
+        kList = omap.valueRange (tree, 'R', 'X', self.comparestrkeys)  
         print("\nRBT values between R and X")
         print (kList)
 
