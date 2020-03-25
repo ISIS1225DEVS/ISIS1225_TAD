@@ -39,8 +39,8 @@ class EntryMapTest (unittest.TestCase):
             pos += 1
 
 
-    def comparekeys (self, key1, key2):
-        if ( key1 == key2):
+    def comparekeys (self, key, element):
+        if ( key == element['key']):
             return True
         return False
 
