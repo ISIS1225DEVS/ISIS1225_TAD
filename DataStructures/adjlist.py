@@ -21,6 +21,7 @@
 import config
 import math
 from DataStructures import liststructure as lt
+from DataStructures import edge as e
 from ADT import map as map 
 
 def newGraph( size, cmpfunction ):
@@ -28,8 +29,10 @@ def newGraph( size, cmpfunction ):
     Crea un grafo vacio. Los vertices son guardados en un map de tipo linear probing
     """
     prime = nextPrime (size * 2)
-    graph = {'vertices':None, 'edges':0, 'type':'ADJ_LIST' }
-    #graph ['vertices'] = lt.newList()
+    graph = {'vertices':None, 
+             'edges':0, 
+             'type':'ADJ_LIST' }
+
     graph ['vertices'] = map.newMap(capacity=prime, maptype='PROBING',comparefunction=cmpfunction)
 
     return graph
@@ -61,7 +64,7 @@ def numVertex (graph):
     """
     Retorna el numero de vertices en el  grafo graph
     """ 
-    return lt.size (graph['vertices'])
+    return map.size(graph['vertices'])
 
 
 def numEdges (graph):
@@ -75,7 +78,7 @@ def vertices (graph):
     """
     Retorna una lista con todos los vertices del grafo graph
     """ 
-    pass
+    return map.size(graph['vertices'])
 
 
 def edges (graph):
@@ -89,24 +92,29 @@ def degree (graph, vertex):
     """
     Retorna el numero de arcos asociados al vertice vertex
     """ 
-    if (graph['type'] == "ADJ_LIST"):
-        return alt.degree (graph, vertex)
+    pass
 
 
 def getEdge (graph, vertexa, vertexb):
     """
     Retorna el arco asociado a los vertices vertexa ---- vertexb
     """ 
-    if (graph['type'] == "ADJ_LIST"):
-        return alt.getEdge (graph, vertexa, vertexb)
+    pass
 
 
 def addEdge (graph, vertexa, vertexb, weight):
     """
     Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
     """ 
+    vatovb =  e.newEdge (vertexa,vertexb, weight)
+    vbtova =  e.newEdge (vertexb,vertexa, weight)
+    entrya = map.get (graph['vertices'], vertexa)
+    entryb = map.get (graph['vertices'], vertexb)
+    
+    lt.addLast (entrya['value'], vatovb)
+    lt.addLast (entryb['value'], vbtova)
 
-    return alt.addEdge (graph, vertexa, vertexb, weight)
+    graph['edges'] += 1
 
 
 
@@ -114,8 +122,7 @@ def adjacents (graph, vertex ):
     """
     Retorna una lista con todos los vertices adyacentes al vertice vertex
     """ 
-    if (graph['type'] == "ADJ_LIST"):
-        return alt.adjacents(graph, vertex)
+    pass
 
 
 

@@ -138,7 +138,9 @@ def addBookTag (catalog, tag):
         if book:
             lt.addLast (tagbook['value']['books'], book['value'])
 
+#==============================
 # Funciones de consulta
+#==============================
 
 def getBooksByAuthor (catalog, authorname):
     """
