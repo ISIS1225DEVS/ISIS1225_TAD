@@ -26,11 +26,11 @@ Este archivo contiene la implementacióndel TAD grafo no dirigido
 """  
 
 
-def newGraph():
+def newGraph( size, comparefunction ):
     """
      Crea un grafo vacio.
     """   
-    return gr.newGraph()
+    return gr.newGraph( size, comparefunction )
 
 
 def insertVertex ( graph, vertex ):
@@ -65,34 +65,35 @@ def vertices (graph):
     """
     Retorna una lista con todos los vertices del grafo graph
     """ 
-    pass
+    return gr.vertices (graph)
+
 
 def edges (graph):
     """
     Retorna una lista con todos los arcos del grafo graph
     """ 
-    pass
+    return gr.edges (graph)
 
 
 def degree (graph, vertex):
     """
     Retorna el numero de arcos asociados al vertice vertex
     """ 
-    pass
+    return gr.degree (graph, vertex)
 
 
 def getEdge (graph, vertexa, vertexb):
     """
     Retorna el arco asociado a los vertices vertexa ---- vertexb
     """ 
-    pass
+    return gr.getEdge (graph, vertexa, vertexb)
 
 
 def addEdge (graph, vertexa, vertexb, weight):
     """
     Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
     """ 
-    pass
+    return gr.addEdge (graph, vertexa, vertexb, weight)
 
 
 
@@ -100,4 +101,4 @@ def adjacents (graph, vertex ):
     """
     Retorna una lista con todos los vertices adyacentes al vertice vertex
     """ 
-    pass
+    return gr.adjacents(graph, vertex)

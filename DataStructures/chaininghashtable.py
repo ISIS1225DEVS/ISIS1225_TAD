@@ -40,7 +40,7 @@ from DataStructures import liststructure as lt
 
 
 
-def newMap( capacity, prime ):
+def newMap( capacity, prime, cmpfunction ):
     """
     Crea una tabla de hash con capacidad igual a capacity (idealmente un numero primo).  prime es un número primo utilizado para 
     el calculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. Bucket representa 
@@ -52,20 +52,27 @@ def newMap( capacity, prime ):
     for _ in range(capacity):
         bucket = lt.newList()
         lt.addLast (table, bucket)
-    hashtable = {'prime': prime, 'capacity': capacity, 'scale':scale, 'shift':shift, 'table':table, 'size':0,'type':'CHAINING'}
+    hashtable = {'prime': prime, 
+                 'capacity': capacity, 
+                 'scale':scale, 
+                 'shift':shift, 
+                 'table':table, 
+                 'size':0,
+                 'comparefunction': cmpfunction,
+                 'type':'CHAINING'}
     return hashtable
 
 
 
 
-def contains (map, key, comparefunction):
+def contains (map, key):
     """
     Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
     Es necesario proveer la función de comparación entre llaves. 
     """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
-    pos = lt.isPresent (bucket, key, comparefunction)
+    pos = lt.isPresent (bucket, key, map['comparefunction'])
     if pos > 0:
         return True
     else: 
@@ -74,7 +81,7 @@ def contains (map, key, comparefunction):
 
 
 
-def put (map, key , value, comparefunction):
+def put (map, key , value):
     """
     Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
@@ -82,7 +89,7 @@ def put (map, key , value, comparefunction):
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)          #Se obtiene la lista de elementos en la posicion  hash de la tabla
     entry = me.newMapEntry (key, value)
-    pos = lt.isPresent (bucket, key, comparefunction)  
+    pos = lt.isPresent (bucket, key, map['comparefunction'])  
     if pos > 0:                                          #La pareja ya exista, se reemplaza el valor con la nueva información
         lt.changeInfo (bucket, pos, entry)
     else: 
@@ -91,7 +98,7 @@ def put (map, key , value, comparefunction):
 
 
 
-def get (map, key, comparefunction):
+def get (map, key):
     """
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
@@ -99,7 +106,7 @@ def get (map, key, comparefunction):
     """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
-    pos = lt.isPresent (bucket, key, comparefunction)
+    pos = lt.isPresent (bucket, key, map['comparefunction'])
     if pos > 0:
         return lt.getElement (bucket, pos)
     else: 
@@ -107,14 +114,14 @@ def get (map, key, comparefunction):
 
 
 
-def remove (map , key, comparefunction):
+def remove (map , key):
     """
     Elimina la pareja llave,valor, donde llave == key.
     Es necesario proveer la función de comparación entre llaves 
     """
     hash = hashValue (map, key)
     bucket = lt.getElement (map['table'], hash)
-    pos = lt.isPresent (bucket, key, comparefunction)
+    pos = lt.isPresent (bucket, key, map['comparefunction'])
     if pos > 0:
         lt.deleteElement (bucket, pos)
         map['size'] -= 1  

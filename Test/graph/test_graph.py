@@ -16,21 +16,33 @@ class GraphTest (unittest.TestCase):
     def tearDown (self):
         pass
 
+    def comparenames (self, searchname, key):
+        return (searchname == key)
+
 
     def test_newEdge (self):
         edge = e.newEdge (1,1,1)
         print (edge)
 
+
     def test_edgeMethods (self):
         edge = e.newEdge ('Bogota','Cali',4)
 
         print (e.either(edge))
-        print (e.other(edge))
+        print (e.other(edge, e.either(edge)))
         print (e.weight(edge))
 
 
     def test_newGrapgh (self):
-        graph = g.newGraph()
+        graph = g.newGraph(7,self.comparenames)
+
+        g.insertVertex (graph, 'Bogota')
+        g.insertVertex (graph, 'Yopal')
+        g.insertVertex (graph, 'Cali')
+        g.insertVertex (graph, 'Medellin')
+        g.insertVertex (graph, 'Pasto')
+        g.insertVertex (graph, 'Barranquilla')
+        g.insertVertex (graph, 'Manizales')
 
         print (graph)
 

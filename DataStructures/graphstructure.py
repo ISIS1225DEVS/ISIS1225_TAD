@@ -27,12 +27,12 @@ from DataStructures import adjlist as alt
 """
 
 
-def newGraph(datastructure = "ADJ_LIST"):
+def newGraph(size, comparefunction, datastructure = "ADJ_LIST", ):
     """
     Crea un grafo vacio.
     """
     if (datastructure == "ADJ_LIST"):
-        graph = alt.newGraph()
+        graph = alt.newGraph(size, comparefunction)
 
     return graph
 

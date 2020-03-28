@@ -26,27 +26,27 @@ from DataStructures import probehashtable as pht
 
 
 
-def newMap( capacity=17, prime=109345121, maptype='CHAINING') :
+def newMap( capacity=17, prime=109345121, maptype='CHAINING', comparefunction=None) :
     """
     Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
     el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
     """
     if (maptype == 'CHAINING'):
-        return cht.newMap (capacity, prime)
+        return cht.newMap (capacity, prime, comparefunction)
     else:
-        return pht.newMap (capacity, prime)
+        return pht.newMap (capacity, prime, comparefunction)
 
     
 
-def put (map, key , value, comparefunction):
+def put (map, key , value):
     """
     Ingresa una pareja llave,valor a la tabla de hash.  Si la llave ya existe en la tabla, se reemplaza el valor.
     Es necesario proveer una función de comparación para las llaves.
     """
     if (map['type']=='CHAINING'):
-        cht.put (map, key, value, comparefunction)
+        cht.put (map, key, value)
     else:
-        pht.put (map, key, value, comparefunction)
+        pht.put (map, key, value)
 
 
 
