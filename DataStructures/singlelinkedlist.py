@@ -141,6 +141,8 @@ def removeFirst (lst):
         node = lst['first'] 
         lst['first'] = temp
         lst['size'] -= 1
+        if (lst['size'] == 0):
+            lst['last'] = lst['first']
         return node['info']
     else:
         return None
