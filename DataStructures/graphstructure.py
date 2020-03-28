@@ -37,3 +37,84 @@ def newGraph(datastructure = "ADJ_LIST"):
     return graph
 
 
+def insertVertex ( graph, vertex ):
+    """
+    Inserta el vertice vertex en el grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.insertVertex (graph, vertex )
+
+
+def removeVertex ( graph, vertex):
+    """
+    Remueve el vertice vertex del grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.removeVertex (graph, vertex )
+
+
+def numVertex (graph):
+    """
+    Retorna el numero de vertices en el  grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.numVertex (graph)
+
+
+def numEdges (graph):
+    """
+    Retorna el numero de arcos en el  grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.numEdges (graph)
+
+
+def vertices (graph):
+    """
+    Retorna una lista con todos los vertices del grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.vertices (graph)
+
+
+def edges (graph):
+    """
+    Retorna una lista con todos los arcos del grafo graph
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.edges (graph)
+
+
+def degree (graph, vertex):
+    """
+    Retorna el numero de arcos asociados al vertice vertex
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.degree (graph, vertex)
+
+
+def getEdge (graph, vertexa, vertexb):
+    """
+    Retorna el arco asociado a los vertices vertexa ---- vertexb
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.getEdge (graph, vertexa, vertexb)
+
+
+def addEdge (graph, vertexa, vertexb, weight):
+    """
+    Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.addEdge (graph, vertexa, vertexb, weight)
+
+
+
+def adjacents (graph, vertex ):
+    """
+    Retorna una lista con todos los vertices adyacentes al vertice vertex
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.adjacents(graph, vertex)
+
+

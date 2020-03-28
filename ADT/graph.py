@@ -37,28 +37,28 @@ def insertVertex ( graph, vertex ):
     """
     Inserta el vertice vertex en el grafo graph
     """ 
-    pass
+    return gr.insertVertex (graph, vertex )
 
 
 def removeVertex ( graph, vertex):
     """
     Remueve el vertice vertex del grafo graph
     """ 
-    pass
+    return gr.removeVertex (graph, vertex )
 
 
 def numVertex (graph):
     """
     Retorna el numero de vertices en el  grafo graph
     """ 
-    pass
+    return gr.numVertex (graph)
 
 
 def numEdges (graph):
     """
     Retorna el numero de arcos en el  grafo graph
     """ 
-    pass
+    return gr.numEdges (graph)
 
 
 def vertices (graph):
