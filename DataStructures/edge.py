@@ -20,17 +20,19 @@
 
 import config
 
-def newEdge (v, w, weight):
-    edge = {'from':v, 'to':w,'weight':weight}
+def newEdge (va, vb, weight):
+    edge = {'vertexA':va, 'vertexB':vb,'weight':weight}
     return edge
 
-def weight (vertex):
-    return vertex['weight']
 
-def either (vertex):
-    return vertex['from']
+def weight (edge):
+    return edge['weight']
 
 
-def other (vertex):
-    return vertex['to']
+def either (edge):
+    return edge['vertexA']
+
+
+def other (edge, vertex):
+    return edge['vertexB']
 

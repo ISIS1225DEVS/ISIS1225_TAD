@@ -22,7 +22,82 @@ import config
 from DataStructures import graphstructure as gr
 
 """
-Crea un grafo vacio.
-"""
+Este archivo contiene la implementacióndel TAD grafo no dirigido
+"""  
+
+
 def newGraph():
+    """
+     Crea un grafo vacio.
+    """   
     return gr.newGraph()
+
+
+def insertVertex ( graph, vertex ):
+    """
+    Inserta el vertice vertex en el grafo graph
+    """ 
+    pass
+
+
+def removeVertex ( graph, vertex):
+    """
+    Remueve el vertice vertex del grafo graph
+    """ 
+    pass
+
+
+def numVertex (graph):
+    """
+    Retorna el numero de vertices en el  grafo graph
+    """ 
+    pass
+
+
+def numEdges (graph):
+    """
+    Retorna el numero de arcos en el  grafo graph
+    """ 
+    pass
+
+
+def vertices (graph):
+    """
+    Retorna una lista con todos los vertices del grafo graph
+    """ 
+    pass
+
+def edges (graph):
+    """
+    Retorna una lista con todos los arcos del grafo graph
+    """ 
+    pass
+
+
+def degree (graph, vertex):
+    """
+    Retorna el numero de arcos asociados al vertice vertex
+    """ 
+    pass
+
+
+def getEdge (graph, vertexa, vertexb):
+    """
+    Retorna el arco asociado a los vertices vertexa ---- vertexb
+    """ 
+    pass
+
+
+def addEdge (graph, vertexa, vertexb, weight):
+    """
+    Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
+    """ 
+    pass
+
+
+
+def adjacents (graph, vertex ):
+    """
+    Retorna una lista con todos los vertices adyacentes al vertice vertex
+    """ 
+    pass
