@@ -8,10 +8,6 @@ from ADT import list as lt
 
 
 class mapTest (unittest.TestCase):
-    
-    table_capacity = 171
-    book_map = ht.newMap (capacity=table_capacity, maptype='CHAINING')
-    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
 
 
     def loadCSVFile (file, lst):
@@ -27,6 +23,7 @@ class mapTest (unittest.TestCase):
 
     def setUp (self):
         pass
+
 
 
     def tearDown (self):
@@ -83,29 +80,33 @@ class mapTest (unittest.TestCase):
 
 
     def test_LoadTable (self):
-        self.assertEqual (ht.size (self.book_map), 0)
-        self.assertTrue (ht.isEmpty (self.book_map))
+        table_capacity = 171
+        book_map = ht.newMap (capacity=table_capacity, maptype='CHAINING', comparefunction = self.compare_book_id)
+        booksfile = cf.data_dir + 'GoodReads/books-small.csv'
 
-        input_file = csv.DictReader(open(self.booksfile))
+        self.assertEqual (ht.size (book_map), 0)
+        self.assertTrue (ht.isEmpty (book_map))
+
+        input_file = csv.DictReader(open(booksfile))
         for book in input_file:  
-            ht.put(self.book_map,book['book_id'],book, self.compare_book_id)
+            ht.put(book_map,book['book_id'],book)
 
-        self.assertEqual (ht.size(self.book_map), 149)
-        self.assertTrue (ht.contains(self.book_map,'100',self.compare_book_id))
+        self.assertEqual (ht.size(book_map), 149)
+        self.assertTrue (ht.contains(book_map,'100'))
 
-        entry = ht.get (self.book_map, '100', self.compare_book_id)
+        entry = ht.get (book_map, '100')
         self.assertIsNotNone (entry)
         self.assertEqual (entry['value']['book_id'],'100')
 
-        ht.remove(self.book_map,'100',self.compare_book_id)
-        self.assertEqual (ht.size (self.book_map), 148)
-        self.assertFalse (ht.contains(self.book_map,'100',self.compare_book_id))
+        ht.remove(book_map,'100')
+        self.assertEqual (ht.size (book_map), 148)
+        self.assertFalse (ht.contains(book_map,'100'))
 
-        lst_keys = ht.keySet (self.book_map )
+        lst_keys = ht.keySet (book_map )
         self.assertFalse (lt.isEmpty (lst_keys))
         self.assertEqual (lt.size (lst_keys), 148)
 
-        lst_values = ht.valueSet (self.book_map )
+        lst_values = ht.valueSet (book_map )
         self.assertFalse (lt.isEmpty (lst_values))
         self.assertEqual (lt.size (lst_values), 148)
 

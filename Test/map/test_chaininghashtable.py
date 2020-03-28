@@ -10,7 +10,7 @@ class EntryMapTest (unittest.TestCase):
     
     
 
-    def compareentryfunction (self, element1, element2):
+    def comparefunction (self, element1, element2):
         if (element1 == element2['key']):
             return True
         return False
@@ -55,15 +55,15 @@ class EntryMapTest (unittest.TestCase):
     def test_put (self):
         """
         """
-        table = ht.newMap (capacity= 7, maptype='CHAINING')
+        table = ht.newMap (capacity= 7, maptype='CHAINING',comparefunction=self.comparefunction)
 
-        ht.put (table, 'book1', 'title1', self.compareentryfunction)
-        ht.put (table, 'book2', 'title2', self.compareentryfunction)
-        ht.put (table, 'book3', 'title3', self.compareentryfunction)
-        ht.put (table, 'book4', 'title4', self.compareentryfunction)
-        ht.put (table, 'book5', 'title5', self.compareentryfunction)
-        ht.put (table, 'book6', 'title6', self.compareentryfunction)
-        ht.put (table, 'book2', 'new-title 2', self.compareentryfunction)
+        ht.put (table, 'book1', 'title1')
+        ht.put (table, 'book2', 'title2')
+        ht.put (table, 'book3', 'title3')
+        ht.put (table, 'book4', 'title4')
+        ht.put (table, 'book5', 'title5')
+        ht.put (table, 'book6', 'title6')
+        ht.put (table, 'book2', 'new-title 2')
         self.printTable (table)
         self.assertEqual (ht.size(table), 6)
 
@@ -72,16 +72,16 @@ class EntryMapTest (unittest.TestCase):
     def test_get (self):
         """
         """
-        table = ht.newMap (capacity= 7, maptype='CHAINING')
+        table = ht.newMap (capacity= 7, maptype='CHAINING',comparefunction=self.comparefunction)
 
-        ht.put (table, 'book1', 'title1', self.compareentryfunction)
-        ht.put (table, 'book2', 'title2', self.compareentryfunction)
-        ht.put (table, 'book3', 'title3', self.compareentryfunction)
-        ht.put (table, 'book4', 'title4', self.compareentryfunction)
-        ht.put (table, 'book5', 'title5', self.compareentryfunction)
-        ht.put (table, 'book6', 'title6', self.compareentryfunction)
+        ht.put (table, 'book1', 'title1')
+        ht.put (table, 'book2', 'title2')
+        ht.put (table, 'book3', 'title3')
+        ht.put (table, 'book4', 'title4')
+        ht.put (table, 'book5', 'title5')
+        ht.put (table, 'book6', 'title6')
         
-        book = ht.get (table, 'book2', self.compareentryfunction)
+        book = ht.get (table, 'book2')
         print (book)
         self.assertEqual (ht.size(table), 6)
 
@@ -90,16 +90,16 @@ class EntryMapTest (unittest.TestCase):
     def test_delete (self):
         """
         """
-        table = ht.newMap (capacity= 7, maptype='CHAINING')
+        table = ht.newMap (capacity= 7, maptype='CHAINING',comparefunction=self.comparefunction)
 
-        ht.put (table, 'book1', 'title1', self.compareentryfunction)
-        ht.put (table, 'book2', 'title2', self.compareentryfunction)
-        ht.put (table, 'book3', 'title3', self.compareentryfunction)
-        ht.put (table, 'book4', 'title4', self.compareentryfunction)
-        ht.put (table, 'book5', 'title5', self.compareentryfunction)
-        ht.put (table, 'book6', 'title6', self.compareentryfunction)
+        ht.put (table, 'book1', 'title1')
+        ht.put (table, 'book2', 'title2')
+        ht.put (table, 'book3', 'title3')
+        ht.put (table, 'book4', 'title4')
+        ht.put (table, 'book5', 'title5')
+        ht.put (table, 'book6', 'title6')
         self.printTable (table)
-        ht.remove (table, 'book1', self.comparekeyfunction)
+        ht.remove (table, 'book1')
         self.printTable (table)
 
 
@@ -107,14 +107,14 @@ class EntryMapTest (unittest.TestCase):
     def test_getkeys (self):
         """
         """
-        table = ht.newMap (capacity= 7, maptype='CHAINING')
+        table = ht.newMap (capacity= 7, maptype='CHAINING',comparefunction=self.comparefunction)
 
-        ht.put (table, 'book1', 'title1', self.compareentryfunction)
-        ht.put (table, 'book2', 'title2', self.compareentryfunction)
-        ht.put (table, 'book3', 'title3', self.compareentryfunction)
-        ht.put (table, 'book4', 'title4', self.compareentryfunction)
-        ht.put (table, 'book5', 'title5', self.compareentryfunction)
-        ht.put (table, 'book6', 'title6', self.compareentryfunction)
+        ht.put (table, 'book1', 'title1')
+        ht.put (table, 'book2', 'title2')
+        ht.put (table, 'book3', 'title3')
+        ht.put (table, 'book4', 'title4')
+        ht.put (table, 'book5', 'title5')
+        ht.put (table, 'book6', 'title6')
 
         ltset = ht.keySet(table)
         iterator = it.newIterator (ltset)
@@ -127,14 +127,14 @@ class EntryMapTest (unittest.TestCase):
     def test_getvalues (self):
         """
         """
-        table = ht.newMap (capacity= 7, maptype='CHAINING')
+        table = ht.newMap (capacity= 7, maptype='CHAINING',comparefunction=self.comparefunction)
         
-        ht.put (table, 'book1', 'title1', self.compareentryfunction)
-        ht.put (table, 'book2', 'title2', self.compareentryfunction)
-        ht.put (table, 'book3', 'title3', self.compareentryfunction)
-        ht.put (table, 'book4', 'title4', self.compareentryfunction)
-        ht.put (table, 'book5', 'title5', self.compareentryfunction)
-        ht.put (table, 'book6', 'title6', self.compareentryfunction)
+        ht.put (table, 'book1', 'title1')
+        ht.put (table, 'book2', 'title2')
+        ht.put (table, 'book3', 'title3')
+        ht.put (table, 'book4', 'title4')
+        ht.put (table, 'book5', 'title5')
+        ht.put (table, 'book6', 'title6')
 
         ltset = lt.newList ('SINGLE_LINKED_LIST')
         ltset = ht.valueSet (table)

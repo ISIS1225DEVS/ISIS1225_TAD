@@ -50,40 +50,40 @@ def put (map, key , value):
 
 
 
-def get (map, key, comparefunction):
+def get (map, key):
     """
     Retorna la pareja llave, valor, cuya llave sea igual a key.
     Es necesario proveer una función de comparación para las llaves.
     """
     if (map['type']=='CHAINING'):
-        return cht.get (map, key, comparefunction)
+        return cht.get (map, key)
     else:
-        return pht.get (map, key, comparefunction)
+        return pht.get (map, key)
 
 
 
 
-def remove (map , key, comparefunction):
+def remove (map , key):
     """
     Elimina la pareja llave,valor, donde llave == key.
     Es necesario proveer la función de comparación entre llaves 
     """
     if (map['type']=='CHAINING'):
-        cht.remove (map, key, comparefunction)
+        cht.remove (map, key)
     else:
-        pht.remove (map, key, comparefunction)
+        pht.remove (map, key)
 
 
 
-def contains (map, key, comparefunction):
+def contains (map, key):
     """
     Retorna True si la llave key se encuentra en la tabla de hash o False en caso contrario.  
     Es necesario proveer la función de comparación entre llaves. 
     """
     if (map['type']=='CHAINING'):
-        return cht.contains (map, key, comparefunction)
+        return cht.contains (map, key)
     else:
-        return pht.contains (map, key, comparefunction)
+        return pht.contains (map, key)
 
 
 

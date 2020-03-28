@@ -42,58 +42,58 @@ class EntryMapTest (unittest.TestCase):
 
 
     def compareentryfunction (self, element1, element2):
-        if (element1['key'] == element2['key']):
+        if (element1 == element2):
             return True
         return False
 
 
     def test_contains(self):
-        table = ht.newMap (capacity=17, maptype='PROBING')
+        table = ht.newMap (capacity=17, maptype='PROBING', comparefunction=self.comparekeys)
 
-        ht.put (table, '1', 'title1', self.comparekeys)
-        ht.put (table, '2', 'title2', self.comparekeys)
-        ht.put (table, '3', 'title3', self.comparekeys)
-        ht.put (table, '4', 'title4', self.comparekeys)
-        ht.put (table, '5', 'title5', self.comparekeys)
-        ht.put (table, '6', 'title6', self.comparekeys)
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '3', 'title3')
+        ht.put (table, '4', 'title4')
+        ht.put (table, '5', 'title5')
+        ht.put (table, '6', 'title6')
 
-        self.assertTrue   (ht.contains(table, '1', self.comparekeys))
-        self.assertFalse  (ht.contains(table, '15', self.comparekeys))
-        self.assertTrue   (ht.contains(table, '6', self.comparekeys))
+        self.assertTrue   (ht.contains(table, '1'))
+        self.assertFalse  (ht.contains(table, '15'))
+        self.assertTrue   (ht.contains(table, '6'))
         self.assertEqual (ht.size(table), 6)
 
 
     def test_get(self):
-        table = ht.newMap (capacity=17, maptype='PROBING')
+        table = ht.newMap (capacity=17, maptype='PROBING', comparefunction=self.comparekeys)
 
-        ht.put (table, '1', 'title1', self.comparekeys)
-        ht.put (table, '2', 'title2', self.comparekeys)
-        ht.put (table, '3', 'title3', self.comparekeys)
-        ht.put (table, '4', 'title4', self.comparekeys)
-        ht.put (table, '5', 'title5', self.comparekeys)
-        ht.put (table, '6', 'title6', self.comparekeys)
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '3', 'title3')
+        ht.put (table, '4', 'title4')
+        ht.put (table, '5', 'title5')
+        ht.put (table, '6', 'title6')
         self.assertEqual (ht.size(table), 6)
 
-        entry = ht.get (table, '5', self.comparekeys)      
+        entry = ht.get (table, '5')      
         print (entry) 
 
 
 
     def test_delete(self):
-        table = ht.newMap (capacity=17, maptype='PROBING')
+        table = ht.newMap (capacity=17, maptype='PROBING', comparefunction=self.comparekeys)
 
-        ht.put (table, '1', 'title1', self.comparekeys)
-        ht.put (table, '2', 'title2', self.comparekeys)
-        ht.put (table, '3', 'title3', self.comparekeys)
-        ht.put (table, '4', 'title4', self.comparekeys)
-        ht.put (table, '5', 'title5', self.comparekeys)
-        ht.put (table, '6', 'title6', self.comparekeys)
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '3', 'title3')
+        ht.put (table, '4', 'title4')
+        ht.put (table, '5', 'title5')
+        ht.put (table, '6', 'title6')
         self.assertEqual (ht.size(table), 6)
 
         self.printTable (table)
-        entry = ht.remove (table, '3', self.comparekeys)  
+        entry = ht.remove (table, '3')  
         self.assertEqual (ht.size(table), 5)    
-        entry = ht.get (table, '3', self.comparekeys)  
+        entry = ht.get (table, '3')  
         self.assertIsNone (entry)
         self.printTable (table)
 
@@ -101,14 +101,14 @@ class EntryMapTest (unittest.TestCase):
     def test_getkeys (self):
         """
         """
-        table = ht.newMap (capacity=17, maptype='PROBING')
+        table = ht.newMap (capacity=17, maptype='PROBING', comparefunction=self.comparekeys)
 
-        ht.put (table, '1', 'title1', self.comparekeys)
-        ht.put (table, '2', 'title2', self.comparekeys)
-        ht.put (table, '3', 'title3', self.comparekeys)
-        ht.put (table, '4', 'title4', self.comparekeys)
-        ht.put (table, '5', 'title5', self.comparekeys)
-        ht.put (table, '6', 'title6', self.comparekeys)
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '3', 'title3')
+        ht.put (table, '4', 'title4')
+        ht.put (table, '5', 'title5')
+        ht.put (table, '6', 'title6')
 
         ltset = lt.newList ('SINGLE_LINKED')
         ltset = ht.keySet(table)
@@ -121,14 +121,14 @@ class EntryMapTest (unittest.TestCase):
     def test_getvalues (self):
         """
         """
-        table = ht.newMap (capacity=17, maptype='PROBING')
+        table = ht.newMap (capacity=17, maptype='PROBING', comparefunction=self.comparekeys)
 
-        ht.put (table, '1', 'title1', self.comparekeys)
-        ht.put (table, '2', 'title2', self.comparekeys)
-        ht.put (table, '3', 'title3', self.comparekeys)
-        ht.put (table, '4', 'title4', self.comparekeys)
-        ht.put (table, '5', 'title5', self.comparekeys)
-        ht.put (table, '6', 'title6', self.comparekeys)
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '3', 'title3')
+        ht.put (table, '4', 'title4')
+        ht.put (table, '5', 'title5')
+        ht.put (table, '6', 'title6')
 
         ltset = lt.newList ('SINGLE_LINKED')
         ltset = ht.valueSet (table)

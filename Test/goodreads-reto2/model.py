@@ -33,7 +33,7 @@ tablas de simbolos
 
 # Construccion de modelos
 
-def newCatalog():
+def newCatalog(compareBookIds, compareAuthorsByName, compareTagNames, compareIds):
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar todos los libros,
     Adicionalmente, crea una lista vacia para los autores y una lista vacia para los 
@@ -41,10 +41,10 @@ def newCatalog():
     """
     catalog = {'books':None, 'bookIds':None, 'authors':None, 'tags': None, 'tagIds': None}
     catalog['books'] = lt.newList('ARRAY_LIST')
-    catalog['bookIds'] = map.newMap (20011, maptype='PROBING')
-    catalog['authors'] = map.newMap (12007, maptype='PROBING')
-    catalog['tags'] = map.newMap (17021, maptype='CHAINING')
-    catalog['tagIds'] = map.newMap (17021, maptype='CHAINING')
+    catalog['bookIds'] = map.newMap (20011, maptype='PROBING', comparefunction=compareBookIds)
+    catalog['authors'] = map.newMap (12007, maptype='PROBING', comparefunction=compareAuthorsByName )
+    catalog['tags'] = map.newMap (17021, maptype='CHAINING', comparefunction=compareTagNames)
+    catalog['tagIds'] = map.newMap (17021, maptype='CHAINING', comparefunction=compareIds)
     return catalog
 
 
@@ -81,22 +81,24 @@ def newTagBook (name, id):
 
 # Funciones para agregar informacion al catalogo
 
-def addBookAuthor (catalog, authorname, book, compareauthors, comparebookid):
+def addBookAuthor (catalog, authorname, book):
     """
     Adiciona un autor a lista de autores, la cual guarda referencias a los libros de dicho autor
     """
     authors = catalog['authors']
-    existauthor = map.contains (authors, authorname, compareauthors)
+    existauthor = map.contains (authors, authorname)
 
     if existauthor:
-        entry = map.get (authors,authorname,compareauthors)  
+        entry = map.get (authors,authorname)  
         author =  entry['value'] 
     else:
         author = newAuthor(authorname)
-        map.put (authors, authorname, author, compareauthors)
+        map.put (authors, authorname, author)
     lt.addLast (author['books'], book)
+
     # Se crea un indice para buscar libros x id
-    map.put(catalog['bookIds'], book['goodreads_book_id'], book, comparebookid )
+    map.put(catalog['bookIds'], book['goodreads_book_id'], book )
+
     if (author['average_rating']==0.0):
         author['average_rating']= float (book['average_rating'])
     else:
@@ -104,52 +106,55 @@ def addBookAuthor (catalog, authorname, book, compareauthors, comparebookid):
 
 
 
-def addTag (catalog, tag, compareTagNames, compareTagIds):
+def addTag (catalog, tag):
     """
     Adiciona un tag a la lista de tags
     """
     t = newTagBook (tag['tag_name'], tag['tag_id'])
-    map.put (catalog['tags'], tag['tag_name'], t, compareTagNames)
-    map.put (catalog['tagIds'], tag['tag_id'], t, compareTagIds)
+    map.put (catalog['tags'], tag['tag_name'], t)
+    map.put (catalog['tagIds'], tag['tag_id'], t)
 
-def putMapBook (catalog, bookRow, compareFunction):
+
+
+def putMapBook (catalog, bookRow):
     book= newBook(bookRow)
-    map.put (catalog['bookIds'], book['book_id'],book , compareFunction)
+    map.put (catalog['bookIds'], book['book_id'],book )
 
-def addBookTag (catalog, tag, comparefunction, compareTagNames, comparegoodreadsid):
+
+
+def addBookTag (catalog, tag):
     """
     Agrega una relación entre un libro y un tag asociado a dicho libro
     """
     bookid = tag['goodreads_book_id']
     tagid = tag['tag_id']
-    entry = map.get(catalog['tagIds'], tagid, comparefunction)
+    entry = map.get(catalog['tagIds'], tagid)
+
     if entry:
-        tagbook = map.get (catalog['tags'], entry['value']['name'], compareTagNames)
+        tagbook = map.get (catalog['tags'], entry['value']['name'])
         tagbook ['value']['total_books'] += 1
         tagbook ['value']['count'] += int (tag['count'])
-        #posbook = lt.isPresent(catalog['books'], bookid, comparegoodreadsid)
-        book = map.get (catalog['bookIds'],bookid ,comparegoodreadsid)
+        book = map.get (catalog['bookIds'],bookid)
         if book:
-            #book =  lt.getElement (catalog['books'], posbook) 
             lt.addLast (tagbook['value']['books'], book['value'])
 
 # Funciones de consulta
 
-def getBooksByAuthor (catalog, authorname, compareauthors):
+def getBooksByAuthor (catalog, authorname):
     """
     Retorna un autor con sus libros a partir del nombre del autor
     """
-    author = map.get (catalog['authors'], authorname, compareauthors)
+    author = map.get (catalog['authors'], authorname)
     if author:
         return author['value']
     return None
 
 
-def getBooksByTag (catalog, tagname, compareTagNames):
+def getBooksByTag (catalog, tagname):
     """
     Retornar la lista de libros asociados a un tag 
     """    
-    tag = map.get (catalog['tags'], tagname, compareTagNames)
+    tag = map.get (catalog['tags'], tagname)
     books = None
     if tag:
         books = tag['value']['books']

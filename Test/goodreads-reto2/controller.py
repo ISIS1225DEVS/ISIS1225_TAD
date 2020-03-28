@@ -37,7 +37,7 @@ def initCatalog ():
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
-    catalog = model.newCatalog()
+    catalog = model.newCatalog ( compareBookIds, compareAuthorsByName, compareTagNames, compareIds)
     return catalog
 
 
@@ -47,7 +47,7 @@ def loadData (catalog):
     estructura de datos
     """
     loadBooks(catalog)
-    loadTags (catalog, compareTagNames)
+    loadTags (catalog)
     loadBooksTags(catalog)
 
 #___________________________________________________
@@ -68,25 +68,30 @@ def loadBooks (catalog):
     for book in input_file:  
         # Se adiciona el libro a la lista de libros
         lt.addLast(catalog['books'],book)
-        model.putMapBook (catalog, book, compareBookIds)
+
+        # Se adiciona al map
+        model.putMapBook (catalog, book)
+
         # Se obtienen los autores del libro
         authors = book['authors'].split(",")
-        # Cada auto se crea en la tabla de simbolos del catalogo, y se 
+
+        # Cada autor se crea en la tabla de simbolos del catalogo, y se 
         # crea un libro en la lista de dicho autor (apuntador al libro)
         for author in authors:
-            model.addBookAuthor (catalog, author.strip(), book, compareAuthorsByName, compareBookIds)
+            model.addBookAuthor (catalog, author.strip(), book)
+
     sort.mergesort (catalog['books'],compareRatings)
     
 
 
-def loadTags(catalog,compareTagNames):
+def loadTags(catalog):
     """
     Carga todos los tags del archivo y los agrega a la lista de tags
     """
     tagsfile = cf.data_dir + 'GoodReads/tags.csv'
     input_file = csv.DictReader(open(tagsfile))
     for tag in input_file:  
-        model.addTag (catalog, tag, compareTagNames, compareIds)
+        model.addTag (catalog, tag)
     
 
 
@@ -99,7 +104,7 @@ def loadBooksTags (catalog):
     booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file: 
-        model.addBookTag (catalog, tag, compareIds, compareTagNames, compareBookIds)
+        model.addBookTag (catalog, tag)
 
 
 #___________________________________________________
@@ -108,7 +113,7 @@ def loadBooksTags (catalog):
 
 
 def getBooksByAuthor (catalog, authorname):
-    author = model.getBooksByAuthor (catalog, authorname, compareAuthorsByName)
+    author = model.getBooksByAuthor (catalog, authorname)
     return author
 
 
@@ -122,7 +127,7 @@ def getBestBooks (catalog, number):
     
 
 def getBooksByTag (catalog, tagname):
-    books = model.getBooksByTag (catalog, tagname, compareTagNames)
+    books = model.getBooksByTag (catalog, tagname)
     return books
 
 

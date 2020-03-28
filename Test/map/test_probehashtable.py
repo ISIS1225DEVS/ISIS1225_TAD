@@ -7,17 +7,16 @@ from ADT import list as lt
 
 class EntryMapTest (unittest.TestCase):
 
-    capacity = 10
-    table = ht.newMap (capacity, maptype='PROBING')
+    
+
+    def comparekeys (self, key, element):
+        if ( key == element['key']):
+            return True
+        return False
 
 
     def setUp (self):
-        ht.put (self.table, '1', 'title1', self.comparekeys)
-        ht.put (self.table, '2', 'title2', self.comparekeys)
-        ht.put (self.table, '11', 'title3', self.comparekeys)
-        ht.put (self.table, '3', 'title4', self.comparekeys)
-        ht.put (self.table, '12', 'title5', self.comparekeys)
-        ht.put (self.table, '5', 'title6', self.comparekeys)
+        pass
 
 
     def tearDown (self):
@@ -39,40 +38,68 @@ class EntryMapTest (unittest.TestCase):
             pos += 1
 
 
-    def comparekeys (self, key, element):
-        if ( key == element['key']):
-            return True
-        return False
-
-
-    def compareentryfunction (self, element1, element2):
-        if (element1['key'] == element2['key']):
-            return True
-        return False
-
-
     def test_contains(self):
-        self.assertTrue   (ht.contains(self.table, '1', self.comparekeys))
-        self.assertFalse  (ht.contains(self.table, '15', self.comparekeys))
-        self.assertTrue   (ht.contains(self.table, '11', self.comparekeys))
+
+        capacity = 10
+        table = ht.newMap (capacity, maptype='PROBING', comparefunction=self.comparekeys)
+
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '11', 'title3')
+        ht.put (table, '3', 'title4')
+        ht.put (table, '12', 'title5')
+        ht.put (table, '5', 'title6')
+
+        self.assertTrue   (ht.contains(table, '1'))
+        self.assertFalse  (ht.contains(table, '15'))
+        self.assertTrue   (ht.contains(table, '11'))
 
 
     def test_get(self):
-        entry = ht.get (self.table, '5', self.comparekeys)      
+        capacity = 10
+        table = ht.newMap (capacity, maptype='PROBING', comparefunction=self.comparekeys)
+
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '11', 'title3')
+        ht.put (table, '3', 'title4')
+        ht.put (table, '12', 'title5')
+        ht.put (table, '5', 'title6')
+
+        entry = ht.get (table, '5')      
         print (entry) 
 
 
     def test_delete(self):
-        self.printTable (self.table)
-        entry = ht.remove (self.table, '3', self.comparekeys)      
-        self.printTable (self.table)
+        capacity = 10
+        table = ht.newMap (capacity, maptype='PROBING', comparefunction=self.comparekeys)
+
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '11', 'title3')
+        ht.put (table, '3', 'title4')
+        ht.put (table, '12', 'title5')
+        ht.put (table, '5', 'title6')
+        self.printTable (table)
+        entry = ht.remove (table, '3')      
+        self.printTable (table)
 
 
     def test_getkeys (self):
         """
         """
+        capacity = 10
+        table = ht.newMap (capacity, maptype='PROBING', comparefunction=self.comparekeys)
+
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '11', 'title3')
+        ht.put (table, '3', 'title4')
+        ht.put (table, '12', 'title5')
+        ht.put (table, '5', 'title6')
+
         ltset = lt.newList ('SINGLE_LINKED_LIST')
-        ltset = ht.keySet(self.table)
+        ltset = ht.keySet(table)
         iterator = it.newIterator (ltset)
         while it.hasNext (iterator):
             info = it.next (iterator)
@@ -82,8 +109,18 @@ class EntryMapTest (unittest.TestCase):
     def test_getvalues (self):
         """
         """
+        capacity = 10
+        table = ht.newMap (capacity, maptype='PROBING', comparefunction=self.comparekeys)
+
+        ht.put (table, '1', 'title1')
+        ht.put (table, '2', 'title2')
+        ht.put (table, '11', 'title3')
+        ht.put (table, '3', 'title4')
+        ht.put (table, '12', 'title5')
+        ht.put (table, '5', 'title6')
+
         ltset = lt.newList ('SINGLE_LINKED_LIST')
-        ltset = ht.valueSet (self.table)
+        ltset = ht.valueSet (table)
         iterator = it.newIterator (ltset)
         while it.hasNext (iterator):
             info = it.next (iterator)
