@@ -20,9 +20,11 @@
 
 import config
 import math
-from DataStructures import liststructure as lt
-from DataStructures import edge as e
 from ADT import map as map 
+from DataStructures import liststructure as lt
+from DataStructures import listiterator as it
+from DataStructures import edge as e
+
 
 def newGraph( size, cmpfunction ):
     """
@@ -53,11 +55,8 @@ def removeVertex ( graph, vertex, comparefunction):
     """
     Remueve el vertice vertex del grafo graph
     """ 
-    #revisar
-    present = lt.isPresent (graph['vertices'], vertex, comparefunction )
-    if present: 
-        lt.deleteElement (graph['vertices'], present)
-    return graph
+    # TODO
+    pass
 
 
 def numVertex (graph):
@@ -78,41 +77,70 @@ def vertices (graph):
     """
     Retorna una lista con todos los vertices del grafo graph
     """ 
-    return map.size(graph['vertices'])
+    lstmap = map.keySet(graph['vertices'])
+    return lstmap
+
 
 
 def edges (graph):
     """
     Retorna una lista con todos los arcos del grafo graph
     """ 
-    pass
+    lstmap = map.valueSet(graph['vertices'])
+    lstresp = lt.newList ()
+    itervertex = it.newIterator (lstmap)
+    while it.hasNext (itervertex):
+        lstedge = it.next (itervertex)
+        iteredge = it.newIterator (lstedge)
+        while (it.hasNext (iteredge)):
+            edge = it.next (iteredge)
+            if not (lt.isPresent (lstresp,edge, e.compareedges)):
+                lt.addLast (lstresp,edge)
+    return lstresp
+
+    
 
 
 def degree (graph, vertex):
     """
     Retorna el numero de arcos asociados al vertice vertex
     """ 
-    pass
+    element = map.get (graph['vertices'], vertex)
+    lst = element['value']
+    return (lt.size(lst))
+
 
 
 def getEdge (graph, vertexa, vertexb):
     """
     Retorna el arco asociado a los vertices vertexa ---- vertexb
     """ 
-    pass
+    element = map.get (graph['vertices'], vertexa)
+    lst = element['value']
+    itvertex = it.newIterator (lst)
+    while (it.hasNext(itvertex)):
+        edge = it.next (itvertex)
+        if ( e.either(edge) == vertexa or (e.other(edge,e.either(edge) )== vertexa ) ):
+            if ( e.either(edge) == vertexb or (e.other(edge,e.either(edge) )== vertexb ) ):
+                return edge
+    return None
+
 
 
 def addEdge (graph, vertexa, vertexb, weight):
     """
     Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
     """ 
-    vatovb =  e.newEdge (vertexa,vertexb, weight)
-    vbtova =  e.newEdge (vertexb,vertexa, weight)
+    # Se crea el arco
+    edge =  e.newEdge (vertexa,vertexb, weight)
+
+    #Se obtienen las listas de adyacencias de cada vertice
     entrya = map.get (graph['vertices'], vertexa)
     entryb = map.get (graph['vertices'], vertexb)
     
-    lt.addLast (entrya['value'], vatovb)
-    lt.addLast (entryb['value'], vbtova)
+    #Se anexa a cada lista el arco correspondiente
+    lt.addLast (entrya['value'], edge)
+    lt.addLast (entryb['value'], edge)
 
     graph['edges'] += 1
 
@@ -122,7 +150,19 @@ def adjacents (graph, vertex ):
     """
     Retorna una lista con todos los vertices adyacentes al vertice vertex
     """ 
-    pass
+    element = map.get (graph['vertices'], vertex)
+    lst = element['value']
+    lstresp = lt.newList()
+    iter=it.newIterator (lst)
+    while (it.hasNext(iter)):
+        edge = it.next (iter)
+        v = e.either(edge)
+        if (v == vertex):
+            lt.addLast (lstresp, e.other(edge, v))
+        else:
+            lt.addLast (lstresp, v)
+    return lstresp
+
 
 
 

@@ -44,7 +44,6 @@ class GraphTest (unittest.TestCase):
         g.insertVertex (graph, 'Barranquilla')
         g.insertVertex (graph, 'Manizales')
 
-        print (graph)
 
     def test_addEdges (self):
         graph = g.newGraph(7,self.comparenames)
@@ -68,8 +67,23 @@ class GraphTest (unittest.TestCase):
         g.addEdge (graph, 'Barranquilla','Manizales', 1 )
         g.addEdge (graph, 'Pasto','Manizales', 1 )
 
-        print (graph)
+        self.assertEqual (g.numEdges(graph), 10)
+        self.assertEqual (g.numVertex(graph), 7)
 
+        lst = g.vertices (graph)
+        self.assertEqual (lt.size (lst), 7)
+
+        lst = g.edges (graph)
+        self.assertEqual (lt.size (lst), 10)
+
+        degree = g.degree (graph, 'Bogota')
+        self.assertEqual (degree, 4)
+
+        edge = g.getEdge (graph, 'Bogota', 'Medellin')
+
+        lst = g.adjacents (graph, 'Bogota')
+        self.assertEqual (lt.size (lst), 4)
+    
 
 if __name__ == "__main__":
     unittest.main()

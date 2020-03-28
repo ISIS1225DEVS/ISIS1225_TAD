@@ -36,3 +36,12 @@ def either (edge):
 def other (edge, vertex):
     return edge['vertexB']
 
+def compareedges (edge1, edge2):
+    e1v = either (edge1)
+    e2v = either (edge2)
+
+    if e1v == e2v:
+        if other(edge1, e1v) == other (edge2,e2v):
+            return True
+    return False
+
