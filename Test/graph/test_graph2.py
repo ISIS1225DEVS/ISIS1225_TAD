@@ -346,7 +346,7 @@ class GraphTest (unittest.TestCase):
         #print()
 
 
-    def atest_dfs2_flights (self):    
+    def test_dfs2_flights (self):    
         graph = g.newGraph(111353,self.comparenames)
         nodes = '/Users/kmilo/Documents/PhD/Sem8/Docencia/flights_nodes.csv'    
         dialect = csv.excel()
@@ -366,11 +366,11 @@ class GraphTest (unittest.TestCase):
         print(g.numEdges(graph), g.numVertex(graph))
         self.dfs2(graph, 'ALB-11-5')
         routeALB2SMF = self.pathTo(graph,'ALB-11-5', 'SMF-11-5')
-        print("Route from ALB-11-5 to SMF-11-5")
+        print("Route (DSF2) from ALB-11-5 to SMF-11-5")
         print(routeALB2SMF)
         #print()
 
-    def atest_bfs_flights (self):
+    def test_bfs_flights (self):
         graph = g.newGraph(111353,self.comparenames)
         nodes = '/Users/kmilo/Documents/PhD/Sem8/Docencia/flights_nodes.csv'    
         dialect = csv.excel()
@@ -388,9 +388,9 @@ class GraphTest (unittest.TestCase):
                 g.addEdge (graph, row['SOURCE'], row['DEST'], info )
         print('####test_flights')
         print(g.numEdges(graph), g.numVertex(graph))
-        self.bfs(graph, 'ALB-11-5')
+        self.bfs2(graph, 'ALB-11-5')
         routeALB2SMF = self.pathTo(graph,'ALB-11-5', 'SMF-11-5')
-        print("Route from ALB-11-5 to SMF-11-5")
+        print(":::Route (BSF2) from ALB-11-5 to SMF-11-5")
         print(routeALB2SMF)
     
     

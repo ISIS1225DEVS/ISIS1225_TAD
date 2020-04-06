@@ -33,7 +33,8 @@ def newGraph( size, cmpfunction ):
     prime = nextPrime (size * 2)
     graph = {'vertices':None, 
              'edges':0, 
-             'type':'ADJ_LIST' }
+             'type':'ADJ_LIST',
+             'comparefunction':cmpfunction}
 
     graph ['vertices'] = map.newMap(capacity=prime, maptype='PROBING',comparefunction=cmpfunction)
 
@@ -51,7 +52,7 @@ def insertVertex ( graph, vertex ):
 
 
 
-def removeVertex ( graph, vertex, comparefunction):
+def removeVertex ( graph, vertex):
     """
     Remueve el vertice vertex del grafo graph
     """ 
