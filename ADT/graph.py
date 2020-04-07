@@ -89,7 +89,7 @@ def getEdge (graph, vertexa, vertexb):
     return gr.getEdge (graph, vertexa, vertexb)
 
 
-def addEdge (graph, vertexa, vertexb, weight):
+def addEdge (graph, vertexa, vertexb, weight=0):
     """
     Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
     """ 

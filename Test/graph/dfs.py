@@ -23,15 +23,14 @@ def newDFS(graph, source):
     return search
 
 def dfs (search, v):
-        vertex = map.get(graph['vertices'],v)
-        adjs = g.adjacents(search['graph'],v)
-        adjs_iter = it.newIterator (adjs)
-        while (it.hasNext(adjs_iter)):
-            w = it.next (adjs_iter)
-            visited_w = map.get(search['visitedMap'], w)
-            if visited_w == None:
-                map.put(search['visitedMap'], w, {'marked':True, 'edgeTo':v})
-                dfs(search, w)
+    adjs = g.adjacents(search['graph'],v)
+    adjs_iter = it.newIterator (adjs)
+    while (it.hasNext(adjs_iter)):
+        w = it.next (adjs_iter)
+        visited_w = map.get(search['visitedMap'], w)
+        if visited_w == None:
+            map.put(search['visitedMap'], w, {'marked':True, 'edgeTo':v})
+            dfs(search, w)
 
 
 def hasPathTo(search, v):

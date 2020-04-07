@@ -137,3 +137,5 @@ dmypy.json
 #Python Cache
 #Data
 *.csv
+!Data/GoodReads/books.csv
+!Data/GoodReads/book_reviews.csv

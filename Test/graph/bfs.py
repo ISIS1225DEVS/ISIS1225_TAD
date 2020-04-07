@@ -26,7 +26,7 @@ def bfs (search, source):
     while not (q.isEmpty(queue)):
         v = q.dequeue (queue)
         visited_v = map.get(search['visitedMap'], v)['value']
-        adjs = g.adjacents (graph, v)
+        adjs = g.adjacents (search['graph'], v)
         adjs_iter = it.newIterator (adjs)
         while (it.hasNext(adjs_iter)):
             w = it.next(adjs_iter)

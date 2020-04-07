@@ -126,9 +126,14 @@ def getEdge (graph, vertexa, vertexb):
                 return edge
     return None
 
+def containsVertex (graph, vertex):
+    """
+    Verifica si el grafo contiene un vertice
+    """ 
+    return map.get (graph['vertices'], vertex)!= None
 
 
-def addEdge (graph, vertexa, vertexb, weight):
+def addEdge (graph, vertexa, vertexb, weight=0):
     """
     Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
     """ 

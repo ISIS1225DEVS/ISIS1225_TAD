@@ -20,7 +20,7 @@
 
 import config
 
-def newEdge (va, vb, weight):
+def newEdge (va, vb, weight=0):
     edge = {'vertexA':va, 'vertexB':vb,'weight':weight}
     return edge
 
