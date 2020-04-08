@@ -95,6 +95,11 @@ def addEdge (graph, vertexa, vertexb, weight=0):
     """ 
     return gr.addEdge (graph, vertexa, vertexb, weight)
 
+def containsVertex (graph, vertex):
+    """
+    Verifica si el grafo contiene un vertice
+    """ 
+    return gr.containsVertex (graph, vertex)
 
 
 def adjacents (graph, vertex ):

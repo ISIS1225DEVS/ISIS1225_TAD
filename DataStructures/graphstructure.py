@@ -108,6 +108,14 @@ def addEdge (graph, vertexa, vertexb, weight):
     if (graph['type'] == "ADJ_LIST"):
         return alt.addEdge (graph, vertexa, vertexb, weight)
 
+def containsVertex (graph, vertex):
+    """
+    Verifica si el grafo contiene un vertice
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.containsVertex (graph, vertex)
+
+
 
 
 def adjacents (graph, vertex ):

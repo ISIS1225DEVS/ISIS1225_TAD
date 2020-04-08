@@ -7,7 +7,7 @@ import bfs
 from DataStructures import edge as e
 from DataStructures import listiterator as it
 #from ADT import graph as g
-from DataStructures import adjlist as g
+from ADT import graph as g
 from ADT import queue as q
 from ADT import map as map
 
