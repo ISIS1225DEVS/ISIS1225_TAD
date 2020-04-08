@@ -1,5 +1,5 @@
 import unittest
-import config
+import config as cf
 import dfs
 import cc
 import bfs
@@ -36,10 +36,10 @@ class GraphTest (unittest.TestCase):
     def test_cc (self):    
     
         graph = g.newGraph(5500,self.comparenames)
-        cf.data_dir + 'GoodReads/book_reviews.csv'
+        file=cf.data_dir + 'GoodReads/book_reviews.csv'
         dialect = csv.excel()
         dialect.delimiter=";"
-        with open(flights, encoding="utf-8-sig") as csvfile:
+        with open(file, encoding="utf-8-sig") as csvfile:
             spamreader = csv.DictReader(csvfile, dialect=dialect)
             for row in spamreader:
                 if not g.containsVertex(graph, row['book_id']):

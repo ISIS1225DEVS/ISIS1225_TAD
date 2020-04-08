@@ -1,5 +1,5 @@
 import unittest
-import config
+import config as cf
 import dfs
 import cc
 import bfs
@@ -36,7 +36,7 @@ class GraphTest (unittest.TestCase):
     def test_cc_flights (self):    
     
         graph = g.newGraph(111353,self.comparenames)
-        nodes = '/Users/kmilo/Documents/PhD/Sem8/Docencia/flights_nodes.csv'    
+        nodes =  cf.data_dir + 'flights/flights_nodes.csv'    
         dialect = csv.excel()
         dialect.delimiter=";"
         with open(nodes, encoding="utf-8-sig") as csvfile:
@@ -44,7 +44,7 @@ class GraphTest (unittest.TestCase):
             for row in spamreader: 
                 g.insertVertex (graph, row['VERTEX'])
         
-        flights = '/Users/kmilo/Documents/PhD/Sem8/Docencia/flights_edges.csv'
+        flights =  cf.data_dir + 'flights/flights_edges.csv'
         with open(flights, encoding="utf-8-sig") as csvfile:
             spamreader = csv.DictReader(csvfile, dialect=dialect)
             for row in spamreader:
