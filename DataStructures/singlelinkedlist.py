@@ -33,19 +33,23 @@ def newList ():
     Crea una lista vacia
     """
     new_list = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED' }
-    return (new_list)
+    return new_list
 
 
 def addFirst(lst, element):
     """
     Agrega un elemento en la primera posición de la lista
     """
-    new_node = node.newSingleNode (element)
-    new_node ['next'] = lst['first']
-    lst['first'] = new_node
-    if (lst['size'] == 0):
-        lst ['last'] = lst['first']
-    lst['size'] += 1
+    try:
+        new_node = node.newSingleNode (element)
+        new_node ['next'] = lst['first']
+        lst['first'] = new_node
+        if (lst['size'] == 0):
+            lst ['last'] = lst['first']
+        lst['size'] += 1
+        return lst
+    except Exception as e:
+        return None
 
 
 
@@ -56,35 +60,51 @@ def addLast(lst, element):
     lst: La lista en la que se inserta el elemento
     element: El elemento a insertar
     """
-    new_node = node.newSingleNode (element)
+    try: 
+        new_node = node.newSingleNode (element)
 
-    if lst['size'] == 0:
-        lst['first'] = new_node
-    else:
-        lst['last']['next'] = new_node
-    lst['last']= new_node
-    lst['size'] += 1
+        if lst['size'] == 0:
+            lst['first'] = new_node
+        else:
+            lst['last']['next'] = new_node
+        lst['last']= new_node
+        lst['size'] += 1
+        return lst
+    except Exception as e:
+        return None
+
+
 
 
 def isEmpty (lst):
     """
     Indica si la lista está vacía
     """
-    return lst['size'] == 0
+    try:
+        return lst['size'] == 0
+    except:
+        return None
 
 
 def size(lst):
     """
     Informa el número de elementos de la lista
     """
-    return lst['size'] 
+    try:
+        return lst['size'] 
+    except:
+        return None
 
 
 def firstElement (lst):
     """
     Retorna el primer elemento de la lista, sin eliminarlo.
     """
-    return lst['first']['info']
+    try:
+        if 'info' in lst['first']: 
+            return lst['first']['info']
+    except:
+        return None
 
 
 
@@ -92,7 +112,11 @@ def lastElement (lst):
     """
     Retorna el último elemento de la lista, sin eliminarlo.
     """
-    return lst['last']['info']
+    try:
+        if 'info' in lst['last']:
+            return lst['last']['info']
+    except Exception as e:
+        return None
 
 
 
@@ -102,12 +126,15 @@ def getElement (lst, pos):
     pos debe ser mayor que cero y menor o igual al tamaño de la lista
     la lista no esta vacia
     """
-    searchpos = 1
-    node = lst['first']
-    while searchpos < pos:
-        searchpos+=1
-        node = node['next']
-    return node['info']  
+    try:
+        searchpos = 1
+        node = lst['first']
+        while searchpos < pos:
+            searchpos+=1
+            node = node['next']
+        return node['info']
+    except Exception as e:
+        return None  
 
 
 def deleteElement (lst, pos):
@@ -116,19 +143,22 @@ def deleteElement (lst, pos):
     pos debe ser mayor que cero y menor o igual al tamaño de la lista
     la lista no esta vacia
     """
-    node = lst['first']
-    prev = lst['first']
-    searchpos = 1
-    if (pos == 1):
-        lst['first'] = lst['first']['next']
+    try:
+        node = lst['first']
+        prev = lst['first']
+        searchpos = 1
+        if (pos == 1):
+            lst['first'] = lst['first']['next']
+        elif(pos > 1):
+            while searchpos < pos:
+                searchpos+=1
+                prev = node
+                node = node['next']
+            prev['next'] = node['next']
         lst['size'] -= 1
-    elif(pos > 1):
-        while searchpos < pos:
-            searchpos+=1
-            prev = node
-            node = node['next']
-        prev['next'] = node['next']
-        lst['size'] -= 1
+        return lst
+    except Exception as e:
+        return None
 
 
 
@@ -136,37 +166,48 @@ def removeFirst (lst):
     """
     Remueve el primer elemento de la lista y lo retorna en caso de existir, de lo contrario retorna None
     """
-    if lst['first'] != None:
-        temp = lst['first']['next']
-        node = lst['first'] 
-        lst['first'] = temp
-        lst['size'] -= 1
-        if (lst['size'] == 0):
-            lst['last'] = lst['first']
-        return node['info']
-    else:
+    try:
+        if lst['first'] != None:
+            temp = lst['first']['next']
+            node = lst['first'] 
+            lst['first'] = temp
+            lst['size'] -= 1
+            if (lst['size'] == 0):
+                lst['last'] = lst['first']
+            return node['info']
+        else:
+            return None
+    except Exception as e:
         return None
+
+
 
 def removeLast (lst):
     """
     Remueve el último elemento de la lista y lo retorna en caso de existir, de lo contrario retorna None
     """
-    if lst['size'] != 0:
-        if lst['first'] == lst['last']:
-            node = lst['first'] 
-            lst['last'] = None
-            lst['first'] = None
+    try:
+        if lst['size'] != 0:
+            if lst['first'] == lst['last']:
+                node = lst['first'] 
+                lst['last'] = None
+                lst['first'] = None
+            else:
+                temp = lst['first']    
+                while temp['next'] != lst['last']:
+                    temp = temp['next']
+                node = lst['last']
+                lst['last'] = temp
+                lst['last']['next'] = None
+            lst['size'] -= 1
+            return node['info']
         else:
-            temp = lst['first']    
-            while temp['next'] != lst['last']:
-                temp = temp['next']
-            node = lst['last']
-            lst['last'] = temp
-            lst['last']['next'] = None
-        lst['size'] -= 1
-        return node['info']
-    else:
+            return None
+    except Exception as e:
         return None
+
+
+
 
 def insertElement (lst, element, pos):
     """
@@ -176,22 +217,25 @@ def insertElement (lst, element, pos):
     element: El elemento a insertar
     pos: posición en la que se va a insertar el elemento,  0 < pos <= size(lst) 
     """
-    new_node = node.newSingleNode (element)
-
-    if (pos == 1):
-        new_node['next'] = lst['first']
-        lst['first'] = new_node
-    else:
-        cont = 1
-        prev = lst['first']
-        current  = lst['first']
-        while cont < pos:
-            prev = current
-            current = current['next']
-            cont += 1
-        new_node['next'] = current
-        prev['next'] = new_node
-    lst['size'] += 1
+    try:
+        new_node = node.newSingleNode (element)
+        if (pos == 1):
+            new_node['next'] = lst['first']
+            lst['first'] = new_node
+        else:
+            cont = 1
+            prev = lst['first']
+            current  = lst['first']
+            while cont < pos:
+                prev = current
+                current = current['next']
+                cont += 1
+            new_node['next'] = current
+            prev['next'] = new_node
+        lst['size'] += 1
+        return lst
+    except Exception as e:
+        return None
 
 
 def isPresent (lst, element, comparefunction):
@@ -199,53 +243,68 @@ def isPresent (lst, element, comparefunction):
     Informa si el elemento element esta presente en la lista. Si esta presente retorna 
     la posición en la que se encuentra o cero (0) si no esta presente
     """
-    size = lst ['size']
-    if size > 0:
-        node = lst['first']
-        keyexist = False
-        for keypos in range (1,size+1):
-            if (comparefunction (element, node['info'] )):
-                keyexist = True
-                break
-            node = node['next']
-        if keyexist:
-            return keypos
-    return 0        
+    try:
+        size = lst ['size']
+        if size > 0:
+            node = lst['first']
+            keyexist = False
+            for keypos in range (1,size+1):
+                if (comparefunction (element, node['info'] )):
+                    keyexist = True
+                    break
+                node = node['next']
+            if keyexist:
+                return keypos
+        return 0        
+    except Exception as e:
+        return None
 
 
 def changeInfo (lst, pos, newinfo):
     """
     Cambia la informacion contenida en el nodo de la lista en la posicion pos
     """
-    current  = lst['first']
-    cont = 1
-    while cont < pos:
-        current = current['next']
-        cont += 1
-    current['info'] = newinfo
+    try:
+        current  = lst['first']
+        cont = 1
+        while cont < pos:
+            current = current['next']
+            cont += 1
+        current['info'] = newinfo
+        return lst
+    except Exception as e:
+        return None
     
 
 def exchange (lst, pos1, pos2):
     """
     Intercambia la informacion en las posiciones pos1 y pos2 de la lista
     """
-    infopos1 = getElement (lst, pos1)
-    infopos2 = getElement (lst, pos2)
-    changeInfo (lst, pos1, infopos2)
-    changeInfo (lst, pos2, infopos1)
+    try:
+        infopos1 = getElement (lst, pos1)
+        infopos2 = getElement (lst, pos2)
+        changeInfo (lst, pos1, infopos2)
+        changeInfo (lst, pos2, infopos1)
+        return lst
+    except Exception as e:
+        return None
+
 
 
 def subList (lst, pos, numelem):
     """
     Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
     """
-    sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
-    cont = 1
-    loc = pos
-    while  cont <= numelem:
-        elem = getElement (lst, loc)
-        addLast (sublst, elem)
-        loc += 1
-        cont += 1
-    return sublst
+    try:
+        sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
+        cont = 1
+        loc = pos
+        while  cont <= numelem:
+            elem = getElement (lst, loc)
+            addLast (sublst, elem)
+            loc += 1
+            cont += 1
+        return sublst
+    except Exception as e:
+        return None
 
