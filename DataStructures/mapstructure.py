@@ -26,15 +26,15 @@ from DataStructures import probehashtable as pht
 
 
 
-def newMap( capacity=17, prime=109345121, maptype='CHAINING', comparefunction=None) :
+def newMap( numelements=17, prime=109345121, maptype='CHAINING', comparefunction=None) :
     """
-    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
+    Crea una tabla de hash con capacidad para almacenar numelements.  prime es un número primo utilizado para 
     el calculo de los codigos de hash. Si prime no es provisto, se utiliza 109345121.
     """
     if (maptype == 'CHAINING'):
-        return cht.newMap (capacity, prime, comparefunction)
+        return cht.newMap (numelements, prime, comparefunction)
     else:
-        return pht.newMap (capacity, prime, comparefunction)
+        return pht.newMap (numelements, prime, comparefunction)
 
     
 

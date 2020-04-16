@@ -7,10 +7,11 @@ from ADT import queue as q
 from ADT import list as lt
 
 
-class GraphTest (unittest.TestCase):
+class DigraphTest (unittest.TestCase):
 
     def setUp (self):
         pass
+
 
 
     def tearDown (self):
@@ -29,13 +30,17 @@ class GraphTest (unittest.TestCase):
 
     def test_edgeMethods (self):
         edge = e.newEdge ('Bogota','Cali')
+
+        edge = e.newEdge ('Bogota','Cali')
         self.assertEqual ('Bogota', e.either(edge))
         self.assertEqual ('Cali', e.other(edge, e.either(edge)))
         self.assertEqual  (e.weight(edge), 0)
 
 
+
     def test_insertVertex (self):
-        graph = g.newGraph(7,self.comparenames)
+
+        graph = g.newGraph(7,self.comparenames,directed=True)
 
         g.insertVertex (graph, 'Bogota')
         g.insertVertex (graph, 'Yopal')
@@ -45,10 +50,11 @@ class GraphTest (unittest.TestCase):
         g.insertVertex (graph, 'Barranquilla')
         g.insertVertex (graph, 'Manizales')
         self.assertEqual (g.numVertex(graph),7)
+
 
 
     def test_addEdges (self):
-        graph = g.newGraph(7,self.comparenames)
+        graph = g.newGraph(7, self.comparenames, directed=True)
 
         g.insertVertex (graph, 'Bogota')
         g.insertVertex (graph, 'Yopal')
@@ -57,7 +63,6 @@ class GraphTest (unittest.TestCase):
         g.insertVertex (graph, 'Pasto')
         g.insertVertex (graph, 'Barranquilla')
         g.insertVertex (graph, 'Manizales')
-        self.assertEqual (g.numVertex(graph),7)
 
         g.addEdge (graph, 'Bogota', 'Yopal')
         g.addEdge (graph, 'Bogota', 'Medellin')
@@ -69,8 +74,9 @@ class GraphTest (unittest.TestCase):
         g.addEdge (graph, 'Cali', 'Barranquilla')
         g.addEdge (graph, 'Barranquilla','Manizales')
         g.addEdge (graph, 'Pasto','Manizales')
+
         self.assertEqual (g.numEdges(graph), 10)
-        
+        self.assertEqual (g.numVertex(graph), 7)
 
         lst = g.vertices (graph)
         self.assertEqual (lt.size (lst), 7)
@@ -85,22 +91,25 @@ class GraphTest (unittest.TestCase):
 
         lst = g.adjacents (graph, 'Bogota')
         self.assertEqual (lt.size (lst), 4)
-
-        num = g.degree (graph, 'Bogota')
-        self.assertEqual (num, 4)
     
-        resp = g.containsVertex (graph,'Bogota')
-        self.assertTrue(resp)
-        resp = g.containsVertex (graph,'Pereira' )
-        self.assertFalse(resp)
+
+    def test_insertVertex (self):
+
+        graph = g.newGraph(7,self.comparenames,directed=True)
+
+        g.insertVertex (graph, 'Bogota')
+        g.insertVertex (graph, 'Yopal')
+        g.insertVertex (graph, 'Cali')
+        g.insertVertex (graph, 'Medellin')
+        g.insertVertex (graph, 'Pasto')
+        g.insertVertex (graph, 'Barranquilla')
+        g.insertVertex (graph, 'Manizales')
+        self.assertEqual (g.numVertex(graph),7)
 
 
 
-
-
-    def test_DSF (self):
-
-        graph = g.newGraph(7,self.comparenames)
+    def test_degrees (self):
+        graph = g.newGraph(7, self.comparenames, directed=True)
 
         g.insertVertex (graph, 'Bogota')
         g.insertVertex (graph, 'Yopal')
@@ -114,35 +123,36 @@ class GraphTest (unittest.TestCase):
         g.addEdge (graph, 'Bogota', 'Medellin')
         g.addEdge (graph, 'Bogota', 'Pasto')
         g.addEdge (graph, 'Bogota', 'Cali')
+        g.addEdge (graph, 'Cali', 'Bogota')
         g.addEdge (graph, 'Yopal', 'Medellin')
         g.addEdge (graph, 'Medellin', 'Pasto')
+        g.addEdge (graph, 'Pasto', 'Bogota')
         g.addEdge (graph, 'Cali', 'Pasto')
         g.addEdge (graph, 'Cali', 'Barranquilla')
         g.addEdge (graph, 'Barranquilla','Manizales')
         g.addEdge (graph, 'Pasto','Manizales')
-        
-        marked = lt.newList ()
-        self.dfs (graph, 'Bogota', marked)
+
+        self.assertEqual (g.numEdges(graph), 12)
+        self.assertEqual (g.numVertex(graph), 7)
+
+        degree = g.indegree (graph, 'Bogota')
+        self.assertEqual (degree, 2)
+
+        degree = g.indegree (graph, 'Barranquilla')
+        self.assertEqual (degree, 1)
+
+        degree = g.outdegree (graph, 'Barranquilla')
+        self.assertEqual (degree, 1)
+
+        degree = g.outdegree (graph, 'Bogota')
+        self.assertEqual (degree, 4)
+
+        degree = g.outdegree (graph, 'Manizales')
+        self.assertEqual (degree, 0)
 
 
-    def dfs (self, graph, vertex, marked):
-        
-        lt.addLast (marked, vertex)
-
-        lst = g.adjacents (graph, vertex)
-        iter = it.newIterator (lst)
-        while (it.hasNext(iter)):
-            adjacent = it.next (iter)
-            if not (lt.isPresent (marked, adjacent, self.comparelst)):
-                #Aca se visita el vertice y se realiza alguna operación de interes
-                self.dfs (graph, adjacent,marked)
-
-
-
-
-    def test_BSF (self):
-
-        graph = g.newGraph(7,self.comparenames)
+    def test_adjacents (self):
+        graph = g.newGraph(7, self.comparenames, directed=True)
 
         g.insertVertex (graph, 'Bogota')
         g.insertVertex (graph, 'Yopal')
@@ -152,38 +162,33 @@ class GraphTest (unittest.TestCase):
         g.insertVertex (graph, 'Barranquilla')
         g.insertVertex (graph, 'Manizales')
 
-        g.addEdge (graph, 'Bogota', 'Yopal' )
-        g.addEdge (graph, 'Bogota', 'Medellin' )
-        g.addEdge (graph, 'Bogota', 'Pasto' )
+        g.addEdge (graph, 'Bogota', 'Yopal')
+        g.addEdge (graph, 'Bogota', 'Medellin')
+        g.addEdge (graph, 'Bogota', 'Pasto')
         g.addEdge (graph, 'Bogota', 'Cali')
-        g.addEdge (graph, 'Yopal', 'Medellin' )
-        g.addEdge (graph, 'Medellin', 'Pasto' )
+        g.addEdge (graph, 'Cali', 'Bogota')
+        g.addEdge (graph, 'Yopal', 'Medellin')
+        g.addEdge (graph, 'Medellin', 'Pasto')
+        g.addEdge (graph, 'Pasto', 'Bogota')
         g.addEdge (graph, 'Cali', 'Pasto')
         g.addEdge (graph, 'Cali', 'Barranquilla')
         g.addEdge (graph, 'Barranquilla','Manizales')
         g.addEdge (graph, 'Pasto','Manizales')
-        
-        lst = self.bfs (graph, 'Bogota')
 
+        self.assertEqual (g.numEdges(graph), 12)
+        self.assertEqual (g.numVertex(graph), 7)
 
-    def bfs (self, graph, vertex):
-        marked = lt.newList ()
-        queue =  q.newQueue()
+        lst = g.adjacents (graph, 'Bogota')
+        self.assertEqual (lt.size(lst), 4)
 
-        lt.addLast (marked, vertex)
-        q.enqueue (queue, vertex)
-     
-        while not (q.isEmpty(queue)):
-            v = q.dequeue (queue)
-            lstadj = g.adjacents (graph, v)
-            iter = it.newIterator (lstadj)
-            while (it.hasNext(iter)):
-                adj = it.next(iter)
-                if not (lt.isPresent (marked, adj, self.comparelst)):
-                    lt.addLast (marked, adj)
-                    #Aca se visita el vertice y se realiza alguna operación de interes
-                    q.enqueue (queue, adj)
-        return marked
+        self.assertTrue (lt.isPresent (lst, 'Cali', self.comparelst))
+        self.assertTrue (lt.isPresent (lst, 'Yopal', self.comparelst))
+        self.assertTrue (lt.isPresent (lst, 'Pasto', self.comparelst))
+        self.assertTrue (lt.isPresent (lst, 'Medellin', self.comparelst))
+        self.assertFalse (lt.isPresent (lst, 'Barranquilla', self.comparelst))
+
+        lst = g.adjacents (graph, 'Manizales')
+        self.assertEqual (lt.size(lst), 0)
 
 
 if __name__ == "__main__":

@@ -27,14 +27,15 @@ from DataStructures import adjlist as alt
 """
 
 
-def newGraph(size, comparefunction, datastructure = "ADJ_LIST", ):
+def newGraph(size, comparefunction, directed, datastructure):
     """
     Crea un grafo vacio.
     """
     if (datastructure == "ADJ_LIST"):
-        graph = alt.newGraph(size, comparefunction)
-
-    return graph
+        graph = alt.newGraph(size, comparefunction, directed)
+        return graph
+    else:
+        return None
 
 
 def insertVertex ( graph, vertex ):
@@ -91,6 +92,28 @@ def degree (graph, vertex):
     """ 
     if (graph['type'] == "ADJ_LIST"):
         return alt.degree (graph, vertex)
+
+
+
+
+def outdegree (graph, vertex):
+    """
+    Retorna el numero de arcos que salen del grafo vertex
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.outdegree (graph, vertex)
+
+
+
+
+def indegree (graph, vertex):
+    """
+    Retorna el numero de arcos que llegan al vertice vertex
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.indegree (graph, vertex)
+
+
 
 
 def getEdge (graph, vertexa, vertexb):

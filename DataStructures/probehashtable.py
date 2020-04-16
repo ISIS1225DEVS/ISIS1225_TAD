@@ -33,15 +33,17 @@ Este código está basado en las implementaciones propuestas en:
 """
 
 import random as rd
+import math
 from DataStructures import mapentry as me
 from DataStructures import liststructure as lt
 
 
-def newMap( capacity, prime, comparefunction):
+def newMap( numelements, prime, comparefunction):
     """
-    Crea una tabla de hash con capacidad igual a capacity (idealment un numero primo).  prime es un número primo utilizado para 
-    el cálculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. 
+    Crea una tabla de hash con capacidad igual a capacity (primo mas cercano al doble de numelements).  
+    prime es un número primo utilizado para  el cálculo de los codigos de hash, si no es provisto se utiliza el primo 109345121. 
     """
+    capacity = nextPrime (numelements * 2)
     scale = rd.randint(1, prime-1) + 1
     shift = rd.randint(1, prime) 
     table = lt.newList('ARRAY_LIST')
@@ -221,3 +223,49 @@ def isAvailable (table, pos):
     if (entry['key'] == None or  entry['key']== '__EMPTY__'):
         return True
     return False
+
+# Function that returns True if n  
+# is prime else returns False 
+# This code is contributed by Sanjit_Prasad  
+def isPrime(n): 
+      
+    # Corner cases  
+    if(n <= 1): 
+        return False
+    if(n <= 3): 
+        return True
+      
+    # This is checked so that we can skip  
+    # middle five numbers in below loop  
+    if(n % 2 == 0 or n % 3 == 0): 
+        return False
+      
+    for i in range(5,int(math.sqrt(n) + 1), 6):  
+        if(n % i == 0 or n % (i + 2) == 0): 
+            return False
+      
+    return True
+
+
+
+# Function to return the smallest  
+# prime number greater than N 
+# # This code is contributed by Sanjit_Prasad  
+def nextPrime(N): 
+  
+    # Base case  
+    if (N <= 1): 
+        return 2
+  
+    prime = N 
+    found = False
+  
+    # Loop continuously until isPrime returns  
+    # True for a number greater than n  
+    while(not found): 
+        prime = prime + 1
+  
+        if(isPrime(prime) == True): 
+            found = True
+  
+    return prime 

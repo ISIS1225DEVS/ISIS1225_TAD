@@ -25,13 +25,13 @@ from DataStructures import mapstructure as ht
 
 
 
-def newMap( capacity=17, prime=109345121, maptype='CHAINING', comparefunction=None) :
+def newMap( numelements=17, prime=109345121, maptype='CHAINING', comparefunction=None) :
     """
-    Crea una tabla de simbolos (map) con capacidad 'capacity'
+    Crea una tabla de simbolos (map) para almacenar numelements
     Prime es utilizado para la función de hash 
     maptype indica si se utiliza separate chaining ('CHAINING' ) o linear probing('PROBING') como mecanismo de solución de colisiones.
     """
-    return ht.newMap (capacity, prime, maptype, comparefunction)
+    return ht.newMap (numelements, prime, maptype, comparefunction)
 
     
 

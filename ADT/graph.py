@@ -26,11 +26,11 @@ Este archivo contiene la implementacióndel TAD grafo no dirigido
 """  
 
 
-def newGraph( size, comparefunction ):
+def newGraph( size, comparefunction, directed = False, datastructure = "ADJ_LIST" ):
     """
      Crea un grafo vacio.
     """   
-    return gr.newGraph( size, comparefunction )
+    return gr.newGraph( size, comparefunction,  directed, datastructure )
 
 
 def insertVertex ( graph, vertex ):
@@ -80,6 +80,22 @@ def degree (graph, vertex):
     Retorna el numero de arcos asociados al vertice vertex
     """ 
     return gr.degree (graph, vertex)
+
+
+def outdegree (graph, vertex):
+    """
+    Retorna el numero de arcos que salen del grafo vertex
+    """ 
+    return gr.outdegree (graph, vertex)
+
+
+
+def indegree (graph, vertex):
+    """
+    Retorna el numero de arcos que llegan al vertice vertex
+    """ 
+    return gr.indegree (graph, vertex)
+
 
 
 def getEdge (graph, vertexa, vertexb):

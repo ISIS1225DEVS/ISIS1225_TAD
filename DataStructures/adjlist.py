@@ -26,29 +26,44 @@ from DataStructures import listiterator as it
 from DataStructures import edge as e
 
 
-def newGraph( size, cmpfunction ):
+def newGraph( size, cmpfunction, directed ):
     """
     Crea un grafo vacio. Los vertices son guardados en un map de tipo linear probing
     """
-    prime = nextPrime (size * 2)
-    graph = {'vertices':None, 
-             'edges':0, 
-             'type':'ADJ_LIST',
-             'comparefunction':cmpfunction}
+    try:
+        graph = {'vertices':None,  
+                'edges':0,  
+                'type':'ADJ_LIST', 
+                'comparefunction':cmpfunction, 
+                'directed':directed,
+                'indegree':None}
 
-    graph ['vertices'] = map.newMap(capacity=prime, maptype='PROBING',comparefunction=cmpfunction)
+        graph ['vertices'] = map.newMap(numelements=size, maptype='PROBING',comparefunction=cmpfunction)
 
-    return graph
+        if (directed):
+            graph ['indegree'] = map.newMap(numelements=size, maptype='PROBING',comparefunction=cmpfunction)
+
+        return graph
+
+    except Exception as e:
+        return None
 
 
 
 def insertVertex ( graph, vertex ):
     """
     Inserta el vertice vertex en el grafo graph
+    :param graph: El grafo sobre el que se ejecuta la operacion
+    :param vertex: El vertice que se desea insertar
     """ 
-    edges = lt.newList()
-    map.put (graph['vertices'], vertex, edges)
-    return graph
+    try:
+        edges = lt.newList()
+        map.put (graph['vertices'], vertex, edges)
+        if (graph['directed']):
+            map.put (graph['indegree'], vertex, 0)
+        return graph
+    except:
+        return None
 
 
 
@@ -60,11 +75,13 @@ def removeVertex ( graph, vertex):
     pass
 
 
+
 def numVertex (graph):
     """
     Retorna el numero de vertices en el  grafo graph
     """ 
     return map.size(graph['vertices'])
+
 
 
 def numEdges (graph):
@@ -74,12 +91,16 @@ def numEdges (graph):
     return (graph['edges'])
 
 
+
 def vertices (graph):
     """
     Retorna una lista con todos los vertices del grafo graph
     """ 
-    lstmap = map.keySet(graph['vertices'])
-    return lstmap
+    try:
+        lstmap = map.keySet(graph['vertices'])
+        return lstmap
+    except:
+        return None
 
 
 
@@ -87,18 +108,24 @@ def edges (graph):
     """
     Retorna una lista con todos los arcos del grafo graph
     """ 
-    lstmap = map.valueSet(graph['vertices'])
-    lstresp = lt.newList ()
-    itervertex = it.newIterator (lstmap)
-    while it.hasNext (itervertex):
-        lstedge = it.next (itervertex)
-        iteredge = it.newIterator (lstedge)
-        while (it.hasNext (iteredge)):
-            edge = it.next (iteredge)
-            if not (lt.isPresent (lstresp,edge, e.compareedges)):
-                lt.addLast (lstresp,edge)
-    return lstresp
+    try:
+        lstmap = map.valueSet(graph['vertices'])
+        itervertex = it.newIterator (lstmap)
+        lstresp = lt.newList ()
 
+        while it.hasNext (itervertex):
+            lstedge = it.next (itervertex)
+            iteredge = it.newIterator (lstedge)
+
+            while (it.hasNext (iteredge)):
+                edge = it.next (iteredge)
+                if (graph['directed']):
+                    lt.addLast (lstresp,edge)
+                elif (not lt.isPresent (lstresp,edge, e.compareedges)):
+                    lt.addLast (lstresp,edge)
+        return lstresp
+    except:
+        return None
     
 
 
@@ -106,9 +133,43 @@ def degree (graph, vertex):
     """
     Retorna el numero de arcos asociados al vertice vertex
     """ 
-    element = map.get (graph['vertices'], vertex)
-    lst = element['value']
-    return (lt.size(lst))
+    try:
+        element = map.get (graph['vertices'], vertex)
+        lst = element['value']
+        return (lt.size(lst))
+    except:
+        return None
+
+
+
+def indegree (graph, vertex):
+    """
+    Retorna el numero de arcos que llegan al vertice vertex
+    """ 
+    try:
+        if (graph['directed']):
+            degree = map.get (graph['indegree'], vertex)
+            return degree ['value']
+        return 0
+    except:
+        return None
+
+
+
+
+def outdegree (graph, vertex):
+    """
+    Retorna el numero de arcos que salen del grafo vertex
+    """ 
+    try:
+        if (graph['directed']):
+            element = map.get (graph['vertices'], vertex)
+            lst = element['value']
+            return (lt.size(lst))
+        return 0
+    except:
+        return None
+
 
 
 
@@ -116,39 +177,59 @@ def getEdge (graph, vertexa, vertexb):
     """
     Retorna el arco asociado a los vertices vertexa ---- vertexb
     """ 
-    element = map.get (graph['vertices'], vertexa)
-    lst = element['value']
-    itvertex = it.newIterator (lst)
-    while (it.hasNext(itvertex)):
-        edge = it.next (itvertex)
-        if ( e.either(edge) == vertexa or (e.other(edge,e.either(edge) )== vertexa ) ):
-            if ( e.either(edge) == vertexb or (e.other(edge,e.either(edge) )== vertexb ) ):
-                return edge
-    return None
+    try:
+        element = map.get (graph['vertices'], vertexa)
+        lst = element['value']
+        itvertex = it.newIterator (lst)
+        while (it.hasNext(itvertex)):
+            edge = it.next (itvertex)
+            if ( e.either(edge) == vertexa or (e.other(edge,e.either(edge) )== vertexa ) ):
+                if ( e.either(edge) == vertexb or (e.other(edge,e.either(edge) )== vertexb ) ):
+                    return edge
+        return None
+    except:
+        return None
+
+
 
 def containsVertex (graph, vertex):
     """
     Verifica si el grafo contiene un vertice
     """ 
-    return map.get (graph['vertices'], vertex)!= None
+    try:
+        return map.get (graph['vertices'], vertex)!= None
+    except:
+        return None
+
 
 
 def addEdge (graph, vertexa, vertexb, weight=0):
     """
-    Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight
+    Agrega un arco entre los vertices vertexa ---- vertexb, con peso weight.
+    Si el grafo es no dirigido se adiciona dos veces el mismo arco, en el mismo orden
+    Si el grafo es dirigido se adiciona solo el arco vertexa --> vertexb
     """ 
-    # Se crea el arco
-    edge =  e.newEdge (vertexa,vertexb, weight)
+    try:
+        # Se crea el arco
+        edge =  e.newEdge (vertexa,vertexb, weight)
 
-    #Se obtienen las listas de adyacencias de cada vertice
-    entrya = map.get (graph['vertices'], vertexa)
-    entryb = map.get (graph['vertices'], vertexb)
-    
-    #Se anexa a cada lista el arco correspondiente
-    lt.addLast (entrya['value'], edge)
-    lt.addLast (entryb['value'], edge)
+        #Se obtienen las listas de adyacencias de cada vertice
+        #Se anexa a cada lista el arco correspondiente
+        entrya = map.get (graph['vertices'], vertexa)
+        lt.addLast (entrya['value'], edge)
 
-    graph['edges'] += 1
+        if (not graph['directed']):
+            entryb = map.get (graph['vertices'], vertexb)
+            lt.addLast (entryb['value'], edge)
+        else:
+            degree = map.get (graph['indegree'], vertexb)
+            map.put (graph['indegree'], vertexb, degree['value']+1)
+
+        graph['edges'] += 1
+
+        return graph
+    except:
+        return None
 
 
 
@@ -156,69 +237,19 @@ def adjacents (graph, vertex ):
     """
     Retorna una lista con todos los vertices adyacentes al vertice vertex
     """ 
-    element = map.get (graph['vertices'], vertex)
-    lst = element['value']
-    lstresp = lt.newList()
-    iter=it.newIterator (lst)
-    while (it.hasNext(iter)):
-        edge = it.next (iter)
-        v = e.either(edge)
-        if (v == vertex):
-            lt.addLast (lstresp, e.other(edge, v))
-        else:
-            lt.addLast (lstresp, v)
-    return lstresp
+    try:
+        element = map.get (graph['vertices'], vertex)
+        lst = element['value']
+        lstresp = lt.newList()
+        iter=it.newIterator (lst)
+        while (it.hasNext(iter)):
+            edge = it.next (iter)
+            v = e.either(edge)
+            if (v == vertex):
+                lt.addLast (lstresp, e.other(edge, v))
+            else:
+                lt.addLast (lstresp, v)
+        return lstresp
+    except:
+        return None
 
-
-
-
-# ====================
-#  Funciones Helper
-# ====================
-
-
-# Function that returns True if n  
-# is prime else returns False 
-# This code is contributed by Sanjit_Prasad  
-def isPrime(n): 
-      
-    # Corner cases  
-    if(n <= 1): 
-        return False
-    if(n <= 3): 
-        return True
-      
-    # This is checked so that we can skip  
-    # middle five numbers in below loop  
-    if(n % 2 == 0 or n % 3 == 0): 
-        return False
-      
-    for i in range(5,int(math.sqrt(n) + 1), 6):  
-        if(n % i == 0 or n % (i + 2) == 0): 
-            return False
-      
-    return True
-  
-# Function to return the smallest  
-# prime number greater than N 
-# # This code is contributed by Sanjit_Prasad  
-def nextPrime(N): 
-  
-    # Base case  
-    if (N <= 1): 
-        return 2
-  
-    prime = N 
-    found = False
-  
-    # Loop continuously until isPrime returns  
-    # True for a number greater than n  
-    while(not found): 
-        prime = prime + 1
-  
-        if(isPrime(prime) == True): 
-            found = True
-  
-    return prime 
-
-    
