@@ -149,3 +149,11 @@ def adjacents (graph, vertex ):
         return alt.adjacents(graph, vertex)
 
 
+def adjacentEdges (graph, vertex ):
+    """
+    Retorna una lista con todos los arcos asociados a los vértices adyacentes de vertex
+    """ 
+    if (graph['type'] == "ADJ_LIST"):
+        return alt.adjacentEdges(graph, vertex)
+
+

@@ -24,12 +24,12 @@ from DataStructures import heap as h
 
 
 
-def newMinPQ ():
+def newMinPQ (size, cmpfunction):
     """
     Crea un cola de prioridad orientada a menor
     """
     pq = {'heap': None}
-    pq['heap'] = h.newHeap()
+    pq['heap'] = h.newHeap(size,cmpfunction)
     return pq
 
 
@@ -57,11 +57,11 @@ def min (minpq):
 
 
 
-def insert  (minpq, element):
+def insert  (minpq, key, index):
     """
     Guarda el elemento 'element' en el heap. Lo guarda en la última posición y luego hace swim del elemento
     """
-    return h.insert (minpq['heap'], element)
+    return h.insert (minpq['heap'], key, index)
 
 
 

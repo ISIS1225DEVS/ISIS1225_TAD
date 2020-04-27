@@ -253,3 +253,15 @@ def adjacents (graph, vertex ):
     except:
         return None
 
+
+
+def adjacentEdges (graph, vertex ):
+    """
+    Retorna una lista con todos los arcos asociados a los vértices adyacentes de vertex
+    """ 
+    try:
+        element = map.get (graph['vertices'], vertex)
+        lst = element['value']
+        return lst
+    except:
+        return None

@@ -20,66 +20,52 @@
 
 import config
 from DataStructures import heap as h
+from ADT import map as m
 
 
 
-def newIndexMinPQ (numelemens):
-    pq = h.newHeap (numelemens)
-    qp = h.newHeap (numelemens)
+def newIndexMinPQ ( size, cmpfunction):
+    iminpq = {'pq':None}
+    iminpq['pq'] = h.newHeap (size, cmpfunction)
+    return iminpq
 
 
 
 def isEmpty (iminpq):
-    pass
-
-
-
-def contains (iminpq, element):
-    pass
-
+    return (h.isEmpty(iminpq['pq']))
 
 
 
 def size (iminpq):
-    pass
+    return (h.size(iminpq['pq']))
 
 
-
-def insert (iminpq, element):
-    pass
-
-
-
-def minIndex (iminpq):
-    pass
-
-
-
-def minKey (iminpq):
-    pass
-
+def insert (iminpq, key, index):
+    h.insert (iminpq ['pq'], key, index) 
 
 
 def delMin (iminpq):
-    pass
+    return (h.delMin(iminpq['pq']))
 
+
+def changeKeyIndex (iminpq, key, index):
+    return h.changeIndex (iminpq['pq'], key, index)
+
+
+def min (iminpq):
+    return h.min (iminpq['pq'])
+
+
+def contains (iminpq, element):
+    return h.contains (iminpq['pq'], element)
 
 
 def keyOf (iminpq, index):
     pass
 
 
-def changeKey (iminpq, index, key):
-    pass
-
-
 
 def increaseKey (iminpq, index, key):
-    pass
-
-
-
-def delete (iminpq):
     pass
 
 

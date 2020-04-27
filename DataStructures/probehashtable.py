@@ -70,8 +70,9 @@ def put (map, key , value):
     hash = hashValue (map, key)                               # Se obtiene el hascode de la llave 
     entry = me.newMapEntry (key,value)                  
     pos = findSlot (map, key, hash, map['comparefunction'])    # Se encuentra la posición correspondiente a hash
-    lt.changeInfo (map['table'], abs(pos), entry)              # Se reemplaza el valor anterior (puede ser None) con el nuevo valor
-    map['size'] += 1
+    lt.changeInfo (map['table'], abs(pos), entry)    
+    if (pos < 0):                                              # Se reemplaza el valor anterior (puede ser None) con el nuevo valor
+        map['size'] += 1
 
 
 

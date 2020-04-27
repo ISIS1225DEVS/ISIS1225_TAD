@@ -123,3 +123,9 @@ def adjacents (graph, vertex ):
     Retorna una lista con todos los vertices adyacentes al vertice vertex
     """ 
     return gr.adjacents(graph, vertex)
+
+def adjacentEdges (graph, vertex ):
+    """
+    Retorna una lista con todos los arcos asociados a los vértices adyacentes de vertex
+    """ 
+    return gr.adjacentEdges(graph, vertex)

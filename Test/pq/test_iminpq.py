@@ -1,17 +1,10 @@
 import unittest
 import config
-import math 
-from DataStructures import edge as e
-from DataStructures import listiterator as it
-from ADT import graph as g
-from ADT import queue as q
-from ADT import stack as s 
-from ADT import map as m 
-from ADT import list as lt
-from ADT import indexminpq as iminpq
+import math
+from ADT import indexminpq as ipq
 
 
-class DijkstraTest (unittest.TestCase):
+class IminPQTest (unittest.TestCase):
 
     def setUp (self):
         pass
@@ -19,84 +12,183 @@ class DijkstraTest (unittest.TestCase):
     def tearDown (self):
         pass
 
-    def comparenames (self, searchname, element):
-        return (searchname == element['key'])
+    def comparekeys (self, key, element):
+        if ( key == element['key']):
+            return True
+        return False
 
-    def comparelst (self, searchname, element):
-        return (searchname == element)
+    def test_newiminpq (self):
+
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
+
+        self.assertTrue (ipq.isEmpty(iminpq))
+
+        ipq.insert (iminpq, 'A', 78)  
+        ipq.insert (iminpq, 'B', 16)
+        ipq.insert (iminpq, 'C', 9)
+        ipq.insert (iminpq, 'D', 33)
+        ipq.insert (iminpq, 'E', 21)
+        ipq.insert (iminpq, 'F', 82)
+        ipq.insert (iminpq, 'G', 4)
+        ipq.insert (iminpq, 'H', 93)
+        ipq.insert (iminpq, 'I', 51)
+        ipq.insert (iminpq, 'J', 87)
+        ipq.insert (iminpq, 'K', 12)
+        ipq.insert (iminpq, 'L', 14) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
 
 
-    def test_dijkstra (self):
+    def test_increaseLeaf (self):
 
-        graph = g.newGraph ( 7, self.comparenames, directed=True )
-        distTo = m.newMap (7, maptype= 'PROBING', comparefunction=self.comparenames)
-        edgeTo = m.newMap (7, maptype= 'PROBING', comparefunction=self.comparenames)
-        pq = iminpq.newIndexMinPQ (7)
-        
-        
-        # se inicializa el grafo
-        self.loadgraph  (graph)     
-        self.assertEqual (g.numVertex(graph), 7)
-        self.assertEqual (g.numEdges(graph), 12)               
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
 
-        
+        self.assertTrue (ipq.isEmpty(iminpq))
 
+        ipq.insert (iminpq, 'A', 78)  
+        ipq.insert (iminpq, 'B', 16)
+        ipq.insert (iminpq, 'C', 9)
+        ipq.insert (iminpq, 'D', 33)
+        ipq.insert (iminpq, 'E', 21)
+        ipq.insert (iminpq, 'F', 82)
+        ipq.insert (iminpq, 'G', 4)
+        ipq.insert (iminpq, 'H', 93)
+        ipq.insert (iminpq, 'I', 51)
+        ipq.insert (iminpq, 'J', 87)
+        ipq.insert (iminpq, 'K', 12)
+        ipq.insert (iminpq, 'L', 14) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
+
+        ipq.changeKeyIndex (iminpq, 'A', 2)
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 2)
+        self.assertEqual (min['key'], 'A')
+
+
+    def test_increaseNode (self):
+
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
+
+        self.assertTrue (ipq.isEmpty(iminpq))
+
+        ipq.insert (iminpq, 'A', 78)  
+        ipq.insert (iminpq, 'B', 16)
+        ipq.insert (iminpq, 'C', 9)
+        ipq.insert (iminpq, 'D', 33)
+        ipq.insert (iminpq, 'E', 21)
+        ipq.insert (iminpq, 'F', 82)
+        ipq.insert (iminpq, 'G', 4)
+        ipq.insert (iminpq, 'H', 93)
+        ipq.insert (iminpq, 'I', 51)
+        ipq.insert (iminpq, 'J', 87)
+        ipq.insert (iminpq, 'K', 12)
+        ipq.insert (iminpq, 'L', 14) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
+
+        ipq.changeKeyIndex (iminpq, 'I', 3)
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 3)
+        self.assertEqual (min['key'], 'I')
     
-    def loadgraph (self, graph):
-        """
-        Crea el grafo con la informacion de prueba
-        """
-        g.insertVertex (graph, 'Bogota')
-        g.insertVertex (graph, 'Duitama')
-        g.insertVertex (graph, 'Armenia')
-        g.insertVertex (graph, 'Honda')
-        g.insertVertex (graph, 'Espinal')
-        g.insertVertex (graph, 'Florencia')
-        g.insertVertex (graph, 'Cali')
 
-        g.addEdge (graph, 'Bogota', 'Duitama', 3.5)
-        g.addEdge (graph, 'Bogota', 'Honda', 3)
-        g.addEdge (graph, 'Bogota', 'Espinal', 4.5)
-        g.addEdge (graph, 'Duitama', 'Armenia', 1)
-        g.addEdge (graph, 'Honda', 'Duitama', 1)
-        g.addEdge (graph, 'Honda', 'Espinal', 1)
-        g.addEdge (graph, 'Honda', 'Armenia', 2.5)
-        g.addEdge (graph, 'Honda', 'Florencia', 5.5)
-        g.addEdge (graph, 'Espinal', 'Florencia', 2.4)
-        g.addEdge (graph, 'Honda', 'Cali', 6)
-        g.addEdge (graph, 'Florencia', 'Cali', 1)
-        g.addEdge (graph, 'Armenia', 'Cali', 4)
+
+    def test_decreaseNode (self):
+
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
+
+        self.assertTrue (ipq.isEmpty(iminpq))
+
+        ipq.insert (iminpq, 'A', 78)  
+        ipq.insert (iminpq, 'B', 16)
+        ipq.insert (iminpq, 'C', 9)
+        ipq.insert (iminpq, 'D', 33)
+        ipq.insert (iminpq, 'E', 21)
+        ipq.insert (iminpq, 'F', 82)
+        ipq.insert (iminpq, 'G', 4)
+        ipq.insert (iminpq, 'H', 93)
+        ipq.insert (iminpq, 'I', 51)
+        ipq.insert (iminpq, 'J', 87)
+        ipq.insert (iminpq, 'K', 12)
+        ipq.insert (iminpq, 'L', 14) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
+
+        ipq.changeKeyIndex (iminpq, 'K', 105)
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
+        self.assertEqual (min['key'], 'G')
         
 
+    def test_decreaseRoot (self):
 
-    def dfo (self, graph, marked, pre, post, reversepost):
-        """
-         Implementación del recorrido Depth First Order
-        """
-        lstvert = g.vertices (graph)
-        vertiterator = it.newIterator (lstvert)
-        while it.hasNext (vertiterator):
-            vert = it.next (vertiterator)
-            if not (m.contains (marked,vert)):
-                self.dfs (graph, vert, marked, pre, post, reversepost)
-        
-        
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
 
-    def dfs (self, graph, vert, marked, pre, post, reversepost):
-        """
-          Implementación del recorrido Depth First Search
-        """
-        q.enqueue (pre, vert)
-        m.put (marked, vert, True)
-        lstadjacents = g.adjacents(graph, vert)
-        adjiterator = it.newIterator (lstadjacents)
-        while it.hasNext(adjiterator):
-            adjvert = it.next (adjiterator)
-            if not m.contains (marked, adjvert):
-                self.dfs (graph, adjvert, marked, pre, post, reversepost)
-        q.enqueue (post, vert)
-        s.push (reversepost, vert)
-       
+        self.assertTrue (ipq.isEmpty(iminpq))
+
+        ipq.insert (iminpq, 'A', 78)  
+        ipq.insert (iminpq, 'B', 16)
+        ipq.insert (iminpq, 'C', 9)
+        ipq.insert (iminpq, 'D', 33)
+        ipq.insert (iminpq, 'E', 21)
+        ipq.insert (iminpq, 'F', 82)
+        ipq.insert (iminpq, 'G', 4)
+        ipq.insert (iminpq, 'H', 93)
+        ipq.insert (iminpq, 'I', 51)
+        ipq.insert (iminpq, 'J', 87)
+        ipq.insert (iminpq, 'K', 12)
+        ipq.insert (iminpq, 'L', 14) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 4)
+
+        ipq.changeKeyIndex (iminpq, 'G', 180)
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 9)
+        self.assertEqual (min['key'], 'C')
+
+
+    def test_infinitum (self):
+
+        iminpq = ipq.newIndexMinPQ(12, self.comparekeys)
+
+        self.assertTrue (ipq.isEmpty(iminpq))
+
+        ipq.insert (iminpq, 'A', math.inf)  
+        ipq.insert (iminpq, 'B', math.inf)
+        ipq.insert (iminpq, 'C', math.inf)
+        ipq.insert (iminpq, 'D', math.inf)
+        ipq.insert (iminpq, 'E', math.inf)
+        ipq.insert (iminpq, 'F', math.inf)
+        ipq.insert (iminpq, 'G', math.inf)
+        ipq.insert (iminpq, 'H', math.inf)
+        ipq.insert (iminpq, 'I', math.inf)
+        ipq.insert (iminpq, 'J', math.inf)
+        ipq.insert (iminpq, 'K', math.inf)
+        ipq.insert (iminpq, 'L', math.inf) 
+                    
+        self.assertTrue (ipq.size(iminpq), 12)
+        self.assertFalse (ipq.isEmpty(iminpq))
+
+        ipq.changeKeyIndex (iminpq, 'I', 0.0)
+        min = ipq.min(iminpq)
+        self.assertEqual (min['value'], 0.0)
+        self.assertEqual (min['key'], 'I')
 
 if __name__ == "__main__":
     unittest.main()

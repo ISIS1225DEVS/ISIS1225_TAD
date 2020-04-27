@@ -20,18 +20,26 @@
 
 import config
 from DataStructures import liststructure as lt
+from DataStructures import mapentry as me
+from ADT import map as m
 
 
 
-def newHeap ():
+def newHeap (size, cmpfunction):
     """
     Crea un nuevo heap basado en un arreglo, cuyo primer elemento es inicializado en None y no será utilizado
     """
-    heap = {'elements':None, 'size':0, 'offset':2}
+    heap = {'elements':None, 
+            'indexelems': None,
+            'size':0, 
+            'offset':2,
+            'comparefunction':cmpfunction
+            }
+
     heap['elements'] = lt.newList (datastructure='ARRAY_LIST')
     lt.addLast (heap['elements'], None)
+    heap['indexelems'] = m.newMap (numelements=size,maptype='PROBING',comparefunction=cmpfunction)
     return heap
-
 
 
 
@@ -61,13 +69,15 @@ def min (heap):
 
 
 
-def insert  (heap, element):
+def insert  (heap, key, index):
     """
     Guarda el elemento 'element' en el heap. Lo guarda en la última posición y luego hace swim del elemento
     """
-    lt.insertElement (heap['elements'], element, heap['size']+heap['offset'])
+    node = me.newMapEntry (key, index)
+    lt.insertElement (heap['elements'], node, heap['size']+heap['offset'])
+    m.put (heap['indexelems'],key, heap['size']+heap['offset'])
     heap['size'] += 1
-    swim (heap)
+    swim (heap, heap['size'])
 
 
 
@@ -81,11 +91,34 @@ def delMin (heap):
         last = lt.getElement  (heap['elements'], heap['size']+1)
         lt.changeInfo (heap['elements'], heap['offset'],last)
         lt.changeInfo (heap['elements'], heap['size']+1,None)
+        m.remove (heap['indexelems'],min['key'])
         heap ['size'] -= 1
-        sink (heap)
+        sink (heap, 1)
         return min
     return None
 
+
+
+def indexOf (heap, key):
+    element = m.get (heap['indexelems'],key)
+    if element:
+        return element ['value']
+    return None
+
+
+
+def changeIndex (heap, key, index):
+    newnode = me.newMapEntry (key, index)
+    elem = m.get (heap['indexelems'],key)
+    pos = elem['value']
+    lt.changeInfo (heap['elements'],pos,newnode)
+    swim (heap, pos-1)
+    sink (heap, pos-1)
+    return heap
+
+
+def contains (heap, key):
+    return (lt.isPresent (heap['elements'], key, heap['comparefunction']) > 0)
 
 
 """
@@ -93,12 +126,10 @@ Funciones helper para garantizar las propiedades del heap
 """
 
 
-def swim (heap):
+def swim (heap, pos):
     """
-    Garantiza que no hay elementos menores después de elementos mas grandes
+    Ubica en el lugar indicado un elemento adicionado en la última posición
     """
-    pos = heap['size']
-
     while (pos > 1):
         parent = lt.getElement (heap['elements'], int((pos/2)+1))
         element = lt.getElement (heap['elements'], int (pos+1))
@@ -108,14 +139,12 @@ def swim (heap):
 
 
 
-def sink (heap):
-    """
-    Garantiza que no hay elementos mayores antes que elementos menores
-    """
-    root = lt.getElement (heap['elements'], heap['offset'])
-    size = heap['size']
-    pos = 1
 
+def sink (heap, pos):
+    """
+    Ubica en la posición correcta un elemento ubicado en la raíz del heap
+    """
+    size = heap['size']
     while ( (2*pos <= size)):
         j = 2*pos
         if (j < size):
@@ -128,11 +157,13 @@ def sink (heap):
 
 
 
+
+
 def greater (element1, element2):
     """
     Indica si el elemento 1 es mayor que el elemento 2
     """
-    return (element1 > element2)
+    return (element1['value'] > element2['value'])
 
 
 
@@ -140,4 +171,8 @@ def exchange (heap, posa, posb):
     """
     Intercambia los elementos en las posiciones posa y posb del heap
     """
+    elema = lt.getElement (heap['elements'], posa)
+    elemb = lt.getElement (heap['elements'], posb)
     lt.exchange (heap['elements'], posa, posb) 
+    m.put (heap['indexelems'], elema['key'], posb)
+    m.put (heap['indexelems'], elemb['key'], posa)
