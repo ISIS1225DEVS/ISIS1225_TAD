@@ -19,75 +19,43 @@
  """
 
 import config
-from DataStructures import heap as h
+from DataStructures import minheap as h
 from ADT import map as m
 
-
-
-def newIndexMinPQ ( size, cmpfunction):
-    iminpq = {'pq':None}
-    iminpq['pq'] = h.newHeap (size, cmpfunction)
+def newIndexMinPQ ( capacity, cmpfunction):
+    iminpq= h.newMinHeap (capacity, cmpfunction)
     return iminpq
 
-
-
 def isEmpty (iminpq):
-    return (h.isEmpty(iminpq['pq']))
-
+    return (h.isEmpty(iminpq))
 
 
 def size (iminpq):
-    return (h.size(iminpq['pq']))
+    return (h.size(iminpq))
 
 
 def insert (iminpq, key, index):
-    h.insert (iminpq ['pq'], key, index) 
+    h.insert (iminpq, key, index) 
 
 
 def delMin (iminpq):
-    return (h.delMin(iminpq['pq']))
+    return (h.delMin(iminpq))
 
 
-def changeKeyIndex (iminpq, key, index):
-    return h.changeIndex (iminpq['pq'], key, index)
+def decreasePriority (iminpq, key, index):
+    return h.decreasePriority (iminpq, key, index)
+
+def increasePriority (iminpq, key, index):
+    return h.increasePriority (iminpq, key, index)
 
 
 def min (iminpq):
-    return h.min (iminpq['pq'])
+    return h.min (iminpq) 
 
 
 def contains (iminpq, element):
-    return h.contains (iminpq['pq'], element)
+    return h.contains (iminpq, element)
 
 
 def keyOf (iminpq, index):
     pass
-
-
-
-def increaseKey (iminpq, index, key):
-    pass
-
-
-"""
-Funciones Helper
-"""
-
-def exchange ():
-    pass
-
-def greater ():
-    pass
-
-
-"""
-Funciones MinPQ  
-"""
-
-def swim ():
-    pass
-
-
-def sink ():
-    pass
-
