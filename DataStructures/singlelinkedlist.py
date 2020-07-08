@@ -29,7 +29,7 @@ from Utils import error as error
 """
 
 
-def newList (cmpfunction):
+def newList (cmpfunction=None):
     """Crea una lista vacia.
 
     Se inicializan los apuntadores a la primera y ultima posicion en None.  El tipo de la lista
