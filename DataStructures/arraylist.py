@@ -22,152 +22,350 @@
   Este módulo implementa una estructura de datos lineal, como un arreglo de apuntadores a 
   los nodos de la lista.
 """
+import config
+from Utils import error as error
 
+def newList (cmpfunction=None):
+    """Crea una lista vacia.
 
-def newList ():
+    Args:
+        cmpfunction: Función de comparación para los elementos de la lista
+    Returns:
+        Un diccionario que representa la estructura de datos de una lista
+
+    Raises:
+
     """
-    Crea una lista vacia
-    """
-    new_list = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
+    new_list = {'elements':[], 'size':0, 'type':'ARRAY_LIST','cmpfunction':cmpfunction }
     return (new_list)
 
 
 def addFirst(lst, element):
+    """Agrega un elemento a la lista en la primera posicion.
+
+    Agrega un elemento en la primera posición de la lista, se incrementa 
+    el tamaño de la lista en uno.
+
+    Args:
+        lst:  La lista don de inserta el elemento
+        element:  El elemento a insertar en la lista
+
+    Returns:
+        La lista con el nuevo elemento en la primera posición, si el proceso fue exitoso  
+
+    Raises:
+        Exception
     """
-    Agrega un elemento en la primera posición de la lista
-    """
-    lst['elements'].insert (0,element)
-    lst['size'] += 1
+    try:
+        lst['elements'].insert (0,element)
+        lst['size'] += 1
+    except Exception as exp:
+        error.reraise (exp, 'arraylist->addFirst: ')
+       
 
 
 
 def addLast(lst, element):
+    """ Agrega un elemento en la última posición de la lista.
+
+    Se adiciona un elemento en la última posición de la lista y se actualiza el apuntador a la útima posición. 
+    Se incrementa el tamaño de la lista en 1
+    
+    Args:
+        lst: La lista en la que se inserta el elemento
+        element: El elemento a insertar
+
+    Raises:
+        Exception
     """
-    Agrega un elemento en la última posición de la lista
-    """
-    lst['elements'].append (element)
-    lst['size'] += 1
+    try:
+        lst['elements'].append (element)
+        lst['size'] += 1
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->addLast: ')
 
 
 
 def isEmpty (lst):
+    """ Indica si la lista está vacía
+
+    Args: 
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Indica si la lista está vacía
-    """
-    return lst['size'] == 0
+    try:
+        return lst['size'] == 0
+    except Exception as exp:
+        error.reraise (exp, 'isEmpty->addLast: ')
+
+
 
 
 def size(lst):
+    """ Informa el número de elementos de la lista.
+
+    Args
+        lst: La lista a examinar
+    
+    Raises: 
+        Exception
     """
-    Informa el número de elementos de la lista
-    """
-    return lst['size'] 
+    try:
+        return lst['size'] 
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->size: ')
+
+
+
 
 
 def firstElement (lst):
+    """ Retorna el primer elemento de una lista no vacía. No se elimina el elemento.
+
+    Args: 
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Retorna el primer elemento de la lista, sin eliminarlo. La lista no puede ser vacía
-    """
-    return lst['elements'][0]
+    try:
+        return lst['elements'][0]
+    except Exception as exp:
+        error.reraise (exp, 'LinkedList->firstElement: ')
+
+
 
 
 
 def lastElement (lst):
+    """ Retorna el último elemento de una  lista no vacia.  No se elimina el elemento.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Retorna el último elemento de la lista, sin eliminarlo. La lista no puede ser vacía
-    """
-    return lst['elements'][lst['size']-1]
+    try:
+        return lst['elements'][lst['size']-1]
+    except Exception as exp:
+        error.reraise (exp, 'LinkedList->lastElement: ')
+
 
 
 
 def getElement (lst, pos):
+    """ Retorna el elemento en la posición pos de la lista.
+
+    Se recorre la lista hasta el elemento pos, el cual  debe ser mayor que cero y menor o igual al tamaño de la lista.
+    Se retorna el elemento en dicha posición sin eleminarlo.  La lista no puede ser vacia.
+
+    Args:
+        lst: La lista a examinar
+        pos: Posición del elemento a retornar
+
+    Raises:
+        Exception
     """
-    Retorna el elemento en la posición pos de la lista sin eliminarlo
-    pos debe ser mayor que cero y menor o igual al tamaño de la lista
-    la lista no esta vacia
-    """
-    return lst['elements'][pos-1]
+    try:
+        return lst['elements'][pos-1]
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->getElement: ')
+
+
 
 
 def deleteElement (lst, pos):
+    """ Elimina el elemento en la posición pos de la lista.
+    
+    Elimina el elemento que se encuentra en la posición pos de la lista.  Pos debe ser mayor que cero y menor 
+    o igual al tamaño de la lista.   Se decrementa en un uno el tamñao de la lista. La lista no puede estar vacia.
+
+    Args:
+        lst: La lista a retoranr
+        pos: Posición del elemento a eliminar.
+
+    Raises:
+        Exception
     """
-    Elimina el elemento en la posición pos de la lista.
-    pos debe ser mayor que cero y menor o igual al tamaño de la lista
-    la lista no esta vacia
-    """
-    lst['elements'].pop(pos)
-    lst['size'] -= 1    
+    try:
+        lst['elements'].pop(pos-1)
+        lst['size'] -= 1    
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->deleteElement: ')
+
+
 
 
 def removeFirst (lst):
+    """ Remueve el primer elemento de la lista. 
+    
+    Elimina y retorna el primer elemento de la lista.  El tamaño de la lista se decrementa en uno.  Si la lista
+    es vacía se retorna None.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Remueve el primer elemento de la lista y lo retorna. La lista no puede ser vacía
-    """
-    element = lst['elements'].pop(0)
-    lst['size'] -= 1
-    return element
+    try:
+        element = lst['elements'].pop(0)
+        lst['size'] -= 1
+        return element
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->removeFirst: ')
+
+
 
 
 def removeLast (lst):
+    """ Remueve el último elemento de la lista.
+    
+    Elimina el último elemento de la lista  y lo retorna en caso de existir. El tamaño de la lista se decrementa en 1. 
+    Si la lista es vacía  retorna None.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Remueve el último elemento de la lista y lo retorna en caso de existir, de lo contrario retorna None
-    """
-    element = lst['elements'].pop(lst['size']-1)
-    lst['size'] -= 1
-    return element
+    try:
+        element = lst['elements'].pop(lst['size']-1)
+        lst['size'] -= 1
+        return element
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->remoLast: ')
+
+
+
 
 def insertElement (lst, element, pos):
+    """ Inserta el elemento element en la posición pos de la lista. 
+    
+    Inserta el elemento en la posición pos de la lista. La lista puede ser vacía.  Se incrementa en 1 el tamaño de la lista.
+
+    Args:
+        lst: La lista en la que se va a insertar el elemento
+        element: El elemento a insertar
+        pos: posición en la que se va a insertar el elemento,  0 < pos <= size(lst) 
+
+    Raises:
+        Exception
     """
-    Inserta el elemento element en la posición pos de la lista. pos debe ser menor o igual al tamaño de la lista. 
-    """
-    lst['elements'].insert (pos-1,element) 
-    lst['size'] += 1
+    try:
+        lst['elements'].insert (pos-1,element) 
+        lst['size'] += 1
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->insertElement: ')
 
 
-def isPresent (lst, element, comparefunction):
+
+
+
+def isPresent (lst, element):
+    """ Informa si el elemento element esta presente en la lista. 
+    
+    Informa si un elemento está en la lista.  Si esta presente, retorna la posición en la que se encuentra 
+    o cero (0) si no esta presente. Se utiliza la función de comparación utilizada durante la creación 
+    de la lista para comparar los elementos.
+
+    Args:
+        lst: La lista a examinar
+        element: El elemento a buscar
+
+    Raises:
+        Exception
     """
-    Informa si el elemento element esta presente en la lista. Si esta presente retorna 
-    la primera posición en la que se encuentra o cero (0) si no esta presente
-    """
-    size = lst['size']
-    if size > 0:
-        keyexist = False
-        for keypos in range (1,size+1):
-            if (comparefunction (element, lst['elements'][keypos-1])):
-                keyexist = True
-                break
-        if keyexist:
-            return keypos
-    return 0   
+    try:
+        size = lst['size']
+        if size > 0:
+            keyexist = False
+            for keypos in range (1,size+1):
+                if (lst['cmpfunction'] (element, lst['elements'][keypos-1])):
+                    keyexist = True
+                    break
+            if keyexist:
+                return keypos
+        return 0   
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->isPresent: ')
+
+
+
 
 
 def changeInfo (lst, pos, newinfo):
+    """ Cambia la informacion contenida en el nodo de la lista que se encuentra en la posicion pos.
+    
+    Args:   
+        lst: La lista a examinar
+        pos: la posición de la lista con la información a cambiar
+        newinfo: La nueva información que se debe poner en el nodo de la posición pos
+
+    Raises:
+        Exception
     """
-    Cambia la informacion contenida en el nodo de la lista en la posicion pos
-    """
-    lst['elements'][pos-1] = newinfo
+    try:
+        lst['elements'][pos-1] = newinfo
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->changeInfo: ')
+
+
+
 
 def exchange (lst, pos1, pos2):
+    """ Intercambia la informacion en las posiciones pos1 y pos2 de la lista.
+
+    Args:
+        lst: La lista a examinar
+        pos1: Posición del primer elemento
+        pos2: Posiocion del segundo elemento
+
+    Raises:
+        Exception
     """
-    Intercambia la informacion en las posiciones pos1 y pos2 de la lista
-    """
-    infopos1 = getElement (lst, pos1)
-    infopos2 = getElement (lst, pos2)
-    changeInfo (lst, pos1, infopos2)
-    changeInfo (lst, pos2, infopos1)
+    try:
+        infopos1 = getElement (lst, pos1)
+        infopos2 = getElement (lst, pos2)
+        changeInfo (lst, pos1, infopos2)
+        changeInfo (lst, pos2, infopos1)
+        return lst
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->exchange: ')
+
+
+
+
 
 def subList (lst, pos, numelem):
+    """ Retorna una sublista de la lista lst.
+    
+    Se retorna una lista que contiene los elementos a partir de la posicion pos, con una longitud de numelem elementos.  
+    Se crea una copia de dichos elementos y se retorna una lista nueva.
+
+    Args:
+        lst: La lista a examinar
+        pos: Posición a partir de la que se desea obtener la sublista
+        numelem: Numero de elementos a copiar en la sublista
+
+    Raises:
+        Exception
     """
-    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
-    """
-    sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
-    elem = pos-1
-    cont = 1
-    while  cont <= numelem:
-        sublst['elements'].append (lst['elements'][elem])
-        sublst['size'] += 1
-        elem += 1
-        cont += 1
-    return sublst
+    try:
+        sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
+        elem = pos-1
+        cont = 1
+        while  cont <= numelem:
+            sublst['elements'].append (lst['elements'][elem])
+            sublst['size'] += 1
+            elem += 1
+            cont += 1
+        return sublst
+    except Exception as exp:
+        error.reraise (exp, 'Linkedlist->subList: ')
 
 

@@ -181,7 +181,7 @@ def getElement (lst, pos):
     """ Retorna el elemento en la posición pos de la lista.
 
     Se recorre la lista hasta el elemento pos, el cual  debe ser mayor que cero y menor o igual al tamaño de la lista.
-    Se retornar el elemento en dicha posición sin eleminarlo.  La lista no puede ser vacia.
+    Se retorna el elemento en dicha posición sin eleminarlo.  La lista no puede ser vacia.
 
     Args:
         lst: La lista a examinar
