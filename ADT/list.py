@@ -19,6 +19,7 @@
  """
 
 import config
+from Utils import error as error
 from DataStructures import liststructure as lt
 
 
@@ -28,123 +29,312 @@ from DataStructures import liststructure as lt
   como un arreglo
 """
 
-def newList (datastructure='SINGLE_LINKED'):
+def newList (datastructure='SINGLE_LINKED', cmpfunction=None):
+    """Crea una lista vacia.
+
+    Args:
+        cmpfunction: Función de comparación para los elementos de la lista
+    Returns:
+        Una nueva lista
+    Raises:
+        Exception
     """
-    Crea una lista vacia. datastructure puede ser igual a: 'ARRAY_LIST' o 'SINGLE_LINKED'
-    """
-    lst = lt.newList(datastructure)
-    return lst
+    try:
+        lst = lt.newList(datastructure, cmpfunction)
+        return lst
+    except Exception as exp:
+        error.reraise (exp, 'TADList->newList: ')
+    
 
 
 def addFirst(lst, element):
+    """Agrega un elemento a la lista en la primera posicion.
+
+    Agrega un elemento en la primera posición de la lista, se incrementa 
+    el tamaño de la lista en uno.
+
+    Args:
+        lst:  La lista don de inserta el elemento
+        element:  El elemento a insertar en la lista
+
+    Returns:
+        La lista con el nuevo elemento en la primera posición, si el proceso fue exitoso  
+
+    Raises:
+        Exception
     """
-    Agrega un elemento en la primera posición de la lista
-    """
-    lt.addFirst (lst, element)
+    try:
+        lt.addFirst (lst, element)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->addFirst: ')
+
 
 
 def addLast(lst, element):
+    """ Agrega un elemento en la última posición de la lista.
+
+    Se adiciona un elemento en la última posición de la lista y se actualiza el apuntador a la útima posición. 
+    Se incrementa el tamaño de la lista en 1
+    
+    Args:
+        lst: La lista en la que se inserta el elemento
+        element: El elemento a insertar
+
+    Raises:
+        Exception
     """
-    Agrega un elemento en la última posición de la lista
-    """
-    lt.addLast (lst, element)
+    try:
+        lt.addLast (lst, element)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->addLast: ')
+
 
 
 def isEmpty (lst):
+    """ Indica si la lista está vacía
+
+    Args: 
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Indica si la lista está vacía(True) o no (False)
-    """
-    return lt.isEmpty(lst)
+    try:
+        return lt.isEmpty(lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->isEmpty: ')
 
 
 def size(lst):
+    """ Informa el número de elementos de la lista.
+
+    Args
+        lst: La lista a examinar
+    
+    Raises: 
+        Exception
     """
-    Informa el número de elementos almacenados en la lista
-    """
-    return lt.size(lst)
+    try: 
+        return lt.size(lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->size: ')
+
 
 
 def firstElement (lst):
+    """ Retorna el primer elemento de una lista no vacía. No se elimina el elemento.
+
+    Args: 
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Retorna el primer elemento de la lista, sin eliminarlo.
-    """
-    return lt.firstElement (lst)
+    try:
+        return lt.firstElement (lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->firstElement: ')
 
 
 
 def lastElement (lst):
+    """ Retorna el último elemento de una  lista no vacia.  No se elimina el elemento.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Retorna el último elemento de la lista, sin eliminarlo.
-    """
-    return lt.lastElement(lst)
+    try: 
+        return lt.lastElement(lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->LastElement: ')
+
 
 
 
 def getElement (lst, pos):
+    """ Retorna el elemento en la posición pos de la lista.
+
+    Se recorre la lista hasta el elemento pos, el cual  debe ser mayor que cero y menor o igual al tamaño de la lista.
+    Se retorna el elemento en dicha posición sin eleminarlo.  La lista no puede ser vacia.
+
+    Args:
+        lst: La lista a examinar
+        pos: Posición del elemento a retornar
+
+    Raises:
+        Exception
     """
-    Retorna el elemento en la posición pos de la lista.
-    pos debe ser mayor que cero y menor o igual al tamaño de la lista
-    la lista no esta vacia
-    """
-    return lt.getElement (lst, pos) 
+    try: 
+        return lt.getElement (lst, pos) 
+    except Exception as exp:
+        error.reraise (exp, 'List->getElement: ')
+
+
 
 
 def deleteElement (lst, pos):
+    """ Elimina el elemento en la posición pos de la lista.
+    
+    Elimina el elemento que se encuentra en la posición pos de la lista.  Pos debe ser mayor que cero y menor 
+    o igual al tamaño de la lista.   Se decrementa en un uno el tamñao de la lista. La lista no puede estar vacia.
+
+    Args:
+        lst: La lista a retoranr
+        pos: Posición del elemento a eliminar.
+
+    Raises:
+        Exception
     """
-    Elimina el elemento en la posición pos de la lista.
-    pos debe ser mayor que cero y menor o igual al tamaño de la lista
-    la lista no esta vacia
-    """
-    lt.deleteElement(lst, pos) 
+    try:
+        lt.deleteElement(lst, pos) 
+    except Exception as exp:
+        error.reraise (exp, 'TADList->deleteElement: ')
+
+
 
 
 def removeFirst (lst):
+    """ Remueve el primer elemento de la lista. 
+    
+    Elimina y retorna el primer elemento de la lista.  El tamaño de la lista se decrementa en uno.  Si la lista
+    es vacía se retorna None.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Remueve el primer elemento de la lista
-    """
-    lt.removeFirst (lst)
+    try:
+        lt.removeFirst (lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->removeFirst: ')
+
+
 
 
 def removeLast (lst):
+    """ Remueve el último elemento de la lista.
+    
+    Elimina el último elemento de la lista  y lo retorna en caso de existir. El tamaño de la lista se decrementa en 1. 
+    Si la lista es vacía  retorna None.
+
+    Args:
+        lst: La lista a examinar
+
+    Raises:
+        Exception
     """
-    Remueve el último elemento de la lista
-    """
-    lt.removeLast (lst)
+    try:
+        lt.removeLast (lst)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->removeLast: ')
+
+
 
 
 def insertElement (lst, element, pos):
+    """ Inserta el elemento element en la posición pos de la lista. 
+    
+    Inserta el elemento en la posición pos de la lista. La lista puede ser vacía.  Se incrementa en 1 el tamaño de la lista.
+
+    Args:
+        lst: La lista en la que se va a insertar el elemento
+        element: El elemento a insertar
+        pos: posición en la que se va a insertar el elemento,  0 < pos <= size(lst) 
+
+    Raises:
+        Exception
     """
-    Inserta el elemento element en la posición pos de la lista.
-    """
-    lt.insertElement (lst, element, pos)
+    try:
+        lt.insertElement (lst, element, pos)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->insertElement: ')
     
 
-def isPresent (lst, element, comparefunction):
+
+
+
+def isPresent (lst, element):
+    """ Informa si el elemento element esta presente en la lista. 
+    
+    Informa si un elemento está en la lista.  Si esta presente, retorna la posición en la que se encuentra 
+    o cero (0) si no esta presente. Se utiliza la función de comparación utilizada durante la creación 
+    de la lista para comparar los elementos.
+
+    Args:
+        lst: La lista a examinar
+        element: El elemento a buscar
+
+    Raises:
+        Exception
     """
-    Informa si el elemento element esta presente en la lista. Si esta presente retorna 
-    la posición en la que se encuentra o cero (0) si no esta presente
-    """
-    return lt.isPresent (lst, element, comparefunction)
+    try:
+        return lt.isPresent (lst, element)
+    except Exception as exp:
+        error.reraise (exp, 'TADList->isPresent: ')
+
+
 
 
 def exchange (lst, pos1, pos2):
+    """ Intercambia la informacion en las posiciones pos1 y pos2 de la lista.
+
+    Args:
+        lst: La lista a examinar
+        pos1: Posición del primer elemento
+        pos2: Posiocion del segundo elemento
+
+    Raises:
+        Exception
     """
-    Intercambia la informacion en las posiciones pos1 y pos2 de la lista
-    """
-    lt.exchange (lst, pos1, pos2)
+    try:
+        lt.exchange (lst, pos1, pos2)
+    except Exception as exp:
+        error.reraise (exp, 'List->exchange: ')
+
+
 
 
 def changeInfo (lst, pos, element):
+    """ Cambia la informacion contenida en el nodo de la lista que se encuentra en la posicion pos.
+    
+    Args:   
+        lst: La lista a examinar
+        pos: la posición de la lista con la información a cambiar
+        newinfo: La nueva información que se debe poner en el nodo de la posición pos
+
+    Raises:
+        Exception
     """
-    Reemplaza la información de la lista en la posicion pos, con el elemento element
-    """
-    lt.changeInfo (lst, pos, element)
+    try: 
+        lt.changeInfo (lst, pos, element)
+    except Exception as exp:
+        error.reraise (exp, 'List->changeInfo: ')
+
+
 
 
 def subList (lst, pos, numelem):
+    """ Retorna una sublista de la lista lst.
+    
+    Se retorna una lista que contiene los elementos a partir de la posicion pos, con una longitud de numelem elementos.  
+    Se crea una copia de dichos elementos y se retorna una lista nueva.
+
+    Args:
+        lst: La lista a examinar
+        pos: Posición a partir de la que se desea obtener la sublista
+        numelem: Numero de elementos a copiar en la sublista
+
+    Raises:
+        Exception
     """
-    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
-    """
-    return lt.subList (lst, pos, numelem)
+    try:
+        return lt.subList (lst, pos, numelem)
+    except Exception as exp:
+        error.reraise (exp, 'List->subList: ')
 
 

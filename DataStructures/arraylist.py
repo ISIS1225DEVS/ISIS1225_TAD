@@ -82,7 +82,7 @@ def addLast(lst, element):
         lst['elements'].append (element)
         lst['size'] += 1
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->addLast: ')
+        error.reraise (exp, 'arraylist->addLast: ')
 
 
 
@@ -98,7 +98,7 @@ def isEmpty (lst):
     try:
         return lst['size'] == 0
     except Exception as exp:
-        error.reraise (exp, 'isEmpty->addLast: ')
+        error.reraise (exp, 'arraylist->isEmpty: ')
 
 
 
@@ -115,7 +115,7 @@ def size(lst):
     try:
         return lst['size'] 
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->size: ')
+        error.reraise (exp, 'arraylist->size: ')
 
 
 
@@ -133,7 +133,7 @@ def firstElement (lst):
     try:
         return lst['elements'][0]
     except Exception as exp:
-        error.reraise (exp, 'LinkedList->firstElement: ')
+        error.reraise (exp, 'arraylist->firstElement: ')
 
 
 
@@ -151,7 +151,7 @@ def lastElement (lst):
     try:
         return lst['elements'][lst['size']-1]
     except Exception as exp:
-        error.reraise (exp, 'LinkedList->lastElement: ')
+        error.reraise (exp, 'arraylist->lastElement: ')
 
 
 
@@ -172,7 +172,7 @@ def getElement (lst, pos):
     try:
         return lst['elements'][pos-1]
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->getElement: ')
+        error.reraise (exp, 'arraylist->getElement: ')
 
 
 
@@ -194,7 +194,7 @@ def deleteElement (lst, pos):
         lst['elements'].pop(pos-1)
         lst['size'] -= 1    
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->deleteElement: ')
+        error.reraise (exp, 'arraylist->deleteElement: ')
 
 
 
@@ -216,7 +216,7 @@ def removeFirst (lst):
         lst['size'] -= 1
         return element
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->removeFirst: ')
+        error.reraise (exp, 'arraylist->removeFirst: ')
 
 
 
@@ -238,7 +238,7 @@ def removeLast (lst):
         lst['size'] -= 1
         return element
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->remoLast: ')
+        error.reraise (exp, 'arraylist->remoLast: ')
 
 
 
@@ -260,7 +260,7 @@ def insertElement (lst, element, pos):
         lst['elements'].insert (pos-1,element) 
         lst['size'] += 1
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->insertElement: ')
+        error.reraise (exp, 'arraylist->insertElement: ')
 
 
 
@@ -292,7 +292,7 @@ def isPresent (lst, element):
                 return keypos
         return 0   
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->isPresent: ')
+        error.reraise (exp, 'arraylist->isPresent: ')
 
 
 
@@ -312,7 +312,7 @@ def changeInfo (lst, pos, newinfo):
     try:
         lst['elements'][pos-1] = newinfo
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->changeInfo: ')
+        error.reraise (exp, 'arraylist->changeInfo: ')
 
 
 
@@ -335,7 +335,7 @@ def exchange (lst, pos1, pos2):
         changeInfo (lst, pos2, infopos1)
         return lst
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->exchange: ')
+        error.reraise (exp, 'arraylist->exchange: ')
 
 
 
@@ -366,6 +366,6 @@ def subList (lst, pos, numelem):
             cont += 1
         return sublst
     except Exception as exp:
-        error.reraise (exp, 'Linkedlist->subList: ')
+        error.reraise (exp, 'arraylist->subList: ')
 
 
