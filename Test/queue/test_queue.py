@@ -131,5 +131,84 @@ class insertionSortTest (unittest.TestCase):
         elem = q.peek (self.queue)
         self.assertDictEqual (elem, self.book3)
 
+    def test_dequeue_peek(self):
+        self.queue = q.newQueue(self.list_type)
+        self.assertEqual (q.size(self.queue), 0)
+        self.assertTrue (q.isEmpty(self.queue))
+        q.enqueue  (self.queue, self.book5)
+        q.enqueue  (self.queue, self.book6)
+        q.enqueue  (self.queue, self.book3)
+        q.enqueue  (self.queue, self.book10)
+        q.enqueue  (self.queue, self.book1)
+        q.enqueue  (self.queue, self.book2)
+        q.enqueue  (self.queue, self.book8)
+        q.enqueue  (self.queue, self.book4)
+        q.enqueue  (self.queue, self.book7)
+        q.enqueue  (self.queue, self.book9)
+        
+        total = q.size(self.queue)
+        while not (q.isEmpty(self.queue)):
+            top = q.peek(self.queue)
+            self.assertEqual(q.dequeue(self.queue), top)
+            total-=1
+            self.assertEqual(total, q.size(self.queue))
+
+    def test_enqueue_dequeue(self):
+        self.queue = q.newQueue(self.list_type)
+        self.assertEqual (q.size(self.queue), 0)
+        self.assertTrue (q.isEmpty(self.queue))
+        q.enqueue  (self.queue, self.book5)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+
+        q.enqueue  (self.queue, self.book6)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+        
+        q.enqueue  (self.queue, self.book3)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+        
+        q.enqueue  (self.queue, self.book10)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+
+        q.enqueue  (self.queue, self.book1)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+
+        q.enqueue  (self.queue, self.book2)
+        self.assertEqual(q.size(self.queue),1)
+        self.assertEqual(q.peek(self.queue),q.dequeue(self.queue))
+        self.assertEqual(q.size(self.queue),0)
+
+        q.enqueue  (self.queue, self.book8)
+        q.enqueue  (self.queue, self.book4)
+        q.enqueue  (self.queue, self.book7)
+        q.enqueue  (self.queue, self.book9)
+        self.assertEqual(q.size(self.queue),4)
+        self.assertEqual(self.book8,q.dequeue(self.queue))
+        self.assertEqual(self.book4,q.dequeue(self.queue))
+        self.assertEqual(self.book7,q.dequeue(self.queue))
+        self.assertEqual(self.book9,q.dequeue(self.queue))
+
+        self.assertEqual(q.size(self.queue),0)
+
+    def test_error_dequeue(self):
+        self.queue = q.newQueue(self.list_type)
+        self.assertEqual (q.size(self.queue), 0)
+        self.assertTrue (q.isEmpty(self.queue))
+        
+        try:
+            q.dequeue(self.queue)
+            raise Exception('Deberia fallar')
+        except:
+            print('No fail')
+
 if __name__ == "__main__":
     unittest.main()

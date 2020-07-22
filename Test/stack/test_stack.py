@@ -135,5 +135,87 @@ class stackTest (unittest.TestCase):
         elem = st.top (self.stack)
         self.assertDictEqual (elem, self.book9)
 
+    def test_pop_top(self):
+        self.stack = st.newStack(self.list_type)
+        self.assertEqual (st.size(self.stack), 0)
+        self.assertTrue (st.isEmpty(self.stack))
+        st.push   (self.stack, self.book5)
+        st.push   (self.stack, self.book6)
+        st.push   (self.stack, self.book3)
+        st.push   (self.stack, self.book10)
+        st.push   (self.stack, self.book1)
+        st.push   (self.stack, self.book2)
+        st.push   (self.stack, self.book8)
+        st.push   (self.stack, self.book4)
+        st.push   (self.stack, self.book7)
+        st.push   (self.stack, self.book9)
+        
+        total = st.size(self.stack)
+        while not (st.isEmpty(self.stack)):
+            top = st.top(self.stack)
+            self.assertEqual(st.pop(self.stack), top)
+            total-=1
+            self.assertEqual(total, st.size(self.stack))
+
+    def test_push_pop(self):
+        self.stack = st.newStack(self.list_type)
+        self.assertEqual (st.size(self.stack), 0)
+        self.assertTrue (st.isEmpty(self.stack))
+        
+        st.push  (self.stack, self.book5)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+
+        st.push   (self.stack, self.book6)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+
+        st.push   (self.stack, self.book3)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+
+        st.push   (self.stack, self.book10)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+
+        st.push   (self.stack, self.book1)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+
+        st.push   (self.stack, self.book2)
+        self.assertEqual(st.size(self.stack),1)
+        self.assertEqual(st.top(self.stack),st.pop(self.stack))
+        self.assertEqual(st.size(self.stack),0)
+        
+        st.push   (self.stack, self.book8)
+        st.push   (self.stack, self.book4)
+        st.push   (self.stack, self.book7)
+        st.push   (self.stack, self.book9)
+        
+        self.assertEqual(st.size(self.stack),4)
+        self.assertEqual(self.book9,st.pop(self.stack))
+        self.assertEqual(self.book7,st.pop(self.stack))
+        self.assertEqual(self.book4,st.pop(self.stack))
+        self.assertEqual(self.book8,st.pop(self.stack))
+
+        self.assertEqual(st.size(self.stack),0)
+
+    def test_error_pop(self):
+        self.stack = st.newStack(self.list_type)
+        self.assertEqual (st.size(self.stack), 0)
+        self.assertTrue (st.isEmpty(self.stack))
+        
+        try:
+            st.pop(self.stack)
+            raise Exception('Deberia fallar')
+        except:
+            print('No fail')
+            
+
 if __name__ == "__main__":
     unittest.main()

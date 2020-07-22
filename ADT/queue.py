@@ -18,7 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-
+import config
+from Utils import error as err
 from DataStructures import liststructure as lt
 
 """
@@ -28,35 +29,87 @@ from DataStructures import liststructure as lt
 def newQueue(datastructure='SINGLE_LINKED'):
     """
     Crea una cola vacia
+    Args:
+        datastructure 
+            Indica el tipo de estructura de datos a utilizar la cola
+    Return: Cola vacia
+    Raises:
+        Exception
     """
-    return lt.newList(datastructure)
+    try:
+        return lt.newList(datastructure)
+    except Exception as ex:
+        err.reraise(ex, 'newQueue ')
 
 def enqueue (queue, element):
     """
     Agrega el elemento element en el tope de la pila
+    Args:
+        queue :: list
+            Indica la cola a la cual se le agregara el elemento
+        element
+            Elemento que será agregado en la tope de la cola
+    Return: None
+    Raises: Exception
     """
-    lt.addLast (queue, element)
+    try:
+        lt.addLast (queue, element)
+    except Exception as ex:
+        err.reraise(ex, 'enqueue ')
 
 def dequeue (queue):
     """
     Retorna el elemento en la primer posición de la cola, y lo elimina
+    Args:
+        queue :: list
+            Indica la cola a la cual se le eliminará el elemento
+    Return: Elemento en la primera posicion de la cola, eliminandolo
+    Raises: Exception
     """
-    return lt.removeFirst(queue)
+    try:
+        return lt.removeFirst(queue)
+    except Exception as ex:
+        err.reraise (ex, 'dequeue ')
 
 def peek (queue):
     """
-    Retorna el elemento en la primer posición de la cola sin eliminarlo
+    Retorna el elemento en la primer posición de la cola, y lo elimina
+    Args:
+        queue :: list
+            Indica la cola a la cual se le mostrará el primer elemento
+    Return: Elemento en la primera posicion de la cola, sin eliminarlo
+    
     """
-    return lt.firstElement (queue)
+    try:
+        return lt.firstElement (queue)
+    except Exception as ex:
+        err.reraise (ex, 'peek ')  
 
 def isEmpty (queue):
     """
-    Informa si la cola es vacía o no 
+    Informa si la cola es vacía o no
+    Retorna el elemento en la primer posición de la cola, y lo elimina
+    Args:
+        queue :: list
+            Indica la cola que se tomará como vacia o no 
+    Return:: Boolean
+        True en caso de que este vacia, false en caso contrario
     """
-    return lt.isEmpty(queue)
+    try:
+        return lt.isEmpty(queue)
+    except Exception as ex:
+        err.reraise(ex,'isEmpty ')
 
 def size (queue):
     """
     Informa el número de elementos en la cola
+    Args:
+        queue :: list
+            Indica la lista cola a contar
+    Return:: int
+        Numero de elementos presentes en la cola
     """
-    return lt.size(queue)
+    try:
+        return lt.size(queue)
+    except Exception as ex:
+        err.reraise(exp, 'size ')
