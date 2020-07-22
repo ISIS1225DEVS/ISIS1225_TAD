@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+import config
+from Utils import error as error
 from DataStructures import liststructure as lt
 
 """
@@ -26,37 +28,105 @@ from DataStructures import liststructure as lt
 """
 
 def newQueue(datastructure='SINGLE_LINKED'):
+    """ Crea una cola vacia
+    Args:
+        datastructure:  Indica el tipo de estructura de datos a utilizar 
+                        para implementar la cola
+    Returns:
+        Una cola vacia
+    Raises:
+        Exception
     """
-    Crea una cola vacia
-    """
-    return lt.newList(datastructure)
+    try:
+        return lt.newList(datastructure)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->newQueue: ')
+
+
 
 def enqueue (queue, element):
+    """Agrega el elemento element en el tope de la pila
+    Args:
+        queue: La cola donde se insertará el elemento
+        element:  El elemento a insertar
+
+    Returns:
+        La cola modificada
+    Raises:
+        Exception
     """
-    Agrega el elemento element en el tope de la pila
-    """
-    lt.addLast (queue, element)
+    try: 
+        lt.addLast (queue, element)
+        return queue
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->enqueue: ')
+
+
 
 def dequeue (queue):
+    """ Retorna el elemento en la primer posición de la cola, y lo elimina.
+     Args:
+        queue: La cola donde se eliminará el elemento
+
+    Returns:
+        El primer elemento de la cola
+    Raises:
+        Exception   
     """
-    Retorna el elemento en la primer posición de la cola, y lo elimina
-    """
-    return lt.removeFirst(queue)
+    try:
+        return lt.removeFirst(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->dequeue: ')
+
+
 
 def peek (queue):
+    """ Retorna el elemento en la primer posición de la cola sin eliminarlo
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        True el primer elemento de cola sin eliminarlo
+    Raises:
+        Exception   
     """
-    Retorna el elemento en la primer posición de la cola sin eliminarlo
-    """
-    return lt.firstElement (queue)
+    try:
+        return lt.firstElement (queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->isEmpty: ')   
+
+
 
 def isEmpty (queue):
+    """Informa si la cola es vacía o no 
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        True si la cola es vacia, False de lo contrario
+    Raises:
+        Exception   
     """
-    Informa si la cola es vacía o no 
-    """
-    return lt.isEmpty(queue)
+    try:
+        return lt.isEmpty(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->isEmpty: ')
+
+
+
 
 def size (queue):
+    """Informa el número de elementos en la cola
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        Retorna el tamaño de la cola
+
+    Raises:
+        Exception       
     """
-    Informa el número de elementos en la cola
-    """
-    return lt.size(queue)
+    try:
+        return lt.size(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->size: ')

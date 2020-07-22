@@ -125,8 +125,20 @@ def top (stack):
 
 
 
+
+
 def size (stack):
+    """ Informa el número de elementos en la pila
+    Args:
+        stack: La pila a examinar
+
+    Returns:
+        Retorna el tamaño de la pila
+
+    Raises:
+        Exception  
     """
-    Informa el número de elementos en la pila
-    """
-    return lt.size(stack)
+    try:
+        return lt.size(stack)
+    except Exception as exp:
+        error.reraise (exp, 'TADStack->size: ')
