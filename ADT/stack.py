@@ -86,6 +86,7 @@ def pop (stack):
 
 
 
+
 def isEmpty (stack):
     """Informa si la pila es vacía o no 
      Args:
