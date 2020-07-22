@@ -32,6 +32,9 @@ class stackTest (unittest.TestCase):
     #list_type = 'SINGLE_LINKED_LIST'
 
     def setUp (self):
+        """
+        Creacion de diccionarios utilizados en las pruebas de la estructura de datos
+        """
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
         self.book2 = {'book_id':'2', 'book_title':'Title 2', 'author':'author 2'}
         self.book3 = {'book_id':'3', 'book_title':'Title 3', 'author':'author 3'}
@@ -57,6 +60,7 @@ class stackTest (unittest.TestCase):
 
     def test_pushElements (self):
         """
+        Se prueba la creacion de una nueva pila, se agregan todos los datos creados por sistema y se imprime su valor
         """
         self.stack = st.newStack(self.list_type)
 
@@ -99,6 +103,8 @@ class stackTest (unittest.TestCase):
 
     def test_infoElements (self):
         """
+        Este test busca confirmar que los datos se almacenen de forma correcta y que
+        sean los valores correctos en el orden apropiado de la estructura.
         """
         self.stack = st.newStack(self.list_type)
         self.assertEqual (st.size(self.stack), 0)
@@ -136,6 +142,10 @@ class stackTest (unittest.TestCase):
         self.assertDictEqual (elem, self.book9)
 
     def test_pop_top(self):
+        """
+        Este test prueba la creacion de una cola y que el orden de salida sea el correcto para la
+        estructura en cuestion, y que el tamaño se reduzca para cada salida de objeto
+        """
         self.stack = st.newStack(self.list_type)
         self.assertEqual (st.size(self.stack), 0)
         self.assertTrue (st.isEmpty(self.stack))
@@ -158,6 +168,11 @@ class stackTest (unittest.TestCase):
             self.assertEqual(total, st.size(self.stack))
 
     def test_push_pop(self):
+        """
+        Este test prueba que la cola pueda manejar inserciones y eliminaciones de forma correcta siguiendo
+        un orden establecido, y que no quede referencia al objeto sacado despues de haberlo removido de la
+        pila
+        """
         self.stack = st.newStack(self.list_type)
         self.assertEqual (st.size(self.stack), 0)
         self.assertTrue (st.isEmpty(self.stack))
@@ -206,6 +221,9 @@ class stackTest (unittest.TestCase):
         self.assertEqual(st.size(self.stack),0)
 
     def test_error_pop(self):
+        """
+        Este test busca comprobar que es imposible eliminar un objeto de una cola vacia
+        """
         self.stack = st.newStack(self.list_type)
         self.assertEqual (st.size(self.stack), 0)
         self.assertTrue (st.isEmpty(self.stack))

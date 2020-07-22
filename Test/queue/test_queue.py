@@ -32,6 +32,9 @@ class insertionSortTest (unittest.TestCase):
     #list_type = 'SINGLE_LINKED_LIST'
 
     def setUp (self):
+        """
+        Creacion de diccionarios utilizados en las pruebas de la estructura de datos
+        """
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
         self.book2 = {'book_id':'2', 'book_title':'Title 2', 'author':'author 2'}
         self.book3 = {'book_id':'3', 'book_title':'Title 3', 'author':'author 3'}
@@ -57,6 +60,7 @@ class insertionSortTest (unittest.TestCase):
 
     def test_enqueueElements (self):
         """
+        Se prueba la creacion de una nueva cola, se agregan todos los datos creados por sistema y se imprime su valor
         """
         self.queue = q.newQueue(self.list_type)
         q.enqueue  (self.queue, self.book5)
@@ -79,6 +83,8 @@ class insertionSortTest (unittest.TestCase):
 
     def test_emptyQueue (self):
         """
+        Esta prueba confirma la creación de una lista vacia que empieza en tamaño 0
+        Al agregar los libros si tamaño debe ser igual a 10.
         """
         self.queue = q.newQueue(self.list_type)
         self.assertEqual (q.size(self.queue), 0)
@@ -98,6 +104,8 @@ class insertionSortTest (unittest.TestCase):
 
     def test_infoElements (self):
         """
+        Este test busca confirmar que los datos se almacenen de forma correcta y que
+        sean los valores correctos en el orden apropiado de la estructura.
         """
         self.queue = q.newQueue(self.list_type)
         self.assertEqual (q.size(self.queue), 0)
@@ -132,6 +140,10 @@ class insertionSortTest (unittest.TestCase):
         self.assertDictEqual (elem, self.book3)
 
     def test_dequeue_peek(self):
+        """
+        Este test prueba la creacion de una cola y que el orden de salida sea el correcto para la
+        estructura en cuestion, y que el tamaño se reduzca para cada salida de objeto
+        """
         self.queue = q.newQueue(self.list_type)
         self.assertEqual (q.size(self.queue), 0)
         self.assertTrue (q.isEmpty(self.queue))
@@ -154,6 +166,11 @@ class insertionSortTest (unittest.TestCase):
             self.assertEqual(total, q.size(self.queue))
 
     def test_enqueue_dequeue(self):
+        """
+        Este test prueba que la cola pueda manejar inserciones y eliminaciones de forma correcta siguiendo
+        un orden establecido, y que no quede referencia al objeto sacado despues de haberlo removido de la
+        cola
+        """
         self.queue = q.newQueue(self.list_type)
         self.assertEqual (q.size(self.queue), 0)
         self.assertTrue (q.isEmpty(self.queue))
@@ -200,6 +217,9 @@ class insertionSortTest (unittest.TestCase):
         self.assertEqual(q.size(self.queue),0)
 
     def test_error_dequeue(self):
+        """
+        Este test busca comprobar que es imposible eliminar un objeto de una cola vacia
+        """
         self.queue = q.newQueue(self.list_type)
         self.assertEqual (q.size(self.queue), 0)
         self.assertTrue (q.isEmpty(self.queue))

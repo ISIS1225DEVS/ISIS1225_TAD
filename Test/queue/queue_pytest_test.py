@@ -26,6 +26,9 @@ from ADT import queue as q
 
 list_type = 'ARRAY_LIST'
 
+"""
+   Creacion de diccionarios utilizados en las pruebas de la estructura de datos
+"""
 book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
 book2 = {'book_id':'2', 'book_title':'Title 2', 'author':'author 2'}
 book3 = {'book_id':'3', 'book_title':'Title 3', 'author':'author 3'}
@@ -42,6 +45,9 @@ book13 = {'book_id':'9', 'book_title':'Title 13', 'author':'author 13'}
 book14 = {'book_id':'10', 'book_title':'Title 14', 'author':'author 14'}
 
 def test_queueElements ():
+    """
+    Se prueba la creacion de una nueva cola, se agregan todos los datos creados por sistema y se imprime su valor
+    """
     queue = q.newQueue(list_type)
 
     q.enqueue   (queue, book5)
@@ -61,6 +67,9 @@ def test_queueElements ():
         print (result)
 
 def test_sizeStack ():
+    """
+    Se prueba la creacion de una cola y la relacion con el tamaño al ingresar datos
+    """
     
     queue = q.newQueue(list_type)
     assert (q.size(queue) == 0)
@@ -81,6 +90,8 @@ def test_sizeStack ():
 
 def test_infoElements ():
     """
+    Este test busca confirmar que los datos se almacenen de forma correcta y que
+    sean los valores correctos en el orden apropiado de la estructura.
     """
     queue = q.newQueue(list_type)
     assert (q.size(queue) == 0)
@@ -119,7 +130,12 @@ def test_infoElements ():
     elem = q.peek ( queue)
     assert (elem == book3)
     
-def test_top_dequeue():
+def test_peek_dequeue():
+    """
+    Este test prueba la creacion de una cola y que el orden de salida sea el correcto para la
+    estructura en cuestion, y que el tamaño se reduzca para cada salida de objeto
+    """
+
     queue = q.newQueue(list_type)
     assert q.size(queue) == 0
     assert q.isEmpty(queue)
@@ -142,7 +158,12 @@ def test_top_dequeue():
         total-=1
         assert (total == q.size(queue))
 
-def test_push_pop():
+def test_enqueue_dequeue():
+    """
+    Este test prueba que la cola pueda manejar inserciones y eliminaciones de forma correcta siguiendo
+    un orden establecido, y que no quede referencia al objeto sacado despues de haberlo removido de la
+    cola
+    """
     queue = q.newQueue(list_type)
     assert (q.size(queue) == 0)
     assert (q.isEmpty(queue))
@@ -191,6 +212,9 @@ def test_push_pop():
     assert (q.size(queue)== 0)
         
 def test_error_dequeue():
+    """
+    Este test busca comprobar que es imposible eliminar un objeto de una cola vacia
+    """
     queue = q.newQueue(list_type)
     assert (q.size(queue) == 0)
     assert(q.isEmpty(queue))
