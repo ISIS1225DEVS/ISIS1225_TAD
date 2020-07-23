@@ -23,7 +23,6 @@
 
 import config as cf
 from ADT import list as lt
-from DataStructures import listnode as node
 
 """
 Implementación del algoritmo shellsort, basado en la propuesta de Robert Sedgewick
