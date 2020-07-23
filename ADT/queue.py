@@ -18,14 +18,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-<<<<<<< HEAD
-import config
-from Utils import error as err
-=======
 
 import config
 from Utils import error as error
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 from DataStructures import liststructure as lt
 
 """
@@ -42,27 +37,12 @@ def newQueue(datastructure='SINGLE_LINKED'):
     Raises:
         Exception
     """
-<<<<<<< HEAD
-    Crea una cola vacia
-    Args:
-        datastructure 
-            Indica el tipo de estructura de datos a utilizar la cola
-    Return: Cola vacia
-    Raises:
-        Exception
-    """
-    try:
-        return lt.newList(datastructure)
-    except Exception as ex:
-        err.reraise(ex, 'newQueue ')
-=======
     try:
         return lt.newList(datastructure)
     except Exception as exp:
         error.reraise (exp, 'TADQueue->newQueue: ')
 
 
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def enqueue (queue, element):
     """Agrega el elemento element en el tope de la pila
@@ -74,15 +54,6 @@ def enqueue (queue, element):
         La cola modificada
     Raises:
         Exception
-    """
-    Agrega el elemento element en el tope de la pila
-    Args:
-        queue :: list
-            Indica la cola a la cual se le agregara el elemento
-        element
-            Elemento que será agregado en la tope de la cola
-    Return: La cola modificada
-    Raises: Exception
     """
     try:
         lt.addLast (queue, element)
