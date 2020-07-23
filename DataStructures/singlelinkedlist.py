@@ -343,7 +343,11 @@ def isPresent (lst, element):
     
     Informa si un elemento está en la lista.  Si esta presente, retorna la posición en la que se encuentra 
     o cero (0) si no esta presente. Se utiliza la función de comparación utilizada durante la creación 
+<<<<<<< HEAD
     de la lista para comparar los elementos. La cual debe retornar cero en caso de que los elementos sean iguales.
+=======
+    de la lista para comparar los elementos, la cual debe retornar cero en caso de que los elementos sean iguales.
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
     Args:
         lst: La lista a examinar

@@ -33,8 +33,12 @@ def newSingleNode (element):
 
 
 def getElement (node):
+<<<<<<< HEAD
   """
   Retorna la información de un nodo
+=======
+  """ Retorna la información de un nodo
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
   Args:
     node: El nodo a examinar
   Returns:

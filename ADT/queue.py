@@ -18,8 +18,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+<<<<<<< HEAD
 import config
 from Utils import error as err
+=======
+
+import config
+from Utils import error as error
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 from DataStructures import liststructure as lt
 
 """
@@ -27,7 +33,16 @@ from DataStructures import liststructure as lt
 """
 
 def newQueue(datastructure='SINGLE_LINKED'):
+    """ Crea una cola vacia
+    Args:
+        datastructure:  Indica el tipo de estructura de datos a utilizar 
+                        para implementar la cola
+    Returns:
+        Una cola vacia
+    Raises:
+        Exception
     """
+<<<<<<< HEAD
     Crea una cola vacia
     Args:
         datastructure 
@@ -40,9 +55,27 @@ def newQueue(datastructure='SINGLE_LINKED'):
         return lt.newList(datastructure)
     except Exception as ex:
         err.reraise(ex, 'newQueue ')
+=======
+    try:
+        return lt.newList(datastructure)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->newQueue: ')
+
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def enqueue (queue, element):
+    """Agrega el elemento element en el tope de la pila
+    Args:
+        queue: La cola donde se insertará el elemento
+        element:  El elemento a insertar
+
+    Returns:
+        La cola modificada
+    Raises:
+        Exception
     """
+<<<<<<< HEAD
     Agrega el elemento element en el tope de la pila
     Args:
         queue :: list
@@ -57,9 +90,27 @@ def enqueue (queue, element):
         return queue
     except Exception as ex:
         err.reraise(ex, 'enqueue ')
+=======
+    try: 
+        lt.addLast (queue, element)
+        return queue
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->enqueue: ')
+
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def dequeue (queue):
+    """ Retorna el elemento en la primer posición de la cola, y lo elimina.
+     Args:
+        queue: La cola donde se eliminará el elemento
+
+    Returns:
+        El primer elemento de la cola
+    Raises:
+        Exception   
     """
+<<<<<<< HEAD
     Retorna el elemento en la primer posición de la cola, y lo elimina
     Args:
         queue :: list
@@ -71,9 +122,26 @@ def dequeue (queue):
         return lt.removeFirst(queue)
     except Exception as ex:
         err.reraise (ex, 'dequeue ')
+=======
+    try:
+        return lt.removeFirst(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->dequeue: ')
+
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def peek (queue):
+    """ Retorna el elemento en la primer posición de la cola sin eliminarlo
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        True el primer elemento de cola sin eliminarlo
+    Raises:
+        Exception   
     """
+<<<<<<< HEAD
     Retorna el elemento en la primer posición de la cola, y lo elimina
     Args:
         queue :: list
@@ -85,9 +153,26 @@ def peek (queue):
         return lt.firstElement (queue)
     except Exception as ex:
         err.reraise (ex, 'peek ')  
+=======
+    try:
+        return lt.firstElement (queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->isEmpty: ')   
+
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def isEmpty (queue):
+    """Informa si la cola es vacía o no 
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        True si la cola es vacia, False de lo contrario
+    Raises:
+        Exception   
     """
+<<<<<<< HEAD
     Informa si la cola es vacía o no
     Retorna el elemento en la primer posición de la cola, y lo elimina
     Args:
@@ -100,9 +185,28 @@ def isEmpty (queue):
         return lt.isEmpty(queue)
     except Exception as ex:
         err.reraise(ex,'isEmpty ')
+=======
+    try:
+        return lt.isEmpty(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->isEmpty: ')
+
+
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def size (queue):
+    """Informa el número de elementos en la cola
+    Args:
+        queue: La cola  a examinar
+
+    Returns:
+        Retorna el tamaño de la cola
+
+    Raises:
+        Exception       
     """
+<<<<<<< HEAD
     Informa el número de elementos en la cola
     Args:
         queue :: list
@@ -114,3 +218,9 @@ def size (queue):
         return lt.size(queue)
     except Exception as ex:
         err.reraise(exp, 'size ')
+=======
+    try:
+        return lt.size(queue)
+    except Exception as exp:
+        error.reraise (exp, 'TADQueue->size: ')
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70

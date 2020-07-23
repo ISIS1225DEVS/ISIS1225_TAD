@@ -27,8 +27,12 @@
 
 
 def newIterator(lst):
+<<<<<<< HEAD
     """
     Inicializa un iterador para la lista lst
+=======
+    """ Inicializa un iterador para la lista lst
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
     Args:
         lst: La lista sobre la que se quiere iterar
     Returns:
@@ -40,9 +44,16 @@ def newIterator(lst):
 
 
 def hasNext(iterator):
+<<<<<<< HEAD
     """
     Informa si se puede seguir iterando.
     Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador.
+=======
+    """Informa si se puede seguir iterando.
+
+    Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador.
+
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
     Args:
         iterator: El iterador creado sobre la lista
     Returns:
@@ -57,8 +68,12 @@ def hasNext(iterator):
 
 
 def next(iterator):
+<<<<<<< HEAD
     """
     Retorna el elemento en la posición siguiente a la indicada por el iterador
+=======
+    """ Retorna el elemento en la posición siguiente a la indicada por el iterador
+>>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
     Args:
         iterator: El iterador de la lista
     Returns:
