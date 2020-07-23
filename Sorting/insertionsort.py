@@ -22,10 +22,9 @@
 
 import config as cf
 from ADT import list as lt
-from DataStructures import listnode as node
 
 def insertionSort (lst, lessfunction): 
-    size = lst['size']
+    size =  lt.size(lst) 
     pos1 = 1
     while pos1 <= size:
         pos2 = pos1

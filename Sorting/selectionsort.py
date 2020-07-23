@@ -21,10 +21,9 @@
 
 import config as cf
 from ADT import list as lt
-from DataStructures import listnode as node
 
 def selectionSort (lst, lessfunction): 
-    size = lst['size']
+    size =  lt.size(lst) 
     pos1 = 1
     while pos1 < size:
         minimum = pos1              # minimun tiene el menor elemento conocido hasta ese momento
