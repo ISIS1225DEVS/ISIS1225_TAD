@@ -343,7 +343,7 @@ def isPresent (lst, element):
     
     Informa si un elemento está en la lista.  Si esta presente, retorna la posición en la que se encuentra 
     o cero (0) si no esta presente. Se utiliza la función de comparación utilizada durante la creación 
-    de la lista para comparar los elementos.
+    de la lista para comparar los elementos, la cual debe retornar cero en caso de que los elementos sean iguales.
 
     Args:
         lst: La lista a examinar
@@ -358,7 +358,7 @@ def isPresent (lst, element):
             node = lst['first']
             keyexist = False
             for keypos in range (1,size+1):
-                if (lst['cmpfunction'] (element, node['info'] )):
+                if (lst['cmpfunction'] (element, node['info'] )==0):
                     keyexist = True
                     break
                 node = node['next']
