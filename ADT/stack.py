@@ -20,11 +20,7 @@
  """
 
 import config
-<<<<<<< HEAD
-from Utils import error as err
-=======
 from Utils import error as error
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 from DataStructures import liststructure as lt
 
 """
@@ -42,25 +38,10 @@ def newStack(datastructure = 'SINGLE_LINKED'):
     Raises:
         Exception
     """
-<<<<<<< HEAD
-    Crea una pila vacia
-    Args:
-        datastructure 
-            Indica el tipo de estructura de datos a utilizar la cola
-    Return: Cola vacia
-    Raises:
-        Exception
-    """
-    try:
-        return lt.newList(datastructure)
-    except Exception as ex:
-        err.reraise(ex, 'newStack ')
-=======
     try:
         return lt.newList(datastructure, None)
     except Exception as exp:
         error.reraise (exp, 'TADStack->newStack: ')
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
     
 
 
@@ -77,22 +58,6 @@ def push (stack, element):
     Raises: 
         Exception
     """
-<<<<<<< HEAD
-    Agrega el elemento element en el tope de la pila
-    Args:
-        stack :: list
-            Indica la pila a la cual se le agregara el elemento
-        element
-            Elemento que será agregado en la tope de la cola
-    Return: La pila modificada
-    Raises: Exception
-    """
-    try:
-        lt.addFirst (stack, element)
-        return stack
-    except Exception as ex:
-        err.reraise(ex,'push ')
-=======
     try: 
         lt.addFirst (stack, element)
         return stack
@@ -100,7 +65,6 @@ def push (stack, element):
         error.reraise (exp, 'TADStack->Push: ')
     
 
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 
 def pop (stack):
@@ -115,26 +79,12 @@ def pop (stack):
     Raises: 
         Exception   
     """
-<<<<<<< HEAD
-    Retorna el elemento  presente en el tope de la pila
-    Args:
-        stack :: list
-            Indica la pila a la cual se le eliminará el elemento
-    Return: Elemento en la primera posicion de la pila, eliminandolo
-    Raises: Exception
-    """
-    try:
-        return lt.removeFirst(stack)
-    except Exception as ex:
-        err.reraise (ex, 'pop ')
-=======
     try:
         return lt.removeFirst (stack)
     except Exception as exp:
         error.reraise (exp, 'TADStack->pop: ')
 
 
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 
 def isEmpty (stack):
@@ -149,27 +99,12 @@ def isEmpty (stack):
     Raises: 
         Exception  
     """
-<<<<<<< HEAD
-    Informa si la pila es vacía o no 
-    Retorna el elemento en la primer posición de la cola, y lo elimina
-    Args:
-        stack :: list
-            Indica la pila que se tomará como vacia o no 
-    Return:: Boolean
-        True en caso de que este vacia, false en caso contrario
-    """
-    try:
-        return lt.isEmpty(stack)
-    except Exception as ex:
-        err.reraise(ex,'isEmpty ')
-=======
     try:
         return lt.isEmpty(stack)
     except Exception as exp:
         error.reraise (exp, 'TADStack->isEmpty: ')
 
 
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 
 def top (stack):
@@ -184,19 +119,6 @@ def top (stack):
     Raises: 
         Exception  
     """
-<<<<<<< HEAD
-    Retorna el elemento en tope de la pila, sin eliminarlo de la pila 
-    Args:
-        stack :: list
-            Indica la pila a la cual se le mostrará el primer elemento
-    Return: Elemento en la primera posicion de la pila, sin eliminarlo
-    
-    """
-    try:
-        return lt.firstElement (stack)
-    except Exception as ex:
-        err.reraise (ex, 'peek ')  
-=======
     try: 
         return lt.firstElement(stack)
     except Exception as exp:
@@ -204,7 +126,6 @@ def top (stack):
 
 
 
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 
 def size (stack):
@@ -218,22 +139,7 @@ def size (stack):
     Raises:
         Exception  
     """
-<<<<<<< HEAD
-    Informa el número de elementos en la pila
-    Args:
-        stack :: list
-            Indica la lista cola a contar
-    Return:: int
-        Numero de elementos presentes en la cola
-    """
-    try:
-        return lt.size(stack)
-    except Exception as ex:
-        err.reraise(exp, 'size ')
-    
-=======
     try:
         return lt.size(stack)
     except Exception as exp:
         error.reraise (exp, 'TADStack->size: ')
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70

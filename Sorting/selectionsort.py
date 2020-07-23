@@ -21,10 +21,6 @@
 
 import config as cf
 from ADT import list as lt
-<<<<<<< HEAD
-
-=======
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 def selectionSort (lst, lessfunction): 
     size =  lt.size(lst) 

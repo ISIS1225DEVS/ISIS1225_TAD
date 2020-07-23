@@ -28,10 +28,6 @@ from DataStructures import singlelinkedlist as slt
 def cmpfunction (element1, element2):
     if element1 == element2:
         return 0
-<<<<<<< HEAD
-=======
-
->>>>>>> 3803d596a4d1cbce791a4e776e3584ccefd1df70
 
 @pytest.fixture
 def lst ():
