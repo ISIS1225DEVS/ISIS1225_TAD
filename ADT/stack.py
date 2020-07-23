@@ -52,11 +52,12 @@ def push (stack, element):
             Indica la pila a la cual se le agregara el elemento
         element
             Elemento que será agregado en la tope de la cola
-    Return: None
+    Return: La pila modificada
     Raises: Exception
     """
     try:
         lt.addFirst (stack, element)
+        return stack
     except Exception as ex:
         err.reraise(ex,'push ')
 

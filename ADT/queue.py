@@ -49,11 +49,12 @@ def enqueue (queue, element):
             Indica la cola a la cual se le agregara el elemento
         element
             Elemento que será agregado en la tope de la cola
-    Return: None
+    Return: La cola modificada
     Raises: Exception
     """
     try:
         lt.addLast (queue, element)
+        return queue
     except Exception as ex:
         err.reraise(ex, 'enqueue ')
 
