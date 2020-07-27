@@ -30,7 +30,7 @@ import csv
 
 class shellSortTest (unittest.TestCase):
     list_type = 'ARRAY_LIST'
-    #list_type = 'SINGLE_LINKED_LIST'
+    #list_type = 'SINGLE_LINKED
     
     lst_books = lt.newList(list_type)
     booksfile = cf.data_dir + 'GoodReads/books.csv'

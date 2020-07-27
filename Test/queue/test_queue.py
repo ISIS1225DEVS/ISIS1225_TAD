@@ -26,10 +26,10 @@ from DataStructures import listiterator as it
 from ADT import queue as q
 
 
-class insertionSortTest (unittest.TestCase):
+class queueTest (unittest.TestCase):
 
     list_type = 'ARRAY_LIST'
-    #list_type = 'SINGLE_LINKED_LIST'
+    #list_type = 'SINGLE_LINKED'
 
     def setUp (self):
         """

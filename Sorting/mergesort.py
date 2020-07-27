@@ -48,12 +48,12 @@ def mergesort(lst, lessfunction):
             elemi = lt.getElement(leftlist,i)
             elemj = lt.getElement(rightlist,j)
             #compara y ordena los elementos
-            if lessfunction(elemi, elemj):
-                lt.changeInfo (lst, k, elemi)
-                i += 1
-            else:
+             if lessfunction(elemj, elemi):   # caso estricto elemj < elemi
                 lt.changeInfo(lst, k, elemj)
                 j += 1
+            else:                                              # caso elemi <= elemj
+                lt.changeInfo (lst, k, elemi)
+                i += 1
             k += 1
             
         #Agrega los elementos que no se comprararon y estan ordenados

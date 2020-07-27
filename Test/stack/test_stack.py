@@ -29,7 +29,7 @@ from ADT import stack as st
 class stackTest (unittest.TestCase):
 
     list_type = 'ARRAY_LIST'
-    #list_type = 'SINGLE_LINKED_LIST'
+    #list_type = 'SINGLE_LINKED'
 
     def setUp (self):
         """

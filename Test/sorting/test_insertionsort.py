@@ -30,7 +30,7 @@ from ADT import list as slt
 class insertionSortTest (unittest.TestCase):
 
     #list_type = 'ARRAY_LIST'
-    list_type = 'SINGLE_LINKED_LIST'
+    list_type = 'SINGLE_LINKED'
 
     def setUp (self):
         self.book1 = {'book_id':'1', 'book_title':'Title 1', 'author':'author 1'}
