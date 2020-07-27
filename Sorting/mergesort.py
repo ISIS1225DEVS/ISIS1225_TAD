@@ -48,7 +48,7 @@ def mergesort(lst, lessfunction):
             elemi = lt.getElement(leftlist,i)
             elemj = lt.getElement(rightlist,j)
             #compara y ordena los elementos
-             if lessfunction(elemj, elemi):   # caso estricto elemj < elemi
+            if lessfunction (elemj, elemi):   # caso estricto elemj < elemi
                 lt.changeInfo(lst, k, elemj)
                 j += 1
             else:                                              # caso elemi <= elemj
