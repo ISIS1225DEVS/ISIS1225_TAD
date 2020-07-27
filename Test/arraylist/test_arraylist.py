@@ -28,6 +28,10 @@ from DataStructures import arraylist as slt
 def cmpfunction (element1, element2):
     if element1 == element2:
         return 0
+    elif element1 < element2:
+        return -1
+    else:
+        return 1
 
 
 @pytest.fixture

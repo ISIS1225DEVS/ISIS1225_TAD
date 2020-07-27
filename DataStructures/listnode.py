@@ -33,7 +33,8 @@ def newSingleNode (element):
 
 
 def getElement (node):
-  """ Retorna la información de un nodo
+  """
+  Retorna la información de un nodo
   Args:
     node: El nodo a examinar
   Returns:

@@ -30,7 +30,8 @@ from DataStructures import linkedlistiterator as lit
 
 
 def newIterator(lst):
-    """ Inicializa un iterador para la lista lst
+    """
+    Inicializa un iterador para la lista lst
     Args:
         lst: La lista sobre la que se quiere iterar
     Returns:
@@ -44,10 +45,9 @@ def newIterator(lst):
 
 
 def hasNext(iterator):
-    """Informa si se puede seguir iterando.
-
+    """
+    Informa si se puede seguir iterando.
     Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador.
-
     Args:
         iterator: El iterador creado sobre la lista
     Returns:
@@ -61,7 +61,8 @@ def hasNext(iterator):
 
 
 def next(iterator):
-    """ Retorna el elemento en la posición siguiente a la indicada por el iterador
+    """
+    Retorna el elemento en la posición siguiente a la indicada por el iterador
     Args:
         iterator: El iterador de la lista
     Returns:

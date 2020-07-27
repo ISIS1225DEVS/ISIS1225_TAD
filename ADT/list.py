@@ -205,11 +205,13 @@ def removeFirst (lst):
     Args:
         lst: La lista a examinar
 
+    Returns:
+        El primer elemento de la lista
     Raises:
         Exception
     """
     try:
-        lt.removeFirst (lst)
+        return lt.removeFirst (lst)
     except Exception as exp:
         error.reraise (exp, 'TADList->removeFirst: ')
 
@@ -225,11 +227,13 @@ def removeLast (lst):
     Args:
         lst: La lista a examinar
 
+    Returns:
+        El ultimo elemento de la lista
     Raises:
         Exception
     """
     try:
-        lt.removeLast (lst)
+        return lt.removeLast (lst)
     except Exception as exp:
         error.reraise (exp, 'TADList->removeLast: ')
 

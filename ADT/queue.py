@@ -55,13 +55,11 @@ def enqueue (queue, element):
     Raises:
         Exception
     """
-    try: 
+    try:
         lt.addLast (queue, element)
         return queue
-    except Exception as exp:
-        error.reraise (exp, 'TADQueue->enqueue: ')
-
-
+    except Exception as ex:
+        err.reraise(ex, 'enqueue ')
 
 def dequeue (queue):
     """ Retorna el elemento en la primer posición de la cola, y lo elimina.
