@@ -435,7 +435,7 @@ def subList (lst, pos, numelem):
         Exception
     """
     try:
-        sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
+        sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED', 'cmpfunction':lst['cmpfunction']}
         cont = 1
         loc = pos
         while  cont <= numelem:

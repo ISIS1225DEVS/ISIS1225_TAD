@@ -356,7 +356,7 @@ def subList (lst, pos, numelem):
         Exception
     """
     try:
-        sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
+        sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST', 'cmpfunction':lst['cmpfunction'] }
         elem = pos-1
         cont = 1
         while  cont <= numelem:
