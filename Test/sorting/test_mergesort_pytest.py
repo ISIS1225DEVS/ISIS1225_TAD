@@ -178,7 +178,8 @@ def test_oneElement():
 
 def test_ManyElements():
     """
-       Con muchos elementos en la lista
+    Con muchos elementos en la lista, en donde identificadores se repiten
+    Deben aparecer consecutivos aquellos con id igual
     """
     lst = slt.newList(list_type)
     slt.addFirst(lst, book5)
@@ -223,6 +224,7 @@ def test_ManyElements():
 def test_agregarYquitar():
     """
     Prueba que al hacer varios ordnamientos el orden debe mantenerse asi se cambien los elementos
+    Se requiere tener la lista ordenada, luego desordenada y probar que genera excepcion
     """
     lst = slt.newList(list_type)
     slt.addFirst(lst, book10)

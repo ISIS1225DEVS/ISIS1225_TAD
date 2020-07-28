@@ -22,7 +22,7 @@
 
 import pytest
 import config
-from Sorting import insertionsort as sort
+from Sorting import quicksort as sort
 from DataStructures import listiterator as it
 from ADT import list as slt
 
@@ -92,7 +92,7 @@ def test_randomElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.insertionSort(lst, less)
+    sort.quickSort(lst, less)
     probarOrden(lst)
 
 
@@ -121,7 +121,7 @@ def test_invertedElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.insertionSort(lst, less)
+    sort.quickSort(lst, less)
     iterator = it.newIterator(lst)
     probarOrden(lst)
 
@@ -150,7 +150,7 @@ def test_orderedElementss():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.insertionSort(lst, less)
+    sort.quickSort(lst, less)
     probarOrden(lst)
 
 
@@ -169,7 +169,7 @@ def test_oneElement():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.insertionSort(lst, less)
+    sort.quickSort(lst, less)
     iterator = it.newIterator(lst)
     while it.hasNext(iterator):
         element = it.next(iterator)
@@ -205,7 +205,7 @@ def test_ManyElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.insertionSort(lst, less)
+    sort.quickSort(lst, less)
     assert slt.removeFirst(lst) == book1
     assert slt.removeFirst(lst) == book2
     assert slt.removeFirst(lst) == book3
@@ -216,8 +216,8 @@ def test_ManyElements():
     assert slt.removeFirst(lst) == book11
     assert slt.removeFirst(lst) == book8
     assert slt.removeFirst(lst) == book12
+    assert slt.removeFirst(lst) == book13 
     assert slt.removeFirst(lst) == book9
-    assert slt.removeFirst(lst) == book13
     assert slt.removeFirst(lst) == book10
     assert slt.removeFirst(lst) == book14
 
@@ -243,7 +243,7 @@ def test_agregarYquitar():
     slt.addFirst(lst, slt.removeLast(lst))
     with pytest.raises(Exception):
         probarOrden(lst)
-    sort.insertionSort(lst,less)
+    sort.quickSort(lst,less)
     probarOrden(lst)
     
     
