@@ -46,7 +46,7 @@ class insertionSortTest (unittest.TestCase):
         pass
 
     def loadCSVFile (self, file, lst):
-        input_file = csv.DictReader(open(file))
+        input_file = csv.DictReader(open(file,encoding = "utf-8"))
         for row in input_file:  
             lt.addLast(lst,row)
 
