@@ -272,7 +272,8 @@ def isPresent (lst, element):
     Args:
         lst: La lista a examinar
         element: El elemento a buscar
-
+    Returns:     
+        
     Raises:
         Exception
     """
