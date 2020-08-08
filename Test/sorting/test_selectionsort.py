@@ -55,6 +55,11 @@ class selectionSortTest (unittest.TestCase):
             return True
         return False
 
+    def lessint( self, element1, element2):
+        if (element1 <  element2):
+            return True
+        return False
+
     def test_randomElements (self):
         """
          Lista con elementos en orden aleatorio
@@ -202,8 +207,6 @@ class selectionSortTest (unittest.TestCase):
             element = it.next(iterator)
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
-
-
 
 if __name__ == "__main__":
     unittest.main()
