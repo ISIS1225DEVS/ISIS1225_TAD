@@ -46,7 +46,8 @@ book13 = {'book_id': '9', 'book_title': 'Title 13', 'author': 'author 13'}
 book14 = {'book_id': '10', 'book_title': 'Title 14', 'author': 'author 14'}
 
 lista_ordenada_correcta = [
-    book1, book2, book3, book4, book5, book6, book7, book8, book9, book10]
+    book1, book2, book3, book4, book5, book6, book7, book8, book9, book10
+]
 
 def less(element1, element2):
     if int(element1['book_id']) < int(element2['book_id']):
