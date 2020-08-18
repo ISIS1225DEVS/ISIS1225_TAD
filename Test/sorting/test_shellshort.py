@@ -222,7 +222,11 @@ def test_ManyElements():
     assert slt.removeFirst(lst) == book13 
     assert slt.removeFirst(lst) == book9
     assert slt.removeFirst(lst) == book10
-    assert slt.removeFirst(lst) == book14
+    assert slt.removeFirst(lst) != book14
+    # variantes
+    # assert slt.removeFirst(lst)["book_id"] == book10["book_id"]
+    # assert slt.removeFirst(lst)["book_id"] == book14["book_id"]
+
 
 def test_agregarYquitar():
     """
