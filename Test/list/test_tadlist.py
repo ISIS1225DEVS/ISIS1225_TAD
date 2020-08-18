@@ -39,8 +39,8 @@ def cmpfunction (element1, element2):
 
 @pytest.fixture
 def lst ():
-    lst = lt.newList('SINGLE_LINKED', cmpfunction)
-    #lst = lt.newList('ARRAY_LIST', cmpfunction)
+    # lst = lt.newList('SINGLE_LINKED', cmpfunction)
+    lst = lt.newList('ARRAY_LIST', cmpfunction)
     return lst
 
 
@@ -58,8 +58,8 @@ def books ():
 
 @pytest.fixture
 def lstbooks(books):
-    #lst1 = lt.newList('ARRAY_LIST', cmpfunction)
-    lst2 = lt.newList('SINGLE_LINKED', cmpfunction)
+    lst = lt.newList('ARRAY_LIST', cmpfunction)
+    # lst = lt.newList('SINGLE_LINKED', cmpfunction)
     for i in range(0,5):    
         lt.addLast(lst,books[i])    
     return lst

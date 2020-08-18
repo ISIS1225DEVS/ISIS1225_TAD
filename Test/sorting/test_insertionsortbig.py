@@ -31,7 +31,7 @@ import csv
 list_type = 'SINGLE_LINKED'
 
 lst_books = lt.newList(list_type)
-booksfile = cf.data_dir + 'GoodReads/books-medium.csv'
+booksfile = cf.data_dir + 'GoodReads/books.csv'
 
 
 def setUp():

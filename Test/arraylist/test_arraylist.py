@@ -26,9 +26,9 @@ from DataStructures import arraylist as slt
 
 
 def cmpfunction (element1, element2):
-    if element1 == element2:
+    if element1["book_id"] == element2["book_id"]:
         return 0
-    elif element1 < element2:
+    elif element1["book_id"] < element2["book_id"]:
         return -1
     else:
         return 1
@@ -141,6 +141,7 @@ def test_insertElement (lst, books):
 
 def test_isPresent (lstbooks, books):
     book = {'book_id':'10', 'book_title':'Title 10', 'author':'author 10'}
+    print(slt.isPresent (lstbooks, books[2]))
     assert slt.isPresent (lstbooks, books[2]) > 0
     assert slt.isPresent (lstbooks, book) == 0
     
