@@ -22,7 +22,7 @@
 
 import pytest
 import config
-from Sorting import shellsort as sort
+from Sorting import mergesort as sort
 from DataStructures import listiterator as it
 from ADT import list as slt
 
@@ -48,7 +48,6 @@ book14 = {'book_id': '10', 'book_title': 'Title 14', 'author': 'author 14'}
 lista_ordenada_correcta = [
     book1, book2, book3, book4, book5, book6, book7, book8, book9, book10
 ]
-
 
 def less(element1, element2):
     if int(element1['book_id']) < int(element2['book_id']):
@@ -95,7 +94,7 @@ def test_randomElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.shellSort(lst, less)
+    sort.mergesort(lst, less)
     probarOrden(lst)
 
 
@@ -124,7 +123,7 @@ def test_invertedElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.shellSort(lst, less)
+    sort.mergesort(lst, less)
     iterator = it.newIterator(lst)
     probarOrden(lst)
 
@@ -153,7 +152,7 @@ def test_orderedElementss():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.shellSort(lst, less)
+    sort.mergesort(lst, less)
     probarOrden(lst)
 
 
@@ -172,7 +171,7 @@ def test_oneElement():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.shellSort(lst, less)
+    sort.mergesort(lst, less)
     iterator = it.newIterator(lst)
     while it.hasNext(iterator):
         element = it.next(iterator)
@@ -208,7 +207,7 @@ def test_ManyElements():
                          ",  " for key, value in element.items())
         print(result)
     print("sorting ....")
-    sort.shellSort(lst, less)
+    sort.mergesort(lst, less)
     assert slt.removeFirst(lst) == book1
     assert slt.removeFirst(lst) == book2
     assert slt.removeFirst(lst) == book3
@@ -219,8 +218,8 @@ def test_ManyElements():
     assert slt.removeFirst(lst) == book11
     assert slt.removeFirst(lst) == book8
     assert slt.removeFirst(lst) == book12
-    assert slt.removeFirst(lst) == book13 
     assert slt.removeFirst(lst) == book9
+    assert slt.removeFirst(lst) == book13
     assert slt.removeFirst(lst) == book10
     assert slt.removeFirst(lst) == book14
 
@@ -246,7 +245,7 @@ def test_agregarYquitar():
     slt.addFirst(lst, slt.removeLast(lst))
     with pytest.raises(Exception):
         probarOrden(lst)
-    sort.shellSort(lst,less)
+    sort.mergesort(lst,less)
     probarOrden(lst)
     
     

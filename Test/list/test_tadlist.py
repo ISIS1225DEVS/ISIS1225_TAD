@@ -39,8 +39,8 @@ def cmpfunction (element1, element2):
 
 @pytest.fixture
 def lst ():
-    lst = lt.newList('SINGLE_LINKED', cmpfunction)
-    #lst = lt.newList('ARRAY_LIST', cmpfunction)
+    # lst = lt.newList('SINGLE_LINKED', cmpfunction)
+    lst = lt.newList('ARRAY_LIST', cmpfunction)
     return lst
 
 
