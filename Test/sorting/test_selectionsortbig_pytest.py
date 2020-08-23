@@ -30,18 +30,13 @@ import csv
 #list_type = 'ARRAY_LIST'
 list_type = 'SINGLE_LINKED'
 
-lst_books = lt.newList(list_type)
-booksfile = cf.data_dir + 'GoodReads/books.csv'
 
-
-def setUp():
-    print('Loading books')
-    loadCSVFile(booksfile, lst_books)
-    print(lst_books['size'])
-
-
-def tearDown():
-       pass
+@pytest.fixture
+def lst_books ():
+    lst = lt.newList(list_type)
+    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
+    loadCSVFile(booksfile, lst)
+    return lst
 
 
 def loadCSVFile(file, lst):
@@ -60,24 +55,22 @@ def less(element1, element2):
         return True
     return False
 
-def test_sort():
-    """
-    Lista con elementos en orden aleatorio
-    """
-    print("sorting ....")
-    sort.selectionSort(lst_books, less)
 
-def test_loading_CSV_y_ordenamiento():
+def test_loading_CSV_y_ordenamiento(lst_books):
     """
     Prueba que se pueda leer el archivo y que despues de relizar el sort, el orden este correcto
     """
-    setUp()
+    element = lt.lastElement (lst_books)
+    assert element['goodreads_book_id'] == '4374400'
+    element = lt.firstElement (lst_books)
+    assert element['goodreads_book_id'] == '2767052'
+
     sort.selectionSort(lst_books,less)
-    while not (lt.isEmpty(lst_books)):
-        x = int(lt.removeLast(lst_books)['goodreads_book_id'])
-        if not (lt.isEmpty(lst_books)):
-            y = int(lt.lastElement(lst_books)['goodreads_book_id'])
-        else:
-            break
-        assert x > y
+
+    tam = lt.size (lst_books)
+    assert tam == 149
+    element = lt.lastElement (lst_books)
+    assert element['goodreads_book_id'] == '22557272'
+    element = lt.firstElement (lst_books)
+    assert element['goodreads_book_id'] == '1'
 
